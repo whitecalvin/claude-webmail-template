@@ -100,7 +100,7 @@ export function ContactsMobileView() {
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
-          <div className="mb-4 flex items-center gap-3 rounded-[12px] border border-(--border-app) p-3.5">
+          <div className="mb-4 flex items-center gap-3 rounded-xl border border-(--border-app) p-3.5">
             <span
               className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-base font-bold"
               style={{ backgroundColor: open.bg, color: open.fg }}
@@ -132,7 +132,7 @@ export function ContactsMobileView() {
                   type="text"
                   value={open[field]}
                   onChange={(e) => updateOpen({ [field]: e.target.value })}
-                  className="h-11 rounded-[9px] border border-(--border-app) bg-(--surface-app) px-3 text-sm outline-none focus:border-(--color-primary)"
+                  className="h-11 rounded-[9px] border border-(--border-app) bg-background px-3 text-sm outline-none focus:border-(--color-primary)"
                 />
               </label>
             ))}
@@ -192,7 +192,7 @@ export function ContactsMobileView() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="이름 · 회사 · 메일"
-            className="h-10 w-full rounded-[10px] bg-black/[.04] pl-9 pr-3 text-sm outline-none dark:bg-white/[.06]"
+            className="h-10 w-full rounded-[10px] bg-black/4 pl-9 pr-3 text-sm outline-none dark:bg-white/6"
           />
         </div>
         <div className="flex gap-1.5">
@@ -228,7 +228,7 @@ export function ContactsMobileView() {
             className="flex cursor-pointer items-center gap-3 border-b border-(--border-app) px-4 py-3"
           >
             <span
-              className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[11px] text-xs font-bold"
+              className="flex h-9.5 w-9.5 shrink-0 items-center justify-center rounded-[11px] text-xs font-bold"
               style={{ backgroundColor: c.bg, color: c.fg }}
             >
               {c.initials}

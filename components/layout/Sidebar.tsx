@@ -28,9 +28,9 @@ const FOLDER_ICONS: Record<FolderId, LucideIcon> = {
 };
 
 const ASIDE_STYLE: Record<LayoutStyle, string> = {
-  classic: "border-r border-(--border-app) bg-(--surface-app)",
+  classic: "border-r border-(--border-app) bg-background",
   card: "bg-(--surface-muted)",
-  minimal: "bg-(--surface-app)",
+  minimal: "bg-background",
 };
 
 const COMPOSE_STYLE: Record<LayoutStyle, string> = {
@@ -42,13 +42,13 @@ const COMPOSE_STYLE: Record<LayoutStyle, string> = {
 function navItemClass(style: LayoutStyle, isActive: boolean) {
   if (style === "card") {
     return isActive
-      ? "bg-(--surface-app) shadow-md font-semibold text-(--color-primary)"
-      : "text-(--text-muted) hover:bg-(--surface-app)/70";
+      ? "bg-background shadow-md font-semibold text-(--color-primary)"
+      : "text-(--text-muted) hover:bg-background/70";
   }
   if (style === "minimal") {
     return isActive
       ? "border-l-2 border-(--color-primary) font-semibold text-(--color-primary)"
-      : "border-l-2 border-transparent text-(--text-muted) hover:text-(--text-app)";
+      : "border-l-2 border-transparent text-(--text-muted) hover:text-foreground";
   }
   return isActive
     ? "bg-(--color-primary)/10 font-semibold text-(--color-primary)"

@@ -193,7 +193,7 @@ export function ComposeEditor({ value, onChange, placeholder, onImageAttach }: C
           {emojiOpen && (
             <>
               <div className="fixed inset-0 z-40" onClick={() => setEmojiOpen(false)} />
-              <div className="absolute top-full left-0 z-50 mt-1 grid grid-cols-4 gap-1 rounded-[10px] border border-(--border-app) bg-(--surface-app) p-2 shadow-xl">
+              <div className="absolute top-full left-0 z-50 mt-1 grid grid-cols-4 gap-1 rounded-[10px] border border-(--border-app) bg-background p-2 shadow-xl">
                 {EMOJI_OPTIONS.map((em) => (
                   <button
                     key={em}
@@ -217,7 +217,7 @@ export function ComposeEditor({ value, onChange, placeholder, onImageAttach }: C
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="min-h-[140px] flex-1 resize-none px-4 py-3 text-sm leading-relaxed outline-none placeholder:text-[#B0B4BA]"
+          className="min-h-35 flex-1 resize-none px-4 py-3 text-sm leading-relaxed outline-none placeholder:text-[#B0B4BA]"
         />
       ) : (
         <div
@@ -226,7 +226,7 @@ export function ComposeEditor({ value, onChange, placeholder, onImageAttach }: C
           suppressContentEditableWarning
           onInput={() => onChange(richRef.current?.innerText ?? "")}
           data-placeholder={placeholder}
-          className="compose-rich-editor min-h-[140px] flex-1 overflow-y-auto px-4 py-3 text-sm leading-relaxed outline-none empty:before:text-[#B0B4BA] empty:before:content-[attr(data-placeholder)]"
+          className="compose-rich-editor min-h-35 flex-1 overflow-y-auto px-4 py-3 text-sm leading-relaxed outline-none empty:before:text-[#B0B4BA] empty:before:content-[attr(data-placeholder)]"
         />
       )}
     </div>

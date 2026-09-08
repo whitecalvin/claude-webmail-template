@@ -202,11 +202,11 @@ export default function CalendarPage() {
           <button
             type="button"
             onClick={() => setAnchor(today)}
-            className="h-[30px] rounded-lg border border-(--border-app) px-3 text-xs font-semibold transition hover:bg-black/5 active:translate-y-px dark:hover:bg-white/10"
+            className="h-7.5 rounded-lg border border-(--border-app) px-3 text-xs font-semibold transition hover:bg-black/5 active:translate-y-px dark:hover:bg-white/10"
           >
             오늘
           </button>
-          <div className="ml-auto flex items-center gap-1 rounded-[9px] bg-black/[.04] p-[3px] dark:bg-white/[.06]">
+          <div className="ml-auto flex items-center gap-1 rounded-[9px] bg-black/4 p-0.75 dark:bg-white/6">
             {([{ key: "day", label: "일" }, { key: "week", label: "주" }, { key: "month", label: "월" }] as const).map((option) => (
               <button
                 key={option.key}
@@ -214,8 +214,8 @@ export default function CalendarPage() {
                 onClick={() => setView(option.key)}
                 className={`h-6 rounded-[7px] px-3 text-[11.5px] font-semibold transition active:translate-y-px ${
                   view === option.key
-                    ? "bg-(--surface-app) shadow-[0_1px_2px_rgba(0,0,0,.08)]"
-                    : "text-(--text-muted) hover:text-(--text-app)"
+                    ? "bg-background shadow-[0_1px_2px_rgba(0,0,0,.08)]"
+                    : "text-(--text-muted) hover:text-foreground"
                 }`}
               >
                 {option.label}
@@ -237,7 +237,7 @@ export default function CalendarPage() {
       showMobilePageContext={false}
       className="flex flex-col lg:flex-row"
     >
-      <div className="min-h-0 flex-1 bg-(--surface-app) lg:hidden">
+      <div className="min-h-0 flex-1 bg-background lg:hidden">
         <CalendarMobileView
           weekDays={mobileWeekDays}
           selectedDate={mobileSelectedDate}
@@ -251,7 +251,7 @@ export default function CalendarPage() {
           onAddEvent={() => openCreateEvent(mobileSelectedDate)}
         />
       </div>
-      <div className="hidden min-w-0 flex-1 flex-col border-r border-(--border-app) bg-(--surface-app) lg:flex">
+      <div className="hidden min-w-0 flex-1 flex-col border-r border-(--border-app) bg-background lg:flex">
         {view === "month" ? (
           <CalendarMonthGrid
             anchor={anchor}
@@ -288,7 +288,7 @@ export default function CalendarPage() {
           onClick={() => setSelectedEvent(null)}
         >
           <div
-            className="w-full max-w-sm rounded-2xl bg-(--surface-app) p-5 shadow-2xl"
+            className="w-full max-w-sm rounded-2xl bg-background p-5 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <span
@@ -323,7 +323,7 @@ export default function CalendarPage() {
             <button
               type="button"
               onClick={() => setCreatingEvent(false)}
-              className="flex h-[26px] w-[26px] items-center justify-center rounded-lg text-[13px] text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
+              className="flex h-6.5 w-6.5 items-center justify-center rounded-lg text-[13px] text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
               aria-label="닫기"
             >
               ✕
@@ -385,7 +385,7 @@ export default function CalendarPage() {
             <button
               type="button"
               onClick={() => setCreatingEvent(false)}
-              className="h-[34px] rounded-[9px] border border-(--border-app) px-3.5 text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/10"
+              className="h-8.5 rounded-[9px] border border-(--border-app) px-3.5 text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/10"
             >
               취소
             </button>
@@ -393,7 +393,7 @@ export default function CalendarPage() {
               type="button"
               onClick={submitCreateEvent}
               disabled={!newTitle.trim() || !newDate}
-              className="h-[34px] rounded-[9px] px-3.5 text-xs font-semibold text-white transition disabled:opacity-40"
+              className="h-8.5 rounded-[9px] px-3.5 text-xs font-semibold text-white transition disabled:opacity-40"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               만들기

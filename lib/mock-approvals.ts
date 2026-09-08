@@ -19,7 +19,7 @@ export const TYPE_STYLE: Record<ApprovalType, string> = {
   구매: "bg-[#E8F1F5] text-[#3B7A94]",
   인사: "bg-[#E9F3EC] text-[#2E8B5B]",
   지출: "bg-[#FDF0E4] text-[#B4740F]",
-  규정: "bg-black/[.06] text-[var(--text-muted)] dark:bg-white/[.08]",
+  규정: "bg-black/6 text-(--text-muted) dark:bg-white/8",
 };
 
 export const APPROVALS: ApprovalItem[] = [

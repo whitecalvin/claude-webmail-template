@@ -21,7 +21,7 @@ const TRIGGER_STYLE: Record<DropdownVariant, string> = {
   form: "flex h-9 w-full items-center justify-between rounded-[9px] border border-(--border-app) px-3 text-[13px] outline-none hover:bg-black/5 dark:hover:bg-white/5",
   // Slightly taller/bolder trigger used in page headers (e.g. date-range pickers).
   header:
-    "h-[34px] rounded-[9px] border border-(--border-app) px-3 text-xs font-semibold text-(--text-app) hover:bg-black/5 dark:hover:bg-white/10",
+    "h-8.5 rounded-[9px] border border-(--border-app) px-3 text-xs font-semibold text-foreground hover:bg-black/5 dark:hover:bg-white/10",
 };
 
 const MENU_WIDTH: Record<DropdownVariant, string> = {
@@ -72,7 +72,7 @@ export function Dropdown({
           {/* Invisible full-screen layer so any outside click closes the menu. */}
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
           <div
-            className={`absolute top-full z-50 mt-1 max-h-56 overflow-y-auto rounded-lg border border-(--border-app) bg-(--surface-app) py-1 shadow-xl ${
+            className={`absolute top-full z-50 mt-1 max-h-56 overflow-y-auto rounded-lg border border-(--border-app) bg-background py-1 shadow-xl ${
               MENU_WIDTH[variant]
             } ${align === "right" ? "right-0" : "left-0"}`}
           >

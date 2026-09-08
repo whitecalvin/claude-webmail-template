@@ -41,7 +41,7 @@ export default function SignupPage() {
 
   return (
     <div className="flex min-h-dvh w-full lg:grid lg:grid-cols-2">
-      <div className="flex w-full flex-col px-6 py-10 sm:px-12 lg:px-[72px] lg:py-16">
+      <div className="flex w-full flex-col px-6 py-10 sm:px-12 lg:px-18 lg:py-16">
         <div className="flex items-center gap-3">
           <span
             className="flex h-8 w-8 items-center justify-center rounded-[10px] text-sm font-bold text-white"
@@ -49,13 +49,13 @@ export default function SignupPage() {
           >
             G
           </span>
-          <span className="text-[17px] font-bold tracking-tight text-(--text-app)">
+          <span className="text-[17px] font-bold tracking-tight text-foreground">
             GXWebMail
           </span>
         </div>
 
-        <div className="my-auto w-full max-w-[392px] py-10">
-          <h1 className="text-[32px] font-bold leading-[1.2] tracking-tight text-(--text-app)">
+        <div className="my-auto w-full max-w-98 py-10">
+          <h1 className="text-[32px] font-bold leading-[1.2] tracking-tight text-foreground">
             계정을 만들어 보세요
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-(--text-muted)">
@@ -72,7 +72,7 @@ export default function SignupPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="홍길동"
-                className="h-[46px] rounded-[10px] border border-(--border-app) bg-black/[.015] px-3.5 text-sm text-(--text-app) outline-none transition focus:border-(--color-primary) focus:bg-transparent dark:bg-white/[.03]"
+                className="h-11.5 rounded-[10px] border border-(--border-app) bg-black/1.5 px-3.5 text-sm text-foreground outline-none transition focus:border-(--color-primary) focus:bg-transparent dark:bg-white/3"
               />
             </label>
 
@@ -85,7 +85,7 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@gxsoft.co.kr"
-                className="h-[46px] rounded-[10px] border border-(--border-app) bg-black/[.015] px-3.5 text-sm text-(--text-app) outline-none transition focus:border-(--color-primary) focus:bg-transparent dark:bg-white/[.03]"
+                className="h-11.5 rounded-[10px] border border-(--border-app) bg-black/1.5 px-3.5 text-sm text-foreground outline-none transition focus:border-(--color-primary) focus:bg-transparent dark:bg-white/3"
               />
             </label>
 
@@ -98,7 +98,7 @@ export default function SignupPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="8자 이상 입력하세요"
-                className="h-[46px] rounded-[10px] border border-(--border-app) bg-black/[.015] px-3.5 text-sm text-(--text-app) outline-none transition focus:border-(--color-primary) focus:bg-transparent dark:bg-white/[.03]"
+                className="h-11.5 rounded-[10px] border border-(--border-app) bg-black/1.5 px-3.5 text-sm text-foreground outline-none transition focus:border-(--color-primary) focus:bg-transparent dark:bg-white/3"
               />
             </label>
 
@@ -111,14 +111,14 @@ export default function SignupPage() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="비밀번호를 한 번 더 입력하세요"
-                className="h-[46px] rounded-[10px] border border-(--border-app) bg-black/[.015] px-3.5 text-sm text-(--text-app) outline-none transition focus:border-(--color-primary) focus:bg-transparent dark:bg-white/[.03]"
+                className="h-11.5 rounded-[10px] border border-(--border-app) bg-black/1.5 px-3.5 text-sm text-foreground outline-none transition focus:border-(--color-primary) focus:bg-transparent dark:bg-white/3"
               />
             </label>
 
             <button
               type="button"
               onClick={() => setAgreed((v) => !v)}
-              className="mt-1 flex items-start gap-2 text-left text-[13px] text-(--text-app)"
+              className="mt-1 flex items-start gap-2 text-left text-[13px] text-foreground"
             >
               <span
                 className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-[5px]"
@@ -137,7 +137,7 @@ export default function SignupPage() {
                     e.stopPropagation();
                     toast.info("이용약관을 엽니다");
                   }}
-                  className="font-medium text-(--text-app)"
+                  className="font-medium text-foreground"
                 >
                   이용약관
                 </Link>{" "}
@@ -149,7 +149,7 @@ export default function SignupPage() {
                     e.stopPropagation();
                     toast.info("개인정보 처리방침을 엽니다");
                   }}
-                  className="font-medium text-(--text-app)"
+                  className="font-medium text-foreground"
                 >
                   개인정보 처리방침
                 </Link>
@@ -182,7 +182,7 @@ export default function SignupPage() {
         </div>
       </div>
 
-      <div className="relative hidden flex-col justify-between overflow-hidden bg-[#17181B] px-[72px] py-16 lg:flex">
+      <div className="relative hidden flex-col justify-between overflow-hidden bg-[#17181B] px-18 py-16 lg:flex">
         <div
           className="pointer-events-none absolute"
           style={{

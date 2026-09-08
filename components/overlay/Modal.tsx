@@ -27,7 +27,7 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-center justify-center p-4"
+      className="fixed inset-0 z-80 flex items-center justify-center p-4"
       style={{ backgroundColor: "rgba(20,22,30,.42)" }}
       onClick={dismissible ? onClose : undefined}
     >
@@ -35,7 +35,7 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
-        className="w-full overflow-hidden rounded-[14px] bg-(--surface-app) text-(--text-app) shadow-[0_24px_60px_-20px_rgba(20,22,30,.5)]"
+        className="w-full overflow-hidden rounded-[14px] bg-background text-foreground shadow-[0_24px_60px_-20px_rgba(20,22,30,.5)]"
         style={{ maxWidth }}
       >
         {children}

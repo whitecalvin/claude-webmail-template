@@ -41,20 +41,20 @@ export default function AdminSystemPage() {
     setPrintOpts((prev) => prev.map((o) => (o.name === name ? { ...o, on: !o.on } : o)));
 
   return (
-    <div className="flex h-dvh w-full bg-(--surface-muted) text-(--text-app)">
+    <div className="flex h-dvh w-full bg-(--surface-muted) text-foreground">
       <div className="hidden lg:block">
         <AdminNav active={null} onSelect={() => router.push("/admin")} />
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) bg-(--surface-app) px-7 py-4">
+        <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) bg-background px-7 py-4">
           <div>
             <h1 className="text-[17px] font-bold tracking-tight">{t("pageTitle")}</h1>
             <p className="text-xs text-(--text-muted)">
               {t("pageSubtitle")}
             </p>
           </div>
-          <div className="ml-auto flex rounded-full bg-black/[.04] p-1 dark:bg-white/[.06]">
+          <div className="ml-auto flex rounded-full bg-black/4 p-1 dark:bg-white/6">
             {(
               [
                 { key: "mail", label: t("tabMail") },
@@ -67,7 +67,7 @@ export default function AdminSystemPage() {
                 type="button"
                 onClick={() => setTab(t.key)}
                 className={`h-8 rounded-full px-3.5 text-xs font-semibold transition ${
-                  tab === t.key ? "bg-(--surface-app) shadow-sm" : "text-(--text-muted)"
+                  tab === t.key ? "bg-background shadow-sm" : "text-(--text-muted)"
                 }`}
               >
                 {t.label}
@@ -79,7 +79,7 @@ export default function AdminSystemPage() {
         <div className="flex-1 overflow-y-auto p-7">
           {tab === "mail" && (
             <div className="grid grid-cols-1 gap-4 xl:grid-cols-[250px_1fr_1fr]">
-              <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+              <div className="rounded-xl border border-(--border-app) bg-background p-4">
                 <p className="mb-2.5 text-[13px] font-bold">{t("templateCount")}</p>
                 <div className="flex flex-col gap-0.5">
                   {templates.map((template) => (
@@ -102,7 +102,7 @@ export default function AdminSystemPage() {
               </div>
 
               <div className="flex flex-col gap-3">
-                <div className="mx-auto w-full max-w-[520px] overflow-hidden rounded-xl border border-(--border-app) bg-white shadow-sm">
+                <div className="mx-auto w-full max-w-130 overflow-hidden rounded-xl border border-(--border-app) bg-white shadow-sm">
                   <div className="border-b-[3px] px-5 py-3.5" style={{ borderColor: "var(--color-primary)" }}>
                     <div className="flex items-center gap-2">
                       <span className="flex h-6 w-6 items-center justify-center rounded text-[11px] font-bold text-white" style={{ backgroundColor: "var(--color-primary)" }}>
@@ -132,7 +132,7 @@ export default function AdminSystemPage() {
                     <br />{t("outgoingOnlyHelp")}
                   </div>
                 </div>
-                <div className="mx-auto flex w-full max-w-[520px] gap-2">
+                <div className="mx-auto flex w-full max-w-130 gap-2">
                   <button
                     type="button"
                     onClick={() => toast.info(t("openHtmlEditor"), { sub: ui(activeTemplate) })}
@@ -159,7 +159,7 @@ export default function AdminSystemPage() {
               </div>
 
               <div className="flex flex-col gap-4">
-                <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+                <div className="rounded-xl border border-(--border-app) bg-background p-4">
                   <p className="mb-2.5 text-[13px] font-bold">{t("availableVariables")}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {SYS_VARS.map((v) => (
@@ -172,9 +172,9 @@ export default function AdminSystemPage() {
                     {t("undefinedVariablesBlocked")}
                   </p>
                 </div>
-                <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+                <div className="rounded-xl border border-(--border-app) bg-background p-4">
                   <p className="mb-2.5 text-[13px] font-bold">{t("mobilePreview")}</p>
-                  <div className="mx-auto w-[180px] rounded-2xl border-4 border-[#17181B] bg-white p-2.5 text-[9px] text-[#17181B]">
+                  <div className="mx-auto w-45 rounded-2xl border-4 border-[#17181B] bg-white p-2.5 text-[9px] text-[#17181B]">
                     <p className="font-bold">{t("resetTitle")}</p>
                     <p className="mt-1 text-[#5C6068]">{t("expiresSentence")}</p>
                     <div className="mt-1.5 rounded bg-(--color-primary) py-1.5 text-center font-semibold text-white">
@@ -191,11 +191,11 @@ export default function AdminSystemPage() {
 
           {tab === "print" && (
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_300px]">
-              <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+              <div className="rounded-xl border border-(--border-app) bg-background p-4">
                 <p className="mb-1 text-[13px] font-bold">{t("printPreviewThread")}</p>
                 <p className="mb-3 text-[10.5px] text-(--text-muted)">{t("printSpec")}</p>
                 <div className="flex justify-center rounded-lg bg-[#E8E8E3] p-6">
-                  <div className="w-full max-w-[380px] bg-white p-5 text-[10px] text-[#17181B] shadow-sm">
+                  <div className="w-full max-w-95 bg-white p-5 text-[10px] text-[#17181B] shadow-sm">
                     <p className="font-bold">{t("brandName")}</p>
                     <p className="mt-2 font-bold">{ui("[승인요청] 2026 상반기 클라우드 인프라 증설 예산 검토")}</p>
                     <div className="mt-2 flex flex-col gap-0.5 text-[#6B6F77]">
@@ -222,7 +222,7 @@ export default function AdminSystemPage() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+              <div className="rounded-xl border border-(--border-app) bg-background p-4">
                 <p className="mb-2.5 text-[13px] font-bold">{t("printOptions")}</p>
                 <div className="flex flex-col gap-2.5">
                   {printOpts.map((o) => (
@@ -232,11 +232,11 @@ export default function AdminSystemPage() {
                         <p className="text-[10.5px] text-(--text-muted)">{ui(o.desc)}</p>
                       </div>
                       <span
-                        className="flex h-[20px] w-8 shrink-0 items-center rounded-full p-[3px] transition"
+                        className="flex h-5 w-8 shrink-0 items-center rounded-full p-0.75 transition"
                         style={{ backgroundColor: o.on ? "var(--color-primary)" : "var(--border-app)" }}
                       >
                         <span
-                          className="h-[14px] w-[14px] rounded-full bg-white transition-transform"
+                          className="h-3.5 w-3.5 rounded-full bg-white transition-transform"
                           style={{ transform: o.on ? "translateX(14px)" : "translateX(0)" }}
                         />
                       </span>
@@ -280,7 +280,7 @@ export default function AdminSystemPage() {
           {tab === "error" && (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {ERROR_PAGES.map((e) => (
-                <div key={e.code} className="flex flex-col gap-3 rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+                <div key={e.code} className="flex flex-col gap-3 rounded-xl border border-(--border-app) bg-background p-5">
                   <div className="flex items-center gap-2">
                     <span
                       className="rounded-full px-2 py-0.5 text-[10px] font-bold"

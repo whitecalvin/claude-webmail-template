@@ -20,7 +20,7 @@ const HEADER_STYLE: Record<LayoutStyle, string> = {
 };
 
 const SEARCH_STYLE: Record<LayoutStyle, string> = {
-  classic: "border border-(--border-app) bg-black/[.02] dark:bg-white/[.03]",
+  classic: "border border-(--border-app) bg-black/2 dark:bg-white/3",
   card: "border-0 bg-(--surface-muted) shadow-inner",
   minimal: "rounded-none border-0 border-b border-(--border-app) bg-transparent",
 };
@@ -95,7 +95,7 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
   }, [mobileSearchOpen]);
 
   return (
-    <header className={`relative z-20 shrink-0 bg-(--surface-app) ${HEADER_STYLE[draft.layoutStyle]}`}>
+    <header className={`relative z-20 shrink-0 bg-background ${HEADER_STYLE[draft.layoutStyle]}`}>
       <div className="flex h-14 min-w-0 items-center">
         {onMenuClick ? (
           <button type="button" onClick={onMenuClick} className="ml-2 rounded-(--radius-app) p-2 hover:bg-black/5 dark:hover:bg-white/10 lg:hidden" aria-label={t("openMenu")}>
@@ -109,7 +109,7 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
         </Link>
 
         {showGlobalSearch ? (
-          <div className="hidden min-w-[240px] max-w-xl flex-1 px-3 md:block lg:px-4">
+          <div className="hidden min-w-60 max-w-xl flex-1 px-3 md:block lg:px-4">
             <Suspense fallback={<div className="h-9 rounded-(--radius-app) bg-(--surface-muted)" />}><GlobalSearch /></Suspense>
           </div>
         ) : null}
@@ -153,7 +153,7 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
             {openMenu === "profile" ? (
               <>
                 <div className="fixed inset-0 z-40" onClick={closeMenus} />
-                <div className="absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-(--radius-app) border border-(--border-app) bg-(--surface-app) shadow-xl">
+                <div className="absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-(--radius-app) border border-(--border-app) bg-background shadow-xl">
                   <div className="border-b border-(--border-app) px-4 py-3"><p className="text-sm font-medium">{CURRENT_USER.name}</p><p className="truncate text-xs text-(--text-muted)">{CURRENT_USER.email}</p></div>
                   <button type="button" onClick={() => { openCustomizer(); closeMenus(); }} className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><Paintbrush size={16} style={{ color: "var(--color-accent)" }} />{tMenu("themeCustomizer")}</button>
                   <Link href="/mailboxes" onClick={closeMenus} className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><Inbox size={16} className="text-(--text-muted)" />{tMenu("mailboxes")}</Link>

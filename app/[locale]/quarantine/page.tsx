@@ -19,7 +19,7 @@ import {
 
 const KIND_STYLE: Record<QuarantineKind, string> = {
   피싱: "bg-[#EDEBF7] text-[#6B5CA8]",
-  스팸: "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]",
+  스팸: "bg-black/6 text-(--text-muted) dark:bg-white/8",
   멀웨어: "bg-[#FBEAE8] text-[#C0433B]",
 };
 
@@ -72,7 +72,7 @@ export default function QuarantinePage() {
       showGlobalSearch={false}
       className="flex flex-col lg:flex-row"
     >
-      <div className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-[420px]">
+      <div className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-105">
         <div className="flex shrink-0 gap-1.5 border-b border-(--border-app) px-4 py-2.5">
           {QUARANTINE_TABS.map((t) => (
             <button
@@ -130,7 +130,7 @@ export default function QuarantinePage() {
           <p className="m-auto text-sm text-(--text-muted)">메일을 선택하세요.</p>
         ) : (
           <>
-            <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) bg-(--surface-app) px-6 py-3.5">
+            <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) bg-background px-6 py-3.5">
               <button
                 type="button"
                 onClick={releaseSelected}
@@ -178,7 +178,7 @@ export default function QuarantinePage() {
               </div>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+                <div className="rounded-xl border border-(--border-app) bg-background p-4">
                   <p className="mb-2.5 text-[13px] font-bold">판정 근거</p>
                   <div className="flex flex-col gap-2.5">
                     {QUARANTINE_DETAIL_CHECKS.map((c) => (
@@ -199,7 +199,7 @@ export default function QuarantinePage() {
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+                <div className="rounded-xl border border-(--border-app) bg-background p-4">
                   <p className="mb-2.5 text-[13px] font-bold">안전 미리보기 (텍스트 전용)</p>
                   <p className="text-xs leading-relaxed text-(--text-muted)">
                     안녕하세요, 인사팀입니다. 연봉계약서 서명 기한이 임박했습니다. 아래 링크에서 본인 확인 후
@@ -209,8 +209,8 @@ export default function QuarantinePage() {
                     https://gxsoft-kr.net/sign/verify?id=8f2a
                   </p>
                   <p className="mt-1 text-[11px] text-(--text-muted)">링크 1개가 차단되었습니다.</p>
-                  <div className="mt-3 rounded-lg bg-(--color-primary)/[.06] p-2.5 text-[11px] text-(--text-muted)">
-                    <strong className="text-(--text-app)">AI</strong> 인사팀 실제 공지는 사내 결재
+                  <div className="mt-3 rounded-lg bg-(--color-primary)/6 p-2.5 text-[11px] text-(--text-muted)">
+                    <strong className="text-foreground">AI</strong> 인사팀 실제 공지는 사내 결재
                     시스템으로만 발송됩니다.
                   </div>
                 </div>

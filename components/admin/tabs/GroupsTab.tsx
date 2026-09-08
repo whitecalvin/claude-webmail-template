@@ -53,7 +53,7 @@ export function GroupsTab() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="그룹 주소 · 이름 검색"
-              className="h-8 w-64 rounded-lg bg-black/[.04] pl-7 pr-2.5 text-xs outline-none dark:bg-white/[.06]"
+              className="h-8 w-64 rounded-lg bg-black/4 pl-7 pr-2.5 text-xs outline-none dark:bg-white/6"
             />
           </div>
           <span className="ml-auto text-xs text-(--text-muted)">
@@ -61,7 +61,7 @@ export function GroupsTab() {
           </span>
         </div>
         <div className="overflow-hidden rounded-lg border border-(--border-app)">
-          <div className="grid grid-cols-[2fr_1.4fr_70px_1fr_100px] gap-2 border-b border-(--border-app) bg-black/[.02] px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/[.03]">
+          <div className="grid grid-cols-[2fr_1.4fr_70px_1fr_100px] gap-2 border-b border-(--border-app) bg-black/2 px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/3">
             <span>그룹 주소</span>
             <span>유형 · 소유자</span>
             <span>멤버</span>
@@ -74,7 +74,7 @@ export function GroupsTab() {
           {filteredGroups.map((g) => (
             <div
               key={g.addr}
-              className="grid grid-cols-[2fr_1.4fr_70px_1fr_100px] items-center gap-2 border-b border-(--border-app) px-3 py-2.5 text-xs last:border-b-0 hover:bg-black/[.015] dark:hover:bg-white/[.02]"
+              className="grid grid-cols-[2fr_1.4fr_70px_1fr_100px] items-center gap-2 border-b border-(--border-app) px-3 py-2.5 text-xs last:border-b-0 hover:bg-black/1.5 dark:hover:bg-white/2"
             >
               <div className="min-w-0">
                 <p className="truncate font-mono text-[11px] font-semibold">{g.addr}</p>

@@ -12,7 +12,7 @@ import { useToast } from "@/context/toast-context";
 const STATE_TONE: Record<string, string> = {
   success: "bg-(--status-success-bg) text-(--status-success)",
   warning: "bg-(--status-warning-bg) text-(--status-warning)",
-  neutral: "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]",
+  neutral: "bg-black/6 text-(--text-muted) dark:bg-white/8",
 };
 
 export default function OnboardingPage() {
@@ -39,7 +39,7 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-dvh bg-(--surface-muted) text-(--text-app)">
+    <div className="min-h-dvh bg-(--surface-muted) text-foreground">
       <div className="mx-auto flex max-w-6xl flex-col gap-5 p-5 sm:p-8">
         <div className="flex items-center gap-3">
           <div>
@@ -49,7 +49,7 @@ export default function OnboardingPage() {
             </p>
           </div>
           <div className="ml-auto flex items-center gap-2">
-            <div className="h-1.5 w-[170px] overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
+            <div className="h-1.5 w-42.5 overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
               <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--color-primary)" }} />
             </div>
             <span className="text-xs font-bold" style={{ color: "var(--color-primary)" }}>
@@ -59,7 +59,7 @@ export default function OnboardingPage() {
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[280px_1fr]">
-          <div className="flex flex-col gap-2 rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+          <div className="flex flex-col gap-2 rounded-xl border border-(--border-app) bg-background p-4">
             {ONBOARD_STEPS.map((s, i) => (
               <div
                 key={s.name}
@@ -87,7 +87,7 @@ export default function OnboardingPage() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+            <div className="rounded-xl border border-(--border-app) bg-background p-4">
               <div className="mb-3 flex items-center gap-2">
                 <p className="text-sm font-bold">DNS 레코드 등록</p>
                 <div className="ml-auto flex gap-2">
@@ -126,7 +126,7 @@ export default function OnboardingPage() {
                       <tr key={i} className="border-b border-(--border-app) last:border-b-0">
                         <td className="py-2 pr-2 font-mono">{r.type}</td>
                         <td className="py-2 pr-2 font-mono">{r.host}</td>
-                        <td className="max-w-[220px] truncate py-2 pr-2 font-mono text-(--text-muted)">{r.value}</td>
+                        <td className="max-w-55 truncate py-2 pr-2 font-mono text-(--text-muted)">{r.value}</td>
                         <td className="py-2 pr-2 text-(--text-muted)">{r.prio}</td>
                         <td className="py-2">
                           <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${STATE_TONE[r.tone]}`}>{r.state}</span>
@@ -139,12 +139,12 @@ export default function OnboardingPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+              <div className="rounded-xl border border-(--border-app) bg-background p-4">
                 <p className="mb-3 text-sm font-bold">계정 일괄 등록</p>
                 <button
                   type="button"
                   onClick={() => toast.info("CSV 파일 선택 창을 엽니다")}
-                  className="flex h-24 w-full flex-col items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-(--border-app) text-(--text-muted) transition hover:bg-black/[.02] dark:hover:bg-white/[.03]"
+                  className="flex h-24 w-full flex-col items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-(--border-app) text-(--text-muted) transition hover:bg-black/2 dark:hover:bg-white/3"
                 >
                   <Upload size={18} />
                   <span className="text-[11px]">CSV 파일을 드래그하거나 선택하세요</span>
@@ -152,7 +152,7 @@ export default function OnboardingPage() {
                 <p className="mt-2 text-[10.5px] text-(--text-muted)">이름 · 이메일 · 부서 · 직급 열 필요</p>
                 <p className="mt-1 text-[11px] font-semibold text-(--status-success)">1,284행 검증 완료 · 중복 3건 자동 병합</p>
               </div>
-              <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+              <div className="rounded-xl border border-(--border-app) bg-background p-4">
                 <p className="mb-3 text-sm font-bold">기존 메일 마이그레이션</p>
                 <div className="flex flex-col gap-2.5">
                   {MIGRATIONS.map((m) => (

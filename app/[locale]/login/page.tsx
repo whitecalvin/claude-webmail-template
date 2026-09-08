@@ -40,7 +40,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-dvh w-full bg-(--surface-app) xl:grid xl:grid-cols-[minmax(32rem,0.9fr)_minmax(40rem,1.1fr)]">
+    <div className="min-h-dvh w-full bg-background xl:grid xl:grid-cols-[minmax(32rem,0.9fr)_minmax(40rem,1.1fr)]">
       <main className="flex min-h-dvh w-full flex-col px-6 py-6 sm:px-10 sm:py-8 lg:px-12 xl:px-16 2xl:py-12">
         <div className="mx-auto flex w-full max-w-md items-center gap-3">
           <span
@@ -49,14 +49,14 @@ export default function LoginPage() {
           >
             G
           </span>
-          <span className="text-[17px] font-bold tracking-tight text-(--text-app)">
+          <span className="text-[17px] font-bold tracking-tight text-foreground">
             GXWebMail
           </span>
         </div>
 
         <div className="flex flex-1 items-center py-8 sm:py-10 2xl:py-12">
           <div className="mx-auto w-full max-w-md">
-          <h1 className="text-[32px] font-bold leading-[1.15] tracking-[-0.035em] text-(--text-app) sm:text-[36px]">
+          <h1 className="text-[32px] font-bold leading-[1.15] tracking-[-0.035em] text-foreground sm:text-[36px]">
             다시 만나 반갑습니다
           </h1>
           <p className="mt-3 max-w-[38ch] break-keep text-sm leading-6 text-(--text-muted)">
@@ -74,7 +74,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="jiwoo.han@gxsoft.co.kr"
-                className="h-12 rounded-[10px] border border-(--border-app) bg-black/[.015] px-3.5 text-sm text-(--text-app) outline-none transition duration-200 focus:border-(--color-primary) focus:bg-transparent focus:ring-3 focus:ring-blue-500/10 dark:bg-white/[.03]"
+                className="h-12 rounded-[10px] border border-(--border-app) bg-black/1.5 px-3.5 text-sm text-foreground outline-none transition duration-200 focus:border-(--color-primary) focus:bg-transparent focus:ring-3 focus:ring-blue-500/10 dark:bg-white/3"
               />
             </label>
 
@@ -87,7 +87,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="비밀번호를 입력하세요"
-                className="h-12 rounded-[10px] border border-(--border-app) bg-black/[.015] px-3.5 text-sm text-(--text-app) outline-none transition duration-200 focus:border-(--color-primary) focus:bg-transparent focus:ring-3 focus:ring-blue-500/10 dark:bg-white/[.03]"
+                className="h-12 rounded-[10px] border border-(--border-app) bg-black/1.5 px-3.5 text-sm text-foreground outline-none transition duration-200 focus:border-(--color-primary) focus:bg-transparent focus:ring-3 focus:ring-blue-500/10 dark:bg-white/3"
               />
             </label>
 
@@ -97,7 +97,7 @@ export default function LoginPage() {
                 onClick={() => setRemember((v) => !v)}
                 role="checkbox"
                 aria-checked={remember}
-                className="flex items-center gap-2 rounded-md text-[13px] font-medium text-(--text-app) outline-none transition focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-2"
+                className="flex items-center gap-2 rounded-md text-[13px] font-medium text-foreground outline-none transition focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-2"
               >
                 <span
                   className="flex h-4 w-4 items-center justify-center rounded-[5px]"
@@ -116,7 +116,7 @@ export default function LoginPage() {
                   e.preventDefault();
                   toast.info("비밀번호 재설정 메일을 보냅니다", { sub: email || "이메일을 먼저 입력하세요" });
                 }}
-                className="rounded text-[13px] font-medium text-(--text-muted) outline-none transition hover:text-(--text-app) focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-2"
+                className="rounded text-[13px] font-medium text-(--text-muted) outline-none transition hover:text-foreground focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-2"
               >
                 비밀번호 찾기
               </Link>
@@ -140,9 +140,9 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => toast.info("SAML SSO 로그인 화면으로 이동합니다", { sub: "조직 관리자에게 문의하세요" })}
-                className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-(--border-app) bg-(--surface-app) text-[13px] font-semibold text-(--text-muted) outline-none transition duration-200 hover:border-(--text-muted) hover:text-(--text-app) active:translate-y-px focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-2 dark:hover:bg-white/[.03]"
+                className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-(--border-app) bg-background text-[13px] font-semibold text-(--text-muted) outline-none transition duration-200 hover:border-(--text-muted) hover:text-foreground active:translate-y-px focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-2 dark:hover:bg-white/3"
               >
-                <span className="flex h-4 w-4 items-center justify-center rounded-[4px] bg-(--text-app) text-[9px] font-extrabold text-(--surface-app)">
+                <span className="flex h-4 w-4 items-center justify-center rounded-sm bg-(--text-app) text-[9px] font-extrabold text-(--surface-app)">
                   S
                 </span>
                 조직 계정 (SAML) 으로 계속
@@ -150,9 +150,9 @@ export default function LoginPage() {
             </div>
           </form>
 
-          <div className="mt-6 flex items-start gap-3 border-l-2 border-(--color-primary) bg-black/[.025] px-3.5 py-3 dark:bg-white/[.04]">
+          <div className="mt-6 flex items-start gap-3 border-l-2 border-(--color-primary) bg-black/2.5 px-3.5 py-3 dark:bg-white/4">
             <span
-              className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-[8px] text-[13px] font-bold"
+              className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg text-[13px] font-bold"
               style={{
                 backgroundColor: "color-mix(in srgb, var(--color-primary) 15%, transparent)",
                 color: "var(--color-primary)",
@@ -181,7 +181,7 @@ export default function LoginPage() {
                 e.preventDefault();
                 toast.info("이용약관을 엽니다");
               }}
-              className="rounded outline-none transition hover:text-(--text-app) focus-visible:ring-2 focus-visible:ring-(--color-primary)"
+              className="rounded outline-none transition hover:text-foreground focus-visible:ring-2 focus-visible:ring-(--color-primary)"
             >
               이용약관
             </Link>
@@ -191,14 +191,14 @@ export default function LoginPage() {
                 e.preventDefault();
                 toast.info("개인정보 처리방침을 엽니다");
               }}
-              className="rounded outline-none transition hover:text-(--text-app) focus-visible:ring-2 focus-visible:ring-(--color-primary)"
+              className="rounded outline-none transition hover:text-foreground focus-visible:ring-2 focus-visible:ring-(--color-primary)"
             >
               개인정보 처리방침
             </Link>
           </div>
           <div className="flex items-center justify-between gap-4 sm:justify-end">
             <span>{localeNames[locale]}</span>
-            <Link href="/setup" className="rounded font-medium outline-none transition hover:text-(--text-app) focus-visible:ring-2 focus-visible:ring-(--color-primary)">
+            <Link href="/setup" className="rounded font-medium outline-none transition hover:text-foreground focus-visible:ring-2 focus-visible:ring-(--color-primary)">
               서버 설치 마법사
             </Link>
           </div>

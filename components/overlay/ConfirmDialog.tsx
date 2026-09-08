@@ -70,9 +70,9 @@ export function ConfirmDialog({
               {tone === "alert" ? <Check size={17} strokeWidth={3} /> : "!"}
             </span>
             <div className="flex flex-col gap-1.5 pt-0.5">
-              <h2 className="text-[16px] font-bold leading-snug text-(--text-app)">{title}</h2>
+              <h2 className="text-[16px] font-bold leading-snug text-foreground">{title}</h2>
               {description && (
-                <p className="text-[13px] leading-relaxed text-(--text-muted) [text-wrap:pretty]">
+                <p className="text-[13px] leading-relaxed text-(--text-muted) text-pretty">
                   {description}
                 </p>
               )}
@@ -81,7 +81,7 @@ export function ConfirmDialog({
         )}
         {tone === "default" && (
           <div className="flex flex-col gap-1.5">
-            <h2 className="text-[14.5px] font-bold leading-snug text-(--text-app)">{title}</h2>
+            <h2 className="text-[14.5px] font-bold leading-snug text-foreground">{title}</h2>
             {description && (
               <p className="text-[12.5px] leading-relaxed text-(--text-muted)">{description}</p>
             )}
@@ -106,7 +106,7 @@ export function ConfirmDialog({
             <button
               type="button"
               onClick={onCancel}
-              className="h-[38px] whitespace-nowrap rounded-[9px] border border-(--border-app) px-4 text-[13px] font-semibold text-(--text-app) hover:bg-black/5 dark:hover:bg-white/10"
+              className="h-9.5 whitespace-nowrap rounded-[9px] border border-(--border-app) px-4 text-[13px] font-semibold text-foreground hover:bg-black/5 dark:hover:bg-white/10"
             >
               {resolvedCancelLabel}
             </button>
@@ -115,7 +115,7 @@ export function ConfirmDialog({
             <button
               type="button"
               onClick={middleAction.onClick}
-              className="h-[38px] whitespace-nowrap rounded-[9px] px-4 text-[13px] font-semibold text-(--text-app) hover:bg-black/5 dark:hover:bg-white/10"
+              className="h-9.5 whitespace-nowrap rounded-[9px] px-4 text-[13px] font-semibold text-foreground hover:bg-black/5 dark:hover:bg-white/10"
             >
               {middleAction.label}
             </button>
@@ -124,7 +124,7 @@ export function ConfirmDialog({
             type="button"
             disabled={requireTypedText ? !typedMatches : false}
             onClick={onConfirm}
-            className={`h-[38px] whitespace-nowrap rounded-[9px] px-4 text-[13px] font-semibold transition disabled:cursor-not-allowed disabled:bg-[#F0D9D6] disabled:text-[#B0736D] ${
+            className={`h-9.5 whitespace-nowrap rounded-[9px] px-4 text-[13px] font-semibold transition disabled:cursor-not-allowed disabled:bg-[#F0D9D6] disabled:text-[#B0736D] ${
               requireTypedText && !typedMatches ? "" : CONFIRM_BTN_STYLE[tone]
             }`}
             style={

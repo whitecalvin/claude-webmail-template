@@ -13,12 +13,12 @@ export function LoadingModal({
 }) {
   return (
     <div
-      className="fixed inset-0 z-[90] flex items-center justify-center p-4"
+      className="fixed inset-0 z-90 flex items-center justify-center p-4"
       style={{ backgroundColor: "rgba(20,22,30,.42)" }}
     >
-      <div className="flex w-full max-w-[300px] flex-col items-center gap-2 rounded-[14px] bg-(--surface-app) p-4 text-center text-(--text-app)">
+      <div className="flex w-full max-w-75 flex-col items-center gap-2 rounded-[14px] bg-background p-4 text-center text-foreground">
         <div
-          className="h-[34px] w-[34px] animate-spin rounded-full border-[3px]"
+          className="h-8.5 w-8.5 animate-spin rounded-full border-[3px]"
           style={{ borderColor: "#E4E7F5", borderTopColor: "var(--color-primary)" }}
         />
         <p className="text-[13.5px] font-bold">{title}</p>

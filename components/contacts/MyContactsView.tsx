@@ -126,7 +126,7 @@ export function MyContactsView() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="이름 · 회사 · 메일"
-              className="h-8 w-60 rounded-lg bg-black/[.04] pl-7 pr-2.5 text-xs outline-none dark:bg-white/[.06]"
+              className="h-8 w-60 rounded-lg bg-black/4 pl-7 pr-2.5 text-xs outline-none dark:bg-white/6"
             />
           </div>
           {CONTACT_GROUPS.map((g) => (
@@ -173,7 +173,7 @@ export function MyContactsView() {
                 className={`grid cursor-pointer grid-cols-[1.7fr_1.5fr_1.2fr_90px] items-center gap-3 border-b border-(--border-app) px-5 py-2.5 text-left transition ${
                   isSelected
                     ? "border-l-2 border-l-(--color-primary) bg-(--color-primary)/5"
-                    : "hover:bg-black/[.02] dark:hover:bg-white/[.03]"
+                    : "hover:bg-black/2 dark:hover:bg-white/3"
                 }`}
               >
                 <div className="flex min-w-0 items-center gap-2">
@@ -231,9 +231,9 @@ export function MyContactsView() {
               </span>
             </div>
 
-            <div className="mb-4 flex items-center gap-3 rounded-[11px] border border-(--border-app) bg-(--surface-app) p-3.5">
+            <div className="mb-4 flex items-center gap-3 rounded-[11px] border border-(--border-app) bg-background p-3.5">
               <span
-                className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full text-lg font-bold"
+                className="flex h-13 w-13 shrink-0 items-center justify-center rounded-full text-lg font-bold"
                 style={{ backgroundColor: selected.bg, color: selected.fg }}
               >
                 {selected.initials}
@@ -264,7 +264,7 @@ export function MyContactsView() {
                     type="text"
                     value={selected[field]}
                     onChange={(e) => updateSelected({ [field]: e.target.value })}
-                    className="h-[38px] rounded-[9px] border border-(--border-app) bg-(--surface-app) px-3 text-xs outline-none focus:border-(--color-primary)"
+                    className="h-9.5 rounded-[9px] border border-(--border-app) bg-background px-3 text-xs outline-none focus:border-(--color-primary)"
                   />
                 </label>
               ))}

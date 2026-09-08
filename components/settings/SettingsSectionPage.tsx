@@ -20,7 +20,7 @@ export function SettingsSectionPage({ active }: { active: SettingsNavKey }) {
   const Card = CARD_SECTIONS[active];
 
   return (
-    <WorkspaceLayout title={<SettingsHeaderTitle title={title} />} showGlobalSearch={false} className="flex flex-col bg-(--surface-app) lg:flex-row">
+    <WorkspaceLayout title={<SettingsHeaderTitle title={title} />} showGlobalSearch={false} className="flex flex-col bg-background lg:flex-row">
       <SettingsNav active={active} />
       {active === "signature" ? (
         <SignatureSettingsView />

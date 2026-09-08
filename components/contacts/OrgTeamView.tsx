@@ -75,7 +75,7 @@ export function OrgTeamView({ teamId }: { teamId: string }) {
               >
                 <div className="flex w-full items-center gap-2">
                   <span
-                    className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full text-sm font-bold"
+                    className="flex h-9.5 w-9.5 shrink-0 items-center justify-center rounded-full text-sm font-bold"
                     style={{ backgroundColor: m.bg, color: m.fg }}
                   >
                     {m.initials}
@@ -107,7 +107,7 @@ export function OrgTeamView({ teamId }: { teamId: string }) {
           <>
             <div className="flex flex-col items-center text-center">
               <span
-                className="flex h-[76px] w-[76px] items-center justify-center rounded-full text-2xl font-bold"
+                className="flex h-19 w-19 items-center justify-center rounded-full text-2xl font-bold"
                 style={{ backgroundColor: selected.bg, color: selected.fg }}
               >
                 {selected.initials}
@@ -136,7 +136,7 @@ export function OrgTeamView({ teamId }: { teamId: string }) {
               <button
                 type="button"
                 onClick={() => toast.info("일정 잡기 화면을 엽니다", { sub: selected.name })}
-                className="flex h-9 flex-1 items-center justify-center gap-1.5 rounded-[9px] border border-(--border-app) bg-(--surface-app) text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/10"
+                className="flex h-9 flex-1 items-center justify-center gap-1.5 rounded-[9px] border border-(--border-app) bg-background text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/10"
               >
                 <CalendarPlus size={13} />
                 일정 잡기
@@ -156,7 +156,7 @@ export function OrgTeamView({ teamId }: { teamId: string }) {
               ).map(([label, value]) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2 rounded-[9px] border border-(--border-app) bg-(--surface-app) px-3 py-2"
+                  className="flex items-center gap-2 rounded-[9px] border border-(--border-app) bg-background px-3 py-2"
                 >
                   <span className="w-14 shrink-0 text-[11px] text-(--text-muted)">
                     {label}
@@ -176,7 +176,7 @@ export function OrgTeamView({ teamId }: { teamId: string }) {
               {(PERSON_MAILS[selected.id] ?? []).map((pm) => (
                 <div
                   key={pm.subject}
-                  className="flex items-center gap-2 rounded-[9px] border border-(--border-app) bg-(--surface-app) px-3 py-2"
+                  className="flex items-center gap-2 rounded-[9px] border border-(--border-app) bg-background px-3 py-2"
                 >
                   <span className="min-w-0 flex-1 truncate text-xs font-semibold">
                     {pm.subject}

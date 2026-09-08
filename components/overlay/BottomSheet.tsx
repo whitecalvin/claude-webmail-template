@@ -15,16 +15,16 @@ export function BottomSheet({
 }) {
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-end justify-center lg:hidden"
+      className="fixed inset-0 z-80 flex items-end justify-center lg:hidden"
       style={{ backgroundColor: "rgba(20,22,30,.42)" }}
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-t-2xl bg-(--surface-app) pb-[max(10px,env(safe-area-inset-bottom))] pt-2.5 text-(--text-app)"
+        className="w-full max-w-md rounded-t-2xl bg-background pb-[max(10px,env(safe-area-inset-bottom))] pt-2.5 text-foreground"
       >
         <div className="mx-auto mb-2.5 h-1 w-9 rounded-full bg-[#DEDED8]" />
-        <p className="px-[18px] pb-2.5 text-[13.5px] font-bold">{title}</p>
+        <p className="px-4.5 pb-2.5 text-[13.5px] font-bold">{title}</p>
         {children}
       </div>
     </div>
@@ -46,7 +46,7 @@ export function BottomSheetRow({
     <button
       type="button"
       onClick={onClick}
-      className="flex min-h-[44px] w-full items-center gap-2.5 px-[18px] text-left text-[13.5px] hover:bg-black/[.03] dark:hover:bg-white/[.05]"
+      className="flex min-h-11 w-full items-center gap-2.5 px-4.5 text-left text-[13.5px] hover:bg-black/3 dark:hover:bg-white/5"
     >
       {dot && <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: dot }} />}
       <span className="flex-1">{label}</span>

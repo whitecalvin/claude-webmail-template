@@ -131,7 +131,7 @@ export function AppShell() {
         className="relative flex flex-col"
       >
         {bannerTone && (
-          <div className="pointer-events-none fixed inset-x-0 top-[4.25rem] z-[30] flex justify-center px-3 sm:px-4">
+          <div className="pointer-events-none fixed inset-x-0 top-17 z-30 flex justify-center px-3 sm:px-4">
             <div className="pointer-events-auto w-full max-w-3xl overflow-hidden rounded-xl shadow-xl ring-1 ring-black/10 dark:ring-white/10">
               {bannerTone === "offline" && (
                 <GlobalBanner
@@ -174,7 +174,7 @@ export function AppShell() {
           </div>
 
           <div
-            className={`h-full w-full shrink-0 lg:order-2 lg:w-[360px] ${
+            className={`h-full w-full shrink-0 lg:order-2 lg:w-90 ${
               mobileView === "list" ? "block" : "hidden"
             } lg:block`}
           >

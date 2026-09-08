@@ -18,7 +18,7 @@ const ICON_STYLE: Record<ToastTone, string> = {
   success: "bg-[#2E8B5B]/20 text-[#6FE0A8]",
   error: "bg-[#C0433B]/25 text-[#F29A92]",
   info: "bg-[#2B4BF2]/25 text-[#B9C6FA]",
-  undo: "bg-white/[.12] text-[#F7F7F5]",
+  undo: "bg-white/12 text-[#F7F7F5]",
 };
 
 export function ToastStack() {
@@ -27,7 +27,7 @@ export function ToastStack() {
   if (toasts.length === 0) return null;
 
   return (
-    <div className="pointer-events-none fixed bottom-4 left-4 z-[70] flex w-[340px] max-w-[calc(100vw-2rem)] flex-col gap-2">
+    <div className="pointer-events-none fixed bottom-4 left-4 z-70 flex w-85 max-w-[calc(100vw-2rem)] flex-col gap-2">
       {toasts.map((t) => {
         const Icon = ICON[t.tone];
         return (

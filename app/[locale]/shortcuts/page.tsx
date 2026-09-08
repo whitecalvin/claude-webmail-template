@@ -13,7 +13,7 @@ export default function ShortcutsPage() {
       <SettingsNav active="shortcuts" />
       <div className="min-h-0 w-full flex-1 overflow-y-auto py-8">
         <div className="mx-auto max-w-3xl px-4">
-          <div className="border border-(--border-app) bg-(--surface-app) p-8 sm:p-12">
+          <div className="border border-(--border-app) bg-background p-8 sm:p-12">
             <div className="flex items-start justify-between gap-4 border-b-2 border-(--text-app) pb-4">
               <div>
                 <h1 className="text-[26px] font-bold tracking-tight">키보드 단축키</h1>
@@ -44,7 +44,7 @@ export default function ShortcutsPage() {
                           {item.keys.map((k, i) => (
                             <kbd
                               key={i}
-                              className="rounded border border-b-2 border-(--border-app) bg-black/[.02] px-1.5 py-0.5 font-mono text-[11px] font-semibold dark:bg-white/[.04]"
+                              className="rounded border border-b-2 border-(--border-app) bg-black/2 px-1.5 py-0.5 font-mono text-[11px] font-semibold dark:bg-white/4"
                             >
                               {k}
                             </kbd>

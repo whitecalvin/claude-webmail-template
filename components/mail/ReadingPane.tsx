@@ -24,9 +24,9 @@ import type { LayoutStyle } from "@/types/theme";
 // delete actions. Visual style (padding, background) follows the active
 // layout preset from the theme customizer.
 const WRAPPER_STYLE: Record<LayoutStyle, string> = {
-  classic: "bg-(--surface-app)",
+  classic: "bg-background",
   card: "bg-(--surface-muted)",
-  minimal: "bg-(--surface-app)",
+  minimal: "bg-background",
 };
 
 const ACTION_BAR_STYLE: Record<LayoutStyle, string> = {
@@ -37,7 +37,7 @@ const ACTION_BAR_STYLE: Record<LayoutStyle, string> = {
 
 const CONTENT_STYLE: Record<LayoutStyle, string> = {
   classic: "px-4 py-5 sm:px-8",
-  card: "m-4 rounded-(--radius-app) bg-(--surface-app) p-5 shadow-sm sm:m-6 sm:p-8",
+  card: "m-4 rounded-(--radius-app) bg-background p-5 shadow-sm sm:m-6 sm:p-8",
   minimal: "px-6 py-8 sm:px-12",
 };
 

@@ -18,7 +18,7 @@ export default function AccessibilityPage() {
         <p className="text-xs text-(--text-muted)">공공기관 납품 기준 · 자체 점검 2026년 8월 28일</p>
 
         <div className="grid gap-5 lg:grid-cols-[1.15fr_1fr]">
-          <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+          <div className="rounded-xl border border-(--border-app) bg-background p-5">
             <h2 className="mb-3 text-sm font-bold">점검 항목</h2>
             <div className="flex flex-col gap-2">
               {A11Y_ROWS.map((r) => (
@@ -42,7 +42,7 @@ export default function AccessibilityPage() {
           </div>
 
           <div className="flex flex-col gap-5">
-            <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+            <div className="rounded-xl border border-(--border-app) bg-background p-5">
               <h2 className="mb-3 text-sm font-bold">명암비 검증</h2>
               <div className="flex flex-col gap-2.5">
                 {CONTRAST_ROWS.map((r) => (
@@ -71,7 +71,7 @@ export default function AccessibilityPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+            <div className="rounded-xl border border-(--border-app) bg-background p-5">
               <h2 className="mb-3 text-sm font-bold">포커스 · 터치 영역</h2>
               <button
                 type="button"
@@ -91,7 +91,7 @@ export default function AccessibilityPage() {
                 포커스 링은 2px 액센트 외곽선 + 3px 오프셋으로 통일하며, 키보드 사용 시에만 표시됩니다
                 (:focus-visible).
               </p>
-              <div className="mt-3 rounded-lg bg-black/[.02] p-3 text-xs dark:bg-white/[.03]">
+              <div className="mt-3 rounded-lg bg-black/2 p-3 text-xs dark:bg-white/3">
                 <p className="font-semibold">보조 기술 테스트</p>
                 <p className="mt-1 text-(--text-muted)">NVDA 2025.1 · VoiceOver (macOS 15) · 센스리더 3.5</p>
                 <p className="mt-1 text-(--text-muted)">

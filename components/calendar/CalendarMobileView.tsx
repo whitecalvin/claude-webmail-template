@@ -129,10 +129,10 @@ export function CalendarMobileView({
 
       <div className="flex-1 overflow-y-auto p-4">
         {!aiBannerDismissed && (
-          <div className="mb-3 rounded-[12px] border border-(--border-app) bg-(--surface-app) p-3.5">
+          <div className="mb-3 rounded-xl border border-(--border-app) bg-background p-3.5">
             <div className="flex items-center gap-2">
               <span
-                className="flex h-[18px] w-[18px] items-center justify-center rounded-[6px]"
+                className="flex h-4.5 w-4.5 items-center justify-center rounded-md"
                 style={{
                   backgroundColor:
                     "color-mix(in srgb, var(--color-primary) 15%, transparent)",
@@ -151,7 +151,7 @@ export function CalendarMobileView({
               <button
                 type="button"
                 onClick={onAddAiEvent}
-                className="h-8 flex-1 rounded-[8px] text-xs font-semibold text-white transition hover:brightness-110"
+                className="h-8 flex-1 rounded-lg text-xs font-semibold text-white transition hover:brightness-110"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
                 캘린더에 추가
@@ -159,7 +159,7 @@ export function CalendarMobileView({
               <button
                 type="button"
                 onClick={onDismissAiBanner}
-                className="h-8 rounded-[8px] border border-(--border-app) px-3 text-xs text-(--text-muted)"
+                className="h-8 rounded-lg border border-(--border-app) px-3 text-xs text-(--text-muted)"
               >
                 무시
               </button>
@@ -176,10 +176,10 @@ export function CalendarMobileView({
             {dayEvents.map((event) => (
               <div
                 key={event.id}
-                className="flex gap-3 rounded-[12px] border border-(--border-app) bg-(--surface-app) p-3.5"
+                className="flex gap-3 rounded-xl border border-(--border-app) bg-background p-3.5"
               >
                 <span
-                  className="w-[3px] shrink-0 rounded-full"
+                  className="w-0.75 shrink-0 rounded-full"
                   style={{ backgroundColor: event.color }}
                 />
                 <div className="min-w-0 flex-1">

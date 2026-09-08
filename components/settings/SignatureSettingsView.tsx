@@ -44,7 +44,7 @@ export function SignatureSettingsView() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-5 rounded-xl border border-(--border-app) bg-(--surface-app) p-5 sm:flex-row">
+      <div className="flex flex-col gap-5 rounded-xl border border-(--border-app) bg-background p-5 sm:flex-row">
         <div className="flex-1">
           <div className="mb-2.5 flex flex-wrap items-center gap-2">
             <h2 className="text-sm font-bold">서명</h2>
@@ -64,7 +64,7 @@ export function SignatureSettingsView() {
               </button>
             </div>
           </div>
-          <div className="rounded-[10px] border border-(--border-app) bg-black/[.015] p-4 text-xs leading-relaxed dark:bg-white/[.02]">
+          <div className="rounded-[10px] border border-(--border-app) bg-black/1.5 p-4 text-xs leading-relaxed dark:bg-white/2">
             <p className="font-semibold">
               {CURRENT_USER.name}{" "}
               <span className="font-normal text-(--text-muted)">(Jiwoo Han)</span>
@@ -78,7 +78,7 @@ export function SignatureSettingsView() {
             </p>
           </div>
         </div>
-        <div className="w-full shrink-0 sm:w-[250px]">
+        <div className="w-full shrink-0 sm:w-62.5">
           <h2 className="mb-2.5 text-sm font-bold">발신 기본값</h2>
           <div className="flex flex-col gap-1.5">
             {SEND_DEFAULTS.map((row) => (
@@ -100,7 +100,7 @@ export function SignatureSettingsView() {
       </div>
 
       <div className="grid flex-1 grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+        <div className="rounded-xl border border-(--border-app) bg-background p-5">
           <h2 className="mb-3 text-sm font-bold">기능 설정</h2>
           <div className="flex flex-col gap-3.5">
             {toggles.map((t) => (
@@ -116,13 +116,13 @@ export function SignatureSettingsView() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+          <div className="rounded-xl border border-(--border-app) bg-background p-5">
             <h2 className="mb-3 text-sm font-bold">필터 · 자동 분류 규칙</h2>
             <div className="flex flex-col gap-2">
               {USER_RULES.map((rule) => (
                 <div
                   key={rule.name}
-                  className="flex items-center gap-2 rounded-[9px] border border-(--border-app) bg-black/[.015] px-3 py-2 dark:bg-white/[.02]"
+                  className="flex items-center gap-2 rounded-[9px] border border-(--border-app) bg-black/1.5 px-3 py-2 dark:bg-white/2"
                 >
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-xs font-semibold">{rule.name}</p>
@@ -156,7 +156,7 @@ export function SignatureSettingsView() {
               {SECURITY_ROWS.map((row) => (
                 <div
                   key={row.name}
-                  className="flex items-center gap-2 rounded-[9px] bg-white/[.06] px-3 py-2"
+                  className="flex items-center gap-2 rounded-[9px] bg-white/6 px-3 py-2"
                 >
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-xs font-semibold text-white">{row.name}</p>

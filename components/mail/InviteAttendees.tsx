@@ -22,7 +22,7 @@ export function InviteAttendees({ invite }: { invite: MeetingInvite }) {
   const responded = invite.attendees.length - invite.attendees.filter((a) => a.state === "응답 없음").length;
 
   return (
-    <aside className="hidden w-[300px] shrink-0 flex-col gap-4 overflow-y-auto border-l border-(--border-app) bg-[#FCFCFB] p-4 lg:flex">
+    <aside className="hidden w-75 shrink-0 flex-col gap-4 overflow-y-auto border-l border-(--border-app) bg-[#FCFCFB] p-4 lg:flex">
       <div>
         <p className="text-xs font-bold">참석 현황</p>
         <p className="mt-0.5 text-[11px] text-(--text-muted)">
@@ -67,7 +67,7 @@ export function InviteAttendees({ invite }: { invite: MeetingInvite }) {
         ))}
       </div>
 
-      <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-3">
+      <div className="rounded-xl border border-(--border-app) bg-background p-3">
         <p className="text-xs font-bold">AI 브리핑</p>
         <p className="mt-1.5 text-[11px] leading-relaxed text-(--text-muted)">
           지난 스프린트 리뷰에서 논의된 GPU 노드 증설 건의 최종 검토가 이번 회의 안건에 포함되어 있습니다.

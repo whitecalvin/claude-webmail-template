@@ -14,7 +14,7 @@ export const TONE_STYLE: Record<Tone, string> = {
   info: "bg-[#ECEFFE] text-[#2B4BF2] dark:bg-[#2B4BF2]/20 dark:text-[#A9B8FB]",
   violet: "bg-[#EDEBF7] text-[#6B5CA8] dark:bg-[#6B5CA8]/20 dark:text-[#C6BCEB]",
   teal: "bg-[#E8F1F5] text-[#3B7A94] dark:bg-[#3B7A94]/20 dark:text-[#8FC4D9]",
-  neutral: "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]",
+  neutral: "bg-black/6 text-(--text-muted) dark:bg-white/8",
 };
 
 export function Pill({ label, tone }: { label: string; tone: Tone }) {
@@ -40,7 +40,7 @@ export function AdminCard({
 }) {
   return (
     <div
-      className={`rounded-xl border border-(--border-app) bg-(--surface-app) p-4 ${className}`}
+      className={`rounded-xl border border-(--border-app) bg-background p-4 ${className}`}
     >
       {title && (
         <div className="mb-3 flex items-center gap-2">
@@ -56,7 +56,7 @@ export function AdminCard({
 export function Sparkline({ bars, height = 28 }: { bars: number[]; height?: number }) {
   const max = Math.max(...bars, 1);
   return (
-    <div className="flex items-end gap-[2px]" style={{ height }}>
+    <div className="flex items-end gap-0.5" style={{ height }}>
       {bars.map((v, i) => (
         <span
           key={i}
@@ -133,7 +133,7 @@ export const AdminSwitch = Switch;
 
 export function TableHeader({ columns }: { columns: { label: string; className?: string }[] }) {
   return (
-    <div className="flex gap-3 border-b border-(--border-app) bg-black/[.015] px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/[.02]">
+    <div className="flex gap-3 border-b border-(--border-app) bg-black/1.5 px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/2">
       {columns.map((c) => (
         <span key={c.label} className={c.className}>
           {c.label}

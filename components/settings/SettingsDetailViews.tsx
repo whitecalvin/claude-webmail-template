@@ -26,14 +26,14 @@ import { localeNames, locales, type Locale } from "@/i18n/routing";
 
 const VISIBILITY_STYLE: Record<string, string> = {
   "목록 표시": "bg-(--status-success-bg) text-(--status-success)",
-  숨김: "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]",
+  숨김: "bg-black/6 text-(--text-muted) dark:bg-white/8",
   "DLP 연동": "bg-(--status-danger-bg) text-(--status-danger)",
 };
 
 const MODE_STYLE: Record<string, string> = {
   "즉시 알림": "bg-(--status-success-bg) text-(--status-success)",
   "1시간 요약": "bg-(--status-warning-bg) text-(--status-warning)",
-  "알림 없음": "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]",
+  "알림 없음": "bg-black/6 text-(--text-muted) dark:bg-white/8",
 };
 
 const INTEGRATION_ICONS: Record<string, typeof CalendarDays> = {
@@ -54,7 +54,7 @@ function CardShell({
   children: ReactNode;
 }) {
   return (
-    <div className="flex h-full flex-col rounded-[14px] border border-(--border-app) bg-(--surface-app) p-[18px]">
+    <div className="flex h-full flex-col rounded-[14px] border border-(--border-app) bg-background p-4.5">
       <div className="mb-3 flex items-center gap-2">
         <h2 className="text-[13.5px] font-bold">{title}</h2>
         {action && <div className="ml-auto">{action}</div>}
@@ -100,7 +100,7 @@ export function LabelsCard() {
       {labels.map((label) => (
         <div key={label.name} className="flex items-center gap-2.5">
           <span
-            className="h-[9px] w-[9px] shrink-0 rounded-[3px]"
+            className="h-2.25 w-2.25 shrink-0 rounded-[3px]"
             style={{ backgroundColor: label.color }}
           />
           <span className="min-w-0 flex-1 truncate text-xs font-semibold">
@@ -124,7 +124,7 @@ export function LabelsCard() {
             <button
               type="button"
               onClick={() => setCreating(false)}
-              className="flex h-[26px] w-[26px] items-center justify-center rounded-lg text-[13px] text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
+              className="flex h-6.5 w-6.5 items-center justify-center rounded-lg text-[13px] text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
               aria-label="닫기"
             >
               ✕
@@ -165,7 +165,7 @@ export function LabelsCard() {
             <button
               type="button"
               onClick={() => setCreating(false)}
-              className="h-[34px] rounded-[9px] border border-(--border-app) px-3.5 text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/10"
+              className="h-8.5 rounded-[9px] border border-(--border-app) px-3.5 text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/10"
             >
               취소
             </button>
@@ -173,7 +173,7 @@ export function LabelsCard() {
               type="button"
               onClick={createLabel}
               disabled={!name.trim()}
-              className="h-[34px] rounded-[9px] px-3.5 text-xs font-semibold text-white transition disabled:opacity-40"
+              className="h-8.5 rounded-[9px] px-3.5 text-xs font-semibold text-white transition disabled:opacity-40"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               만들기
@@ -201,7 +201,7 @@ export function NotificationsCard() {
           </span>
         </div>
       ))}
-      <div className="mt-1 rounded-[9px] bg-(--color-primary)/[.08] px-3 py-2 text-[11px] text-(--text-muted)">
+      <div className="mt-1 rounded-[9px] bg-(--color-primary)/8 px-3 py-2 text-[11px] text-(--text-muted)">
         방해 금지 22:00–07:00 · 주말 제외 (긴급 결재 예외)
       </div>
     </CardShell>
@@ -232,7 +232,7 @@ export function IntegrationsCard() {
         return (
           <div key={it.name} className="flex items-center gap-2.5">
             <span
-              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] text-white"
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-white"
               style={{ backgroundColor: it.state === "연결됨" ? it.color : "var(--text-muted)" }}
             >
               <Icon size={13} />
@@ -245,7 +245,7 @@ export function IntegrationsCard() {
               className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${
                 it.state === "연결됨"
                   ? "bg-(--status-success-bg) text-(--status-success)"
-                  : "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]"
+                  : "bg-black/6 text-(--text-muted) dark:bg-white/8"
               }`}
             >
               {it.state}
@@ -292,7 +292,7 @@ export function LocaleCard() {
           />
         </div>
       </div>
-      <div className="mt-auto rounded-[11px] border border-(--border-app) bg-black/[.015] p-3 dark:bg-white/[.02]">
+      <div className="mt-auto rounded-[11px] border border-(--border-app) bg-black/1.5 p-3 dark:bg-white/2">
         <p className="text-[10.5px] font-bold uppercase tracking-[.06em] text-(--text-muted)">
           {t("preview")}
         </p>
@@ -329,7 +329,7 @@ export function SettingsDetailGrid() {
 export function ComingSoonView({ label }: { label: string }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-2 p-7 text-center">
-      <p className="text-sm font-semibold text-(--text-app)">{label}</p>
+      <p className="text-sm font-semibold text-foreground">{label}</p>
       <p className="text-xs text-(--text-muted)">
         이 설정 화면은 아직 준비 중입니다.
       </p>

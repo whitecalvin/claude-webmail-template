@@ -24,7 +24,7 @@ export function BrandTab() {
             <button
               type="button"
               onClick={() => toast.info("로고 파일 선택 창을 엽니다")}
-              className="flex h-[88px] w-[88px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-(--border-app) text-(--text-muted) transition hover:bg-black/[.02] dark:hover:bg-white/[.03]"
+              className="flex h-22 w-22 shrink-0 flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-(--border-app) text-(--text-muted) transition hover:bg-black/2 dark:hover:bg-white/3"
             >
               <Upload size={18} />
               <span className="text-[10px] font-semibold">교체</span>
@@ -63,7 +63,7 @@ export function BrandTab() {
         </AdminCard>
 
         <AdminCard title="전사 서명 템플릿">
-          <div className="rounded-lg border border-(--border-app) bg-black/[.015] p-3 text-xs leading-relaxed dark:bg-white/[.02]">
+          <div className="rounded-lg border border-(--border-app) bg-black/1.5 p-3 text-xs leading-relaxed dark:bg-white/2">
             <p>{"{이름} · {부서} {직급}"}</p>
             <p className="text-(--text-muted)">지엑스소프트 주식회사</p>
             <p className="text-(--text-muted)">{"{이메일} · {전화}"}</p>

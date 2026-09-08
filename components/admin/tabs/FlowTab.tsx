@@ -101,7 +101,7 @@ export function FlowTab() {
           </div>
         </AdminCard>
 
-        <AdminCard className="!bg-[#FBF9F4] !border-[#EBE4D6]">
+        <AdminCard className="bg-[#FBF9F4]! border-[#EBE4D6]!">
           <p className="text-xs leading-relaxed">
             최근 7일 트래픽에 새 규칙을 적용해 영향 범위를 미리 확인합니다. 적용 대상{" "}
             <strong>1,204건</strong> · 오탐 예상 <strong>3건</strong>.

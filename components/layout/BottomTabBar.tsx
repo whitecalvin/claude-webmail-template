@@ -19,7 +19,7 @@ export function BottomTabBar() {
 
   return (
     <nav
-      className="flex h-[64px] shrink-0 items-center border-t border-(--border-app) bg-(--surface-app) pb-[max(0px,env(safe-area-inset-bottom))] lg:hidden"
+      className="flex h-16 shrink-0 items-center border-t border-(--border-app) bg-background pb-[max(0px,env(safe-area-inset-bottom))] lg:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       {TABS.map((tab) => {

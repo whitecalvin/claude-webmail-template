@@ -67,7 +67,7 @@ export default function RulesPage() {
 
         <div className="grid gap-5 lg:grid-cols-2">
           <div className="flex flex-col gap-5">
-            <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+            <div className="rounded-xl border border-(--border-app) bg-background p-5">
               <h2 className="mb-3 text-sm font-bold">자동 분류 규칙</h2>
               <div className="flex flex-col gap-2.5">
                 {rules.map((r) => (
@@ -94,7 +94,7 @@ export default function RulesPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+            <div className="rounded-xl border border-(--border-app) bg-background p-5">
               <div className="mb-3 flex items-center gap-2">
                 <h2 className="text-sm font-bold">부재중 자동응답</h2>
                 <span className="ml-auto">
@@ -115,7 +115,7 @@ export default function RulesPage() {
                   </div>
                 </label>
               </div>
-              <div className="mt-2.5 rounded-lg border border-(--border-app) bg-black/[.015] p-3 text-xs leading-relaxed dark:bg-white/[.02]">
+              <div className="mt-2.5 rounded-lg border border-(--border-app) bg-black/1.5 p-3 text-xs leading-relaxed dark:bg-white/2">
                 휴가로 자리를 비웁니다 (9/14–9/19). 급한 사안은 강태윤 책임(taeyun.kang@gxsoft.co.kr)에게 연락
                 부탁드립니다.
               </div>
@@ -135,7 +135,7 @@ export default function RulesPage() {
           </div>
 
           <div className="flex flex-col gap-5">
-            <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+            <div className="rounded-xl border border-(--border-app) bg-background p-5">
               <div className="mb-3 flex items-center gap-2">
                 <h2 className="text-sm font-bold">규칙 만들기</h2>
                 <span className="ml-auto text-[11px] text-(--text-muted)">
@@ -184,8 +184,8 @@ export default function RulesPage() {
                   + 동작
                 </button>
               </div>
-              <div className="mt-2.5 rounded-lg bg-(--color-primary)/[.06] px-3 py-2 text-[11px] text-(--text-muted)">
-                지난 30일 메일에 시험 적용하면 <strong className="text-(--text-app)">38통</strong>이
+              <div className="mt-2.5 rounded-lg bg-(--color-primary)/6 px-3 py-2 text-[11px] text-(--text-muted)">
+                지난 30일 메일에 시험 적용하면 <strong className="text-foreground">38통</strong>이
                 일치합니다.
               </div>
               <button
@@ -198,7 +198,7 @@ export default function RulesPage() {
               </button>
             </div>
 
-            <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+            <div className="rounded-xl border border-(--border-app) bg-background p-5">
               <div className="mb-3 flex items-center gap-2">
                 <h2 className="text-sm font-bold">서명</h2>
                 <button
@@ -226,17 +226,17 @@ export default function RulesPage() {
                   </button>
                 ))}
               </div>
-              <div className="rounded-lg border border-(--border-app) bg-black/[.015] p-3 dark:bg-white/[.02]">
+              <div className="rounded-lg border border-(--border-app) bg-black/1.5 p-3 dark:bg-white/2">
                 <div className="mb-2.5 flex gap-1">
                   {[Bold, Italic, Underline, Link2].map((Icon, i) => (
-                    <span key={i} className="flex h-[26px] w-[26px] items-center justify-center rounded-md bg-black/5 dark:bg-white/10">
+                    <span key={i} className="flex h-6.5 w-6.5 items-center justify-center rounded-md bg-black/5 dark:bg-white/10">
                       <Icon size={13} />
                     </span>
                   ))}
                 </div>
                 <div className="flex items-center gap-3">
                   <span
-                    className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full text-sm font-bold"
+                    className="flex h-11.5 w-11.5 shrink-0 items-center justify-center rounded-full text-sm font-bold"
                     style={{ backgroundColor: "#E4EAFE", color: "var(--color-primary)" }}
                   >
                     {CURRENT_USER.name.slice(0, 1)}
@@ -292,7 +292,7 @@ export default function RulesPage() {
             <button
               type="button"
               onClick={() => setCreatingRule(false)}
-              className="flex h-[26px] w-[26px] items-center justify-center rounded-lg text-[13px] text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
+              className="flex h-6.5 w-6.5 items-center justify-center rounded-lg text-[13px] text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
               aria-label="닫기"
             >
               ✕
@@ -320,7 +320,7 @@ export default function RulesPage() {
               <button
                 type="button"
                 onClick={() => setCreatingRule(false)}
-                className="h-[34px] rounded-[9px] border border-(--border-app) px-3.5 text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/10"
+                className="h-8.5 rounded-[9px] border border-(--border-app) px-3.5 text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/10"
               >
                 취소
               </button>
@@ -328,7 +328,7 @@ export default function RulesPage() {
                 type="button"
                 onClick={handleCreateRule}
                 disabled={!newRuleName.trim()}
-                className="h-[34px] rounded-[9px] px-3.5 text-xs font-semibold text-white transition disabled:opacity-40"
+                className="h-8.5 rounded-[9px] px-3.5 text-xs font-semibold text-white transition disabled:opacity-40"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
                 만들기

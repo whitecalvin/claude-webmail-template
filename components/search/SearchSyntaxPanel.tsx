@@ -13,7 +13,7 @@ import {
 export function SearchSyntaxPanel({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/30 p-4 sm:p-8">
-      <div className="w-full max-w-3xl rounded-2xl bg-(--surface-app) p-6 shadow-2xl sm:p-8">
+      <div className="w-full max-w-3xl rounded-2xl bg-background p-6 shadow-2xl sm:p-8">
         <div className="mb-4 flex items-start gap-3">
           <div>
             <h2 className="text-lg font-bold">검색 고급 문법</h2>

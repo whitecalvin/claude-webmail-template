@@ -36,7 +36,7 @@ export function AdminMobileRow({ row }: { row: AdminMobileRowType }) {
       style={{ backgroundColor: row.on ? "rgba(43,75,242,.04)" : "transparent" }}
     >
       <span
-        className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[11px] text-[11px] font-bold"
+        className="flex h-9.5 w-9.5 shrink-0 items-center justify-center rounded-[11px] text-[11px] font-bold"
         style={{ backgroundColor: colors.bg, color: colors.fg }}
       >
         {row.avatar ?? <Icon size={16} />}
@@ -49,7 +49,7 @@ export function AdminMobileRow({ row }: { row: AdminMobileRowType }) {
           )}
         </div>
         {row.line2 && (
-          <p className="truncate text-[13px] text-(--text-app)">{row.line2}</p>
+          <p className="truncate text-[13px] text-foreground">{row.line2}</p>
         )}
         {row.line3 && (
           <p className="truncate text-[12px] text-(--text-muted)">{row.line3}</p>

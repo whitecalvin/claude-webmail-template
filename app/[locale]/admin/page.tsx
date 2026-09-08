@@ -54,7 +54,7 @@ export default function AdminPage() {
   const mobileScreen = MOBILE_ADMIN_SCREENS.find((s) => s.id === mobileScreenId);
 
   return (
-    <div className="flex h-dvh w-full bg-(--surface-muted) text-(--text-app)">
+    <div className="flex h-dvh w-full bg-(--surface-muted) text-foreground">
       <div className="min-h-0 w-full lg:hidden">
         {mobileScreen ? (
           <AdminMobileScreen screen={mobileScreen} onBack={() => setMobileScreenId(null)} />

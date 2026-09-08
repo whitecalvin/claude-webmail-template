@@ -30,13 +30,13 @@ export function Drawer({
 
   return (
     <div
-      className="fixed inset-0 z-[80] flex justify-end"
+      className="fixed inset-0 z-80 flex justify-end"
       style={{ backgroundColor: "rgba(20,22,30,.42)" }}
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="flex h-full w-full max-w-[460px] flex-col bg-(--surface-app) text-(--text-app) shadow-[-18px_0_40px_-20px_rgba(20,22,30,.5)]"
+        className="flex h-full w-full max-w-115 flex-col bg-background text-foreground shadow-[-18px_0_40px_-20px_rgba(20,22,30,.5)]"
       >
         <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-4 py-3.5">
           <div className="min-w-0 flex-1">

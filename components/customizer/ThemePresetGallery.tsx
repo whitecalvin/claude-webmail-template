@@ -69,7 +69,7 @@ function ThemePresetThumbnail({
 
   return (
     <div
-      className="flex h-12 w-16 shrink-0 flex-col justify-between overflow-hidden border border-(--border-app) bg-(--surface-app) p-1.5"
+      className="flex h-12 w-16 shrink-0 flex-col justify-between overflow-hidden border border-(--border-app) bg-background p-1.5"
       style={{ borderRadius: "10px" }}
     >
       <div className="flex items-center gap-1">

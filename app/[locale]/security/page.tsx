@@ -22,7 +22,7 @@ const TONE_PILL: Record<string, string> = {
   warning: "bg-(--status-warning-bg) text-(--status-warning)",
   danger: "bg-(--status-danger-bg) text-(--status-danger)",
   info: "bg-(--color-primary)/10 text-(--color-primary)",
-  neutral: "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]",
+  neutral: "bg-black/6 text-(--text-muted) dark:bg-white/8",
 };
 
 const EVENT_DOT: Record<string, string> = {
@@ -53,7 +53,7 @@ export default function SecurityPage() {
 
         <div className="grid gap-5 lg:grid-cols-2">
           <div className="flex flex-col gap-5">
-            <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+            <div className="rounded-xl border border-(--border-app) bg-background p-5">
               <h2 className="mb-3 text-sm font-bold">2단계 인증</h2>
               <div className="flex flex-col gap-3">
                 {MFA_METHODS.map((m) => (
@@ -83,8 +83,8 @@ export default function SecurityPage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-3 rounded-lg bg-(--color-primary)/[.06] px-3 py-2 text-[11px] text-(--text-muted)">
-                백업 코드 10개 중 <strong className="text-(--text-app)">{unusedCodes}개</strong> 미사용 · 안전한
+              <div className="mt-3 rounded-lg bg-(--color-primary)/6 px-3 py-2 text-[11px] text-(--text-muted)">
+                백업 코드 10개 중 <strong className="text-foreground">{unusedCodes}개</strong> 미사용 · 안전한
                 곳에 보관하세요{" "}
                 <button
                   type="button"
@@ -97,7 +97,7 @@ export default function SecurityPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+            <div className="rounded-xl border border-(--border-app) bg-background p-5">
               <h2 className="mb-3 text-sm font-bold">비밀번호 · SSO</h2>
               <div className="flex flex-col gap-3">
                 {AUTH_METHODS.map((m) => (
@@ -133,7 +133,7 @@ export default function SecurityPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+          <div className="rounded-xl border border-(--border-app) bg-background p-5">
             <div className="mb-3 flex items-center gap-2">
               <h2 className="text-sm font-bold">로그인 기기 · 세션</h2>
               <button

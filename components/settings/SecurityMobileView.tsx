@@ -12,7 +12,7 @@ const TONE_STYLE: Record<SecurityDevice["tone"], string> = {
   success: "bg-(--status-success-bg) text-(--status-success)",
   warning: "bg-(--status-warning-bg) text-(--status-warning)",
   danger: "bg-(--status-danger-bg) text-(--status-danger)",
-  neutral: "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]",
+  neutral: "bg-black/6 text-(--text-muted) dark:bg-white/8",
 };
 
 function DeviceRow({ device }: { device: SecurityDevice }) {
@@ -43,7 +43,7 @@ export function SecurityMobileView() {
   const toast = useToast();
   return (
     <div className="flex flex-1 flex-col gap-5 overflow-y-auto p-4">
-      <div className="rounded-[12px] border border-(--border-app) p-4">
+      <div className="rounded-xl border border-(--border-app) p-4">
         <p className="text-xs font-semibold text-(--text-muted)">보안 점수</p>
         <p className="mt-1 text-2xl font-bold">72 / 100</p>
         <p className="mt-1 text-xs text-(--text-muted)">개선 가능한 항목 3건</p>
@@ -67,7 +67,7 @@ export function SecurityMobileView() {
         </div>
       </div>
 
-      <div className="mt-auto flex items-center gap-3 rounded-[11px] bg-black/[.03] p-3.5 dark:bg-white/[.04]">
+      <div className="mt-auto flex items-center gap-3 rounded-[11px] bg-black/3 p-3.5 dark:bg-white/4">
         <p className="flex-1 text-xs leading-relaxed text-(--text-muted)">
           비밀번호 변경 132일 전 · 180일마다 필요
         </p>

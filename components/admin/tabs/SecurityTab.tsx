@@ -62,7 +62,7 @@ export function SecurityTab() {
         </div>
 
         <div className="overflow-hidden rounded-lg border border-(--border-app)">
-          <div className="grid grid-cols-[110px_1.6fr_1.7fr_1fr_70px_80px] gap-2 border-b border-(--border-app) bg-black/[.02] px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/[.03]">
+          <div className="grid grid-cols-[110px_1.6fr_1.7fr_1fr_70px_80px] gap-2 border-b border-(--border-app) bg-black/2 px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/3">
             <span>시각</span>
             <span>발신자</span>
             <span>제목 · 판정 근거</span>
@@ -76,7 +76,7 @@ export function SecurityTab() {
           {filteredLogs.map((l) => (
             <div
               key={l.time}
-              className="grid grid-cols-[110px_1.6fr_1.7fr_1fr_70px_80px] items-center gap-2 border-b border-(--border-app) px-3 py-2.5 text-xs last:border-b-0 hover:bg-black/[.015] dark:hover:bg-white/[.02]"
+              className="grid grid-cols-[110px_1.6fr_1.7fr_1fr_70px_80px] items-center gap-2 border-b border-(--border-app) px-3 py-2.5 text-xs last:border-b-0 hover:bg-black/1.5 dark:hover:bg-white/2"
             >
               <span className="text-(--text-muted)">{l.time}</span>
               <span className="truncate font-mono text-[11px]">{l.from}</span>

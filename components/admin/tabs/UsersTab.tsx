@@ -98,7 +98,7 @@ export function UsersTab() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="이름 · 계정 · 부서 검색"
-              className="h-8 w-[280px] rounded-lg bg-black/[.04] pl-7 pr-2.5 text-xs outline-none dark:bg-white/[.06]"
+              className="h-8 w-70 rounded-lg bg-black/4 pl-7 pr-2.5 text-xs outline-none dark:bg-white/6"
             />
           </div>
           <Dropdown value={deptFilter} options={DEPT_OPTIONS} onChange={setDeptFilter} />
@@ -107,7 +107,7 @@ export function UsersTab() {
           {selected.size > 0 ? (
             // Bulk-action bar replaces the summary text while a selection is active.
             <span className="ml-auto flex items-center gap-2 text-xs">
-              <strong className="text-(--text-app)">{selected.size}명</strong> 선택됨
+              <strong className="text-foreground">{selected.size}명</strong> 선택됨
               <button
                 type="button"
                 onClick={bulkSuspend}
@@ -125,14 +125,14 @@ export function UsersTab() {
             </span>
           ) : (
             <span className="ml-auto text-xs text-(--text-muted)">
-              총 <strong className="text-(--text-app)">{filtered.length.toLocaleString()}</strong>개 계정 ·{" "}
+              총 <strong className="text-foreground">{filtered.length.toLocaleString()}</strong>개 계정 ·{" "}
               {filtered.filter((u) => u.status === "정지").length} 정지
             </span>
           )}
         </div>
 
         <div className="overflow-hidden rounded-lg border border-(--border-app)">
-          <div className="grid grid-cols-[28px_2.2fr_1.3fr_1fr_1.1fr_1fr_90px_28px] gap-2 border-b border-(--border-app) bg-black/[.02] px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/[.03]">
+          <div className="grid grid-cols-[28px_2.2fr_1.3fr_1fr_1.1fr_1fr_90px_28px] gap-2 border-b border-(--border-app) bg-black/2 px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/3">
             <Checkbox checked={allFilteredSelected} onChange={toggleSelectAll} label="전체 선택" />
             <span>사용자</span>
             <span>부서 · 직위</span>
@@ -145,7 +145,7 @@ export function UsersTab() {
           {filtered.map((u) => (
             <div
               key={u.email}
-              className="group relative grid grid-cols-[28px_2.2fr_1.3fr_1fr_1.1fr_1fr_90px_28px] items-center gap-2 border-b border-(--border-app) px-3 py-2.5 text-xs last:border-b-0 hover:bg-black/[.015] dark:hover:bg-white/[.02]"
+              className="group relative grid grid-cols-[28px_2.2fr_1.3fr_1fr_1.1fr_1fr_90px_28px] items-center gap-2 border-b border-(--border-app) px-3 py-2.5 text-xs last:border-b-0 hover:bg-black/1.5 dark:hover:bg-white/2"
             >
               <Checkbox checked={selected.has(u.email)} onChange={() => toggleSelect(u.email)} label={`${u.name} 선택`} />
               <div className="flex min-w-0 items-center gap-2">
@@ -192,7 +192,7 @@ export function UsersTab() {
                 {menuFor === u.email && (
                   <>
                     <div className="fixed inset-0 z-40" onClick={() => setMenuFor(null)} />
-                    <div className="absolute right-0 top-7 z-50 w-40 overflow-hidden rounded-lg border border-(--border-app) bg-(--surface-app) py-1 shadow-xl">
+                    <div className="absolute right-0 top-7 z-50 w-40 overflow-hidden rounded-lg border border-(--border-app) bg-background py-1 shadow-xl">
                       <button
                         type="button"
                         onClick={() => toggleSuspend(u)}

@@ -71,7 +71,7 @@ function SearchPageContent() {
     <WorkspaceLayout showGlobalSearch className="flex flex-col lg:flex-row">
       <div className="flex min-h-0 min-w-0 flex-1 flex-col border-r border-(--border-app)">
         <div className="shrink-0 border-b border-(--border-app) px-5 py-3.5 sm:px-6">
-          <div className="flex h-11 items-center gap-2 rounded-[11px] border border-(--border-app) bg-black/[.02] px-3 dark:bg-white/[.03]">
+          <div className="flex h-11 items-center gap-2 rounded-[11px] border border-(--border-app) bg-black/2 px-3 dark:bg-white/3">
             <span className="min-w-0 flex-1 truncate text-sm font-medium">
               {queryEdited ? `“${query}”` : "전체 검색 결과"}
             </span>
@@ -81,7 +81,7 @@ function SearchPageContent() {
             <button
               type="button"
               onClick={() => setShowSyntax(true)}
-              className="shrink-0 text-(--text-muted) hover:text-(--text-app)"
+              className="shrink-0 text-(--text-muted) hover:text-foreground"
               aria-label="검색 문법 도움말"
               title="검색 문법 도움말 (?)"
             >
@@ -129,16 +129,16 @@ function SearchPageContent() {
           )}
           {filteredGroups.map((group) => (
             <div key={group.name}>
-              <div className="border-b border-(--border-app) bg-black/[.015] px-5 py-2.5 text-[11px] font-bold text-(--text-muted) dark:bg-white/[.02] sm:px-6">
+              <div className="border-b border-(--border-app) bg-black/1.5 px-5 py-2.5 text-[11px] font-bold text-(--text-muted) dark:bg-white/2 sm:px-6">
                 {group.name}
               </div>
               {group.items.map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 border-b border-(--border-app) px-5 py-3 hover:bg-black/[.015] dark:hover:bg-white/[.02] sm:px-6"
+                  className="flex items-start gap-3 border-b border-(--border-app) px-5 py-3 hover:bg-black/1.5 dark:hover:bg-white/2 sm:px-6"
                 >
                   <span
-                    className="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full text-[11px] font-bold"
+                    className="flex h-7.5 w-7.5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold"
                     style={{ backgroundColor: item.bg, color: item.fg }}
                   >
                     {item.initials}
@@ -157,7 +157,7 @@ function SearchPageContent() {
                     {item.hit && (
                       <p className="truncate text-xs text-(--text-muted)">
                         {item.hitPrefix}
-                        <span className="rounded bg-[#FBF3D8] font-semibold text-(--text-app)">
+                        <span className="rounded bg-[#FBF3D8] font-semibold text-foreground">
                           {item.hit}
                         </span>
                         {item.hitSuffix}
@@ -180,7 +180,7 @@ function SearchPageContent() {
         </div>
       </div>
 
-      <aside className="hidden w-[300px] shrink-0 flex-col gap-5 overflow-y-auto bg-(--surface-muted) p-5 lg:flex">
+      <aside className="hidden w-75 shrink-0 flex-col gap-5 overflow-y-auto bg-(--surface-muted) p-5 lg:flex">
         <p className="text-xs font-bold">검색 조건 좁히기</p>
         {facets.map((group) => (
           <div key={group.name}>
@@ -194,7 +194,7 @@ function SearchPageContent() {
                   className="flex items-center gap-2 text-left text-xs"
                 >
                   <span
-                    className="flex h-[15px] w-[15px] shrink-0 items-center justify-center rounded-[4px]"
+                    className="flex h-3.75 w-3.75 shrink-0 items-center justify-center rounded-sm"
                     style={{
                       backgroundColor: row.checked ? "var(--color-primary)" : "transparent",
                       border: row.checked ? "none" : "1px solid var(--border-app)",
@@ -210,7 +210,7 @@ function SearchPageContent() {
           </div>
         ))}
 
-        <div className="rounded-[11px] border border-(--border-app) bg-(--surface-app) p-3.5">
+        <div className="rounded-[11px] border border-(--border-app) bg-background p-3.5">
           <p className="mb-2 text-xs font-bold">저장된 검색</p>
           <div className="flex flex-col gap-2">
             {SAVED_SEARCHES.map((s) => (

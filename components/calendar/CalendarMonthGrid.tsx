@@ -76,7 +76,7 @@ export function CalendarMonthGrid({
               key={iso}
               type="button"
               onClick={() => onSelectDay(day)}
-              className="flex flex-col items-start gap-1 border-b border-r border-(--border-app) p-2 text-left transition hover:bg-black/[.02] dark:hover:bg-white/[.03]"
+              className="flex flex-col items-start gap-1 border-b border-r border-(--border-app) p-2 text-left transition hover:bg-black/2 dark:hover:bg-white/3"
               style={{ opacity: isCurrentMonth ? 1 : 0.35 }}
             >
               <span

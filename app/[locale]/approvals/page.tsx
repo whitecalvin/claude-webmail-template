@@ -48,7 +48,7 @@ export default function ApprovalsPage() {
       showGlobalSearch={false}
       className="flex flex-col lg:flex-row"
     >
-      <div className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-[400px]">
+      <div className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-100">
         <div className="flex shrink-0 gap-1.5 border-b border-(--border-app) px-4 py-2.5">
           {APPROVAL_TABS.map((t) => (
             <button
@@ -105,7 +105,7 @@ export default function ApprovalsPage() {
           <p className="m-auto text-sm text-(--text-muted)">결재 문서를 선택하세요.</p>
         ) : (
           <>
-            <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) bg-(--surface-app) px-6 py-3.5">
+            <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) bg-background px-6 py-3.5">
               <button
                 type="button"
                 onClick={() => setPendingAction("approve")}
@@ -147,7 +147,7 @@ export default function ApprovalsPage() {
                 </div>
               </div>
 
-              <div className="mt-5 rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+              <div className="mt-5 rounded-xl border border-(--border-app) bg-background p-4">
                 <p className="mb-3 text-[13px] font-bold">결재선</p>
                 <div className="flex items-center">
                   {APPROVAL_CHAIN.map((node, i) => (
@@ -172,7 +172,7 @@ export default function ApprovalsPage() {
                       </div>
                       {i < APPROVAL_CHAIN.length - 1 && (
                         <span
-                          className="mx-1 mt-[-24px] h-[2px] flex-1 rounded-full"
+                          className="mx-1 -mt-6 h-0.5 flex-1 rounded-full"
                           style={{ backgroundColor: node.state === "완료" ? "#2E8B5B" : "var(--border-app)" }}
                         />
                       )}
@@ -182,7 +182,7 @@ export default function ApprovalsPage() {
               </div>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+                <div className="rounded-xl border border-(--border-app) bg-background p-4">
                   <p className="mb-2.5 text-[13px] font-bold">요청 내역</p>
                   <div className="flex flex-col gap-2">
                     {APPROVAL_LINE_ITEMS.map((it) => (
@@ -192,13 +192,13 @@ export default function ApprovalsPage() {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-3 rounded-lg bg-(--color-primary)/[.06] p-2.5 text-[11px] text-(--text-muted)">
-                    <strong className="text-(--text-app)">AI</strong> 유사 기안 3건과 비교해 단가가 평균 대비
+                  <div className="mt-3 rounded-lg bg-(--color-primary)/6 p-2.5 text-[11px] text-(--text-muted)">
+                    <strong className="text-foreground">AI</strong> 유사 기안 3건과 비교해 단가가 평균 대비
                     8% 낮습니다. 재무팀 이연 의견이 반영된 최신본입니다.
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-4">
+                <div className="rounded-xl border border-(--border-app) bg-background p-4">
                   <p className="mb-2.5 text-[13px] font-bold">의견 · 이력</p>
                   <div className="flex flex-col gap-3">
                     {comments.map((c, i) => (

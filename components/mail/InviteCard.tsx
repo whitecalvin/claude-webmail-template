@@ -32,7 +32,7 @@ export function InviteCard({ invite }: { invite: MeetingInvite }) {
   return (
     <div className="mb-6 rounded-2xl border border-[#C9D3FB] bg-[#F8FAFF] p-4 sm:p-5">
       <div className="flex items-start gap-4">
-        <div className="flex w-[64px] shrink-0 flex-col items-center rounded-xl bg-(--color-primary) py-2 text-white">
+        <div className="flex w-16 shrink-0 flex-col items-center rounded-xl bg-(--color-primary) py-2 text-white">
           <span className="text-[10px] font-bold uppercase">{invite.dateLabel.month}</span>
           <span className="text-xl font-bold leading-none">{invite.dateLabel.day}</span>
           <span className="text-[10px]">{invite.dateLabel.weekday}</span>

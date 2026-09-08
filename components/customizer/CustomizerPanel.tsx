@@ -94,7 +94,7 @@ export function CustomizerPanel() {
         />
       )}
       <aside
-        className={`fixed right-0 top-0 z-50 flex h-full w-[360px] max-w-[90vw] flex-col bg-(--surface-app) shadow-2xl transition-transform duration-300 ${
+        className={`fixed right-0 top-0 z-50 flex h-full w-90 max-w-[90vw] flex-col bg-background shadow-2xl transition-transform duration-300 ${
           isCustomizerOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!isCustomizerOpen}

@@ -24,7 +24,7 @@ export function OrgTreeSidebar({
   const nodes = ORG_TREE.filter((n) => n.depth > 0 && (!q || n.name.toLowerCase().includes(q)));
 
   return (
-    <aside className="flex h-full w-[250px] shrink-0 flex-col gap-3.5 border-r border-(--border-app) bg-(--surface-muted) p-3">
+    <aside className="flex h-full w-62.5 shrink-0 flex-col gap-3.5 border-r border-(--border-app) bg-(--surface-muted) p-3">
       <p className="px-1 text-[13px] font-bold tracking-tight">조직도</p>
 
       <div className="relative">
@@ -37,7 +37,7 @@ export function OrgTreeSidebar({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="이름 · 부서"
-          className="h-[34px] w-full rounded-[9px] border border-(--border-app) bg-(--surface-app) pl-7 pr-2.5 text-xs text-(--text-app) outline-none"
+          className="h-8.5 w-full rounded-[9px] border border-(--border-app) bg-background pl-7 pr-2.5 text-xs text-foreground outline-none"
         />
       </div>
 
@@ -57,7 +57,7 @@ export function OrgTreeSidebar({
                 isActive
                   ? "bg-(--color-primary)/10 font-semibold text-(--color-primary)"
                   : node.depth === 1
-                    ? "cursor-default font-semibold text-(--text-app)"
+                    ? "cursor-default font-semibold text-foreground"
                     : "text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/5"
               }`}
               style={{ paddingLeft: 8 + node.depth * 14 }}

@@ -50,7 +50,7 @@ export function AuditTab() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="관리자 · 대상 · 액션 검색"
-              className="h-8 w-64 rounded-lg bg-black/[.04] pl-7 pr-2.5 text-xs outline-none dark:bg-white/[.06]"
+              className="h-8 w-64 rounded-lg bg-black/4 pl-7 pr-2.5 text-xs outline-none dark:bg-white/6"
             />
           </div>
           <Dropdown prefix="관리자" options={ADMIN_OPTIONS} value={adminFilter} onChange={setAdminFilter} />
@@ -62,7 +62,7 @@ export function AuditTab() {
         </div>
 
         <div className="overflow-hidden rounded-lg border border-(--border-app)">
-          <div className="grid grid-cols-[80px_1.1fr_1fr_1.5fr_110px_80px] gap-2 border-b border-(--border-app) bg-black/[.02] px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/[.03]">
+          <div className="grid grid-cols-[80px_1.1fr_1fr_1.5fr_110px_80px] gap-2 border-b border-(--border-app) bg-black/2 px-3 py-2 text-[10.5px] font-bold uppercase tracking-[.03em] text-(--text-muted) dark:bg-white/3">
             <span>시각</span>
             <span>관리자</span>
             <span>액션</span>
@@ -78,7 +78,7 @@ export function AuditTab() {
               key={i}
               type="button"
               onClick={() => setSelected(a)}
-              className="grid w-full grid-cols-[80px_1.1fr_1fr_1.5fr_110px_80px] items-center gap-2 border-b border-(--border-app) px-3 py-2.5 text-left text-xs last:border-b-0 hover:bg-black/[.015] dark:hover:bg-white/[.02]"
+              className="grid w-full grid-cols-[80px_1.1fr_1fr_1.5fr_110px_80px] items-center gap-2 border-b border-(--border-app) px-3 py-2.5 text-left text-xs last:border-b-0 hover:bg-black/1.5 dark:hover:bg-white/2"
             >
               <span className="text-(--text-muted)">{a.time}</span>
               <span className="truncate font-semibold">{a.admin}</span>

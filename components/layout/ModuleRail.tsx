@@ -48,7 +48,7 @@ export function ModuleRail() {
 
   return (
     <nav
-      className="flex h-full w-[76px] shrink-0 flex-col items-center gap-1 py-3.5"
+      className="flex h-full w-19 shrink-0 flex-col items-center gap-1 py-3.5"
       style={{ backgroundColor: "var(--rail-bg)" }}
     >
       {MODULES.map((mod) => {
@@ -63,7 +63,7 @@ export function ModuleRail() {
               isActive
                 ? "text-white"
                 : mod.enabled
-                  ? "text-white/60 hover:bg-white/[.08] hover:text-white/85"
+                  ? "text-white/60 hover:bg-white/8 hover:text-white/85"
                   : "cursor-not-allowed text-white/25"
             }`}
             style={isActive ? { backgroundColor: "rgba(255,255,255,.12)" } : undefined}
@@ -102,33 +102,33 @@ export function ModuleRail() {
         {menuOpen && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
-            <div className="absolute bottom-0 left-full z-50 ml-2 w-56 overflow-hidden rounded-[var(--radius-app)] border border-[var(--border-app)] bg-[var(--surface-app)] shadow-xl">
-              <div className="border-b border-[var(--border-app)] px-4 py-3">
-                <p className="text-sm font-medium text-[var(--text-app)]">{CURRENT_USER.name}</p>
-                <p className="truncate text-xs text-[var(--text-muted)]">{CURRENT_USER.email}</p>
+            <div className="absolute bottom-0 left-full z-50 ml-2 w-56 overflow-hidden rounded-(--radius-app) border border-(--border-app) bg-background shadow-xl">
+              <div className="border-b border-(--border-app) px-4 py-3">
+                <p className="text-sm font-medium text-foreground">{CURRENT_USER.name}</p>
+                <p className="truncate text-xs text-(--text-muted)">{CURRENT_USER.email}</p>
               </div>
               <Link
                 href="/mailboxes"
                 onClick={() => setMenuOpen(false)}
-                className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm text-[var(--text-app)] hover:bg-black/5 dark:hover:bg-white/5"
+                className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5"
               >
-                <Inbox size={16} className="text-[var(--text-muted)]" />
+                <Inbox size={16} className="text-(--text-muted)" />
                 {tMenu("mailboxes")}
               </Link>
               <Link
                 href="/files"
                 onClick={() => setMenuOpen(false)}
-                className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm text-[var(--text-app)] hover:bg-black/5 dark:hover:bg-white/5"
+                className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5"
               >
-                <Paperclip size={16} className="text-[var(--text-muted)]" />
+                <Paperclip size={16} className="text-(--text-muted)" />
                 {tMenu("files")}
               </Link>
               <Link
                 href="/admin"
                 onClick={() => setMenuOpen(false)}
-                className="flex w-full items-center gap-2 border-t border-[var(--border-app)] px-4 py-2.5 text-left text-sm text-[var(--text-app)] hover:bg-black/5 dark:hover:bg-white/5"
+                className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5"
               >
-                <ShieldCheck size={16} className="text-[var(--text-muted)]" />
+                <ShieldCheck size={16} className="text-(--text-muted)" />
                 {tMenu("admin")}
               </Link>
               <button
@@ -143,7 +143,7 @@ export function ModuleRail() {
                   }
                   router.push("/login");
                 }}
-                className="flex w-full items-center gap-2 border-t border-[var(--border-app)] px-4 py-2.5 text-left text-sm text-[var(--status-danger)] hover:bg-black/5 dark:hover:bg-white/5"
+                className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm text-(--status-danger) hover:bg-black/5 dark:hover:bg-white/5"
               >
                 <LogOut size={16} />
                 {tMenu("logout")}

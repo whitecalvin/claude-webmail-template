@@ -73,7 +73,7 @@ export default function MailboxesPage() {
         </p>
 
         <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr_1fr]">
-          <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+          <div className="rounded-xl border border-(--border-app) bg-background p-5">
             <h2 className="mb-3 text-sm font-bold">{t("sharedMailboxes")}</h2>
             <div className="flex flex-col gap-2">
               {SHARED_BOXES.map((b) => (
@@ -99,12 +99,12 @@ export default function MailboxesPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-3 rounded-lg bg-(--color-primary)/[.06] px-3 py-2 text-[11px] text-(--text-muted)">
+            <p className="mt-3 rounded-lg bg-(--color-primary)/6 px-3 py-2 text-[11px] text-(--text-muted)">
               {t("delegatedFormat", { delegate: ui(DELEGATE_NOTE) })}
             </p>
           </div>
 
-          <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+          <div className="rounded-xl border border-(--border-app) bg-background p-5">
             <div className="mb-3 flex items-center gap-2">
               <h2 className="text-sm font-bold">{t("scheduledMailbox")}</h2>
               <span className="ml-auto text-[11px] text-(--text-muted)">{t("waitingCount", { count: mails.length })}</span>
@@ -147,7 +147,7 @@ export default function MailboxesPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
+          <div className="rounded-xl border border-(--border-app) bg-background p-5">
             <h2 className="mb-3 text-sm font-bold">{t("templatesAndSnippets")}</h2>
             <div className="flex flex-col gap-2.5">
               {MAIL_TEMPLATES.map((template) => (

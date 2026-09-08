@@ -32,7 +32,7 @@ export function AdminMobileMenu({ onSelect }: { onSelect: (id: string) => void }
             className="flex w-full items-center gap-3 border-b border-(--border-app) px-4 py-3.5 text-left"
           >
             <span
-              className="h-[10px] w-[10px] shrink-0 rounded-[3px]"
+              className="h-2.5 w-2.5 shrink-0 rounded-[3px]"
               style={{ backgroundColor: screen.navDot }}
             />
             <div className="min-w-0 flex-1">

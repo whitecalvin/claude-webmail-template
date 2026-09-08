@@ -22,7 +22,7 @@ export function ActionSheet({
   const t = useTranslations("common");
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-end justify-center p-2.5 pb-[max(10px,env(safe-area-inset-bottom))] lg:hidden"
+      className="fixed inset-0 z-80 flex items-end justify-center p-2.5 pb-[max(10px,env(safe-area-inset-bottom))] lg:hidden"
       style={{ backgroundColor: "rgba(20,22,30,.42)" }}
       onClick={onClose}
     >
@@ -30,7 +30,7 @@ export function ActionSheet({
         onClick={(e) => e.stopPropagation()}
         className="flex w-full max-w-md flex-col gap-2"
       >
-        <div className="overflow-hidden rounded-[13px] bg-(--surface-app) text-(--text-app)">
+        <div className="overflow-hidden rounded-[13px] bg-background text-foreground">
           {context && (
             <p className="border-b border-(--border-app) px-3.5 py-2.5 text-center text-[11.5px] leading-relaxed text-(--text-muted)">
               {context}
@@ -44,7 +44,7 @@ export function ActionSheet({
                 item.onClick();
                 onClose();
               }}
-              className={`flex min-h-[44px] w-full items-center justify-center text-[14px] font-semibold ${
+              className={`flex min-h-11 w-full items-center justify-center text-[14px] font-semibold ${
                 i < items.length - 1 ? "border-b border-(--border-app)" : ""
               }`}
               style={{ color: item.destructive ? "#C0433B" : "var(--color-primary)" }}
@@ -56,7 +56,7 @@ export function ActionSheet({
         <button
           type="button"
           onClick={onClose}
-          className="flex min-h-[44px] w-full items-center justify-center rounded-[13px] bg-(--surface-app) text-[14px] font-bold text-(--text-app)"
+          className="flex min-h-11 w-full items-center justify-center rounded-[13px] bg-background text-[14px] font-bold text-foreground"
         >
           {t("cancel")}
         </button>

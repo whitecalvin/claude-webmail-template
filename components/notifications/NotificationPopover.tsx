@@ -21,7 +21,7 @@ export function NotificationPopover({ onClose }: { onClose: () => void }) {
   return (
     <>
       <div className="fixed inset-0 z-40" onClick={onClose} />
-      <div className="absolute right-0 top-full z-50 mt-2 flex w-[340px] flex-col overflow-hidden rounded-(--radius-app) border border-(--border-app) bg-(--surface-app) shadow-[0_16px_34px_-18px_rgba(20,22,30,.34)]">
+      <div className="absolute right-0 top-full z-50 mt-2 flex w-85 flex-col overflow-hidden rounded-(--radius-app) border border-(--border-app) bg-background shadow-[0_16px_34px_-18px_rgba(20,22,30,.34)]">
         <div className="flex shrink-0 items-center gap-2.5 border-b border-(--border-app) px-3.5 py-3">
           <p className="text-[13.5px] font-bold">알림</p>
           {unreadCount > 0 && (
@@ -48,7 +48,7 @@ export function NotificationPopover({ onClose }: { onClose: () => void }) {
               key={t}
               type="button"
               onClick={() => setTab(t)}
-              className={`h-[26px] rounded-full px-2.5 text-[11.5px] font-semibold transition ${
+              className={`h-6.5 rounded-full px-2.5 text-[11.5px] font-semibold transition ${
                 tab === t
                   ? "bg-[#17181B] text-white dark:bg-white dark:text-[#17181B]"
                   : "bg-black/5 text-(--text-muted) dark:bg-white/10"
@@ -59,17 +59,17 @@ export function NotificationPopover({ onClose }: { onClose: () => void }) {
           ))}
         </div>
 
-        <div className="max-h-[340px] overflow-y-auto">
+        <div className="max-h-85 overflow-y-auto">
           {filtered.length === 0 ? (
             <p className="px-4 py-8 text-center text-[12.5px] text-(--text-muted)">알림이 없습니다.</p>
           ) : (
             filtered.map((n) => (
               <div
                 key={n.id}
-                className="flex items-start gap-2.5 border-b border-(--border-app) px-3.5 py-2.5 last:border-b-0 hover:bg-black/[.02] dark:hover:bg-white/[.03]"
+                className="flex items-start gap-2.5 border-b border-(--border-app) px-3.5 py-2.5 last:border-b-0 hover:bg-black/2 dark:hover:bg-white/3"
               >
                 <span
-                  className="mt-1 h-[6px] w-[6px] shrink-0 rounded-full"
+                  className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full"
                   style={{ backgroundColor: n.unread ? "var(--color-primary)" : "transparent" }}
                 />
                 <span

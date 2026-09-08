@@ -24,7 +24,7 @@ export function Checkbox({
       onClick={onChange}
       aria-label={label}
       aria-pressed={checked}
-      className="flex shrink-0 items-center justify-center rounded-[4px]"
+      className="flex shrink-0 items-center justify-center rounded-sm"
       style={{
         height: size,
         width: size,

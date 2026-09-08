@@ -26,9 +26,9 @@ const FOLDER_DOT: Record<FolderId, string> = {
 };
 
 const CONTAINER_STYLE: Record<LayoutStyle, string> = {
-  classic: "border-r border-(--border-app) bg-(--surface-app)",
+  classic: "border-r border-(--border-app) bg-background",
   card: "bg-(--surface-muted)",
-  minimal: "border-r border-(--border-app) bg-(--surface-app)",
+  minimal: "border-r border-(--border-app) bg-background",
 };
 
 const HEADER_STYLE: Record<LayoutStyle, string> = {
@@ -45,21 +45,21 @@ const LIST_STYLE: Record<LayoutStyle, string> = {
 
 function itemClass(style: LayoutStyle, isActive: boolean) {
   if (style === "card") {
-    return `rounded-(--radius-app) bg-(--surface-app) shadow-sm transition hover:shadow-md ${
+    return `rounded-(--radius-app) bg-background shadow-sm transition hover:shadow-md ${
       isActive ? "ring-2 ring-(--color-primary)" : ""
     }`;
   }
   if (style === "minimal") {
     return `border-b border-transparent transition ${
       isActive
-        ? "border-l-2 border-l-(--color-primary) bg-black/[.02] dark:bg-white/[.03]"
-        : "border-l-2 border-l-transparent hover:bg-black/[.02] dark:hover:bg-white/[.03]"
+        ? "border-l-2 border-l-(--color-primary) bg-black/2 dark:bg-white/3"
+        : "border-l-2 border-l-transparent hover:bg-black/2 dark:hover:bg-white/3"
     }`;
   }
   return `border-b border-(--border-app) transition ${
     isActive
       ? "bg-(--color-primary)/10"
-      : "hover:bg-black/[.03] dark:hover:bg-white/[.05]"
+      : "hover:bg-black/3 dark:hover:bg-white/5"
   }`;
 }
 

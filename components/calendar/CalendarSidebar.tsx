@@ -13,7 +13,7 @@ const ROOM_STATUS_STYLE: Record<
 > = {
   available: "bg-(--status-success-bg) text-(--status-success)",
   busy: "bg-(--status-danger-bg) text-(--status-danger)",
-  reserved: "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]",
+  reserved: "bg-black/6 text-(--text-muted) dark:bg-white/8",
 };
 
 export function CalendarSidebar({
@@ -30,12 +30,12 @@ export function CalendarSidebar({
   onAddAiEvent: () => void;
 }) {
   return (
-    <aside className="flex h-full w-[300px] shrink-0 flex-col gap-4 overflow-y-auto bg-(--surface-muted) p-5">
+    <aside className="flex h-full w-75 shrink-0 flex-col gap-4 overflow-y-auto bg-(--surface-muted) p-5">
       {!aiBannerDismissed && (
-        <div className="rounded-[11px] border border-(--border-app) bg-(--surface-app) p-3.5">
+        <div className="rounded-[11px] border border-(--border-app) bg-background p-3.5">
           <div className="flex items-center gap-2">
             <span
-              className="flex h-[18px] w-[18px] items-center justify-center rounded-[6px]"
+              className="flex h-4.5 w-4.5 items-center justify-center rounded-md"
               style={{
                 backgroundColor:
                   "color-mix(in srgb, var(--color-primary) 15%, transparent)",
@@ -54,7 +54,7 @@ export function CalendarSidebar({
             <button
               type="button"
               onClick={onAddAiEvent}
-              className="h-8 flex-1 rounded-[8px] text-xs font-semibold text-white transition hover:brightness-110"
+              className="h-8 flex-1 rounded-lg text-xs font-semibold text-white transition hover:brightness-110"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               캘린더에 추가
@@ -62,7 +62,7 @@ export function CalendarSidebar({
             <button
               type="button"
               onClick={onDismissAiBanner}
-              className="h-8 rounded-[8px] border border-(--border-app) bg-(--surface-app) px-3 text-xs text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
+              className="h-8 rounded-lg border border-(--border-app) bg-background px-3 text-xs text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
             >
               무시
             </button>
@@ -82,10 +82,10 @@ export function CalendarSidebar({
                 key={cal.key}
                 type="button"
                 onClick={() => onToggleCategory(cal.key)}
-                className="flex items-center gap-2.5 text-left text-xs text-(--text-app)"
+                className="flex items-center gap-2.5 text-left text-xs text-foreground"
               >
                 <span
-                  className="flex h-[15px] w-[15px] shrink-0 items-center justify-center rounded-[4px]"
+                  className="flex h-3.75 w-3.75 shrink-0 items-center justify-center rounded-sm"
                   style={{
                     backgroundColor: checked ? cal.color : "transparent",
                     border: checked ? "none" : "1px solid var(--border-app)",
@@ -102,7 +102,7 @@ export function CalendarSidebar({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col overflow-hidden rounded-[11px] border border-(--border-app) bg-(--surface-app) p-3.5">
+      <div className="flex flex-1 flex-col overflow-hidden rounded-[11px] border border-(--border-app) bg-background p-3.5">
         <p className="mb-2 text-xs font-bold">회의실 예약 현황 · 오늘</p>
         <div className="flex flex-col gap-2.5 overflow-y-auto">
           {MEETING_ROOMS.map((room) => (

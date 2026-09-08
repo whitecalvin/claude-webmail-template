@@ -43,10 +43,10 @@ export function DashboardTab() {
               차단
             </span>
           </div>
-          <div className="flex h-[140px] items-end justify-between gap-3">
+          <div className="flex h-35 items-end justify-between gap-3">
             {THROUGHPUT_CHART.map((d) => (
               <div key={d.day} className="flex flex-1 flex-col items-center gap-1.5">
-                <div className="flex h-[110px] w-full items-end justify-center gap-[3px]">
+                <div className="flex h-27.5 w-full items-end justify-center gap-0.75">
                   {[
                     { v: d.a, c: "#2B4BF2" },
                     { v: d.b, c: "#B9C6FA" },

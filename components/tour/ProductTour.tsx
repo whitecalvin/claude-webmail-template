@@ -20,12 +20,12 @@ export function ProductTour({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 z-50">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
 
-      <div className="absolute left-4 top-4 w-[calc(100%-2rem)] max-w-[372px] rounded-2xl bg-(--surface-app) p-5 shadow-2xl sm:left-8 sm:top-8">
+      <div className="absolute left-4 top-4 w-[calc(100%-2rem)] max-w-93 rounded-2xl bg-background p-5 shadow-2xl sm:left-8 sm:top-8">
         <div className="mb-2 flex items-center gap-2">
           <span className="text-xs font-bold" style={{ color: "var(--color-primary)" }}>
             {step + 1} / {TOUR_STEPS.length}
           </span>
-          <button type="button" onClick={onClose} className="ml-auto text-xs font-medium text-(--text-muted) hover:text-(--text-app)">
+          <button type="button" onClick={onClose} className="ml-auto text-xs font-medium text-(--text-muted) hover:text-foreground">
             건너뛰기
           </button>
         </div>
@@ -62,7 +62,7 @@ export function ProductTour({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <div className="absolute bottom-4 right-4 w-[calc(100%-2rem)] max-w-[330px] rounded-2xl border border-(--border-app) bg-(--surface-app) p-4 shadow-2xl sm:bottom-6 sm:right-6">
+      <div className="absolute bottom-4 right-4 w-[calc(100%-2rem)] max-w-82.5 rounded-2xl border border-(--border-app) bg-background p-4 shadow-2xl sm:bottom-6 sm:right-6">
         <div className="mb-2 flex items-center gap-2">
           <p className="text-sm font-bold">시작하기</p>
           <button type="button" onClick={onClose} className="ml-auto text-(--text-muted)" aria-label="닫기">

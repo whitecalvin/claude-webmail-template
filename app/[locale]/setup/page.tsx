@@ -75,7 +75,7 @@ export default function SetupPage() {
           <span className="text-sm font-bold">Mailwave 메일 서버</span>
         </div>
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[.1em] text-white/45">FIRST RUN</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-white/45">FIRST RUN</p>
           <h1 className="mt-2 text-xl font-bold tracking-tight">설치 마법사</h1>
           <p className="mt-2 text-xs leading-relaxed text-white/55">
             서버 설치가 끝났습니다. 일곱 단계를 마치면 사용자가 바로 메일을 쓸 수 있습니다.
@@ -128,7 +128,7 @@ export default function SetupPage() {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col bg-(--surface-app)">
+      <div className="flex flex-1 flex-col bg-background">
         <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-6 py-5 sm:px-10">
           <div>
             <p className="text-xs font-bold" style={{ color: "var(--color-primary)" }}>
@@ -137,7 +137,7 @@ export default function SetupPage() {
             <h2 className="mt-1 text-[22px] font-bold tracking-tight sm:text-[27px]">{SETUP_STEPS[step - 1].name}</h2>
           </div>
           <div className="ml-auto flex items-center gap-2">
-            <div className="h-1.5 w-[110px] overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
+            <div className="h-1.5 w-27.5 overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
               <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--color-primary)" }} />
             </div>
             <span className="text-xs font-semibold text-(--text-muted)">진행률 {progress}%</span>
@@ -166,9 +166,9 @@ export default function SetupPage() {
           {step === 2 && (
             <div className="grid gap-6 lg:grid-cols-[1fr_452px]">
               <div className="flex flex-col gap-3">
-                <div className="flex rounded-lg bg-black/[.04] p-1 text-xs dark:bg-white/[.06]">
+                <div className="flex rounded-lg bg-black/4 p-1 text-xs dark:bg-white/6">
                   {["PostgreSQL 16", "MySQL 8", "MariaDB 11"].map((db, i) => (
-                    <span key={db} className={`flex-1 rounded-md py-2 text-center font-semibold ${i === 0 ? "bg-(--surface-app) shadow-sm" : "text-(--text-muted)"}`}>
+                    <span key={db} className={`flex-1 rounded-md py-2 text-center font-semibold ${i === 0 ? "bg-background shadow-sm" : "text-(--text-muted)"}`}>
                       {db}
                     </span>
                   ))}
@@ -230,7 +230,7 @@ export default function SetupPage() {
                     마지막 테스트 방금 · {dbChecks.length}개 중 {dbChecks.filter((c) => c.state === "통과").length}개 통과
                   </p>
                 </div>
-                <div className="mt-3 rounded-lg bg-[#E4EAFE] p-3 text-[11px] leading-relaxed text-(--text-app)">
+                <div className="mt-3 rounded-lg bg-[#E4EAFE] p-3 text-[11px] leading-relaxed text-foreground">
                   다음을 누르면 스키마 42개 테이블을 생성하고 초기 데이터를 넣습니다(약 40초). 이미 데이터가
                   있는 데이터베이스라면 설치를 중단하고 <strong>기존 스키마 이어쓰기</strong> 여부를 먼저
                   묻습니다.
@@ -253,7 +253,7 @@ export default function SetupPage() {
                     <div className="flex h-11 items-center rounded-lg border border-(--border-app) px-3 text-xs">{value}</div>
                   </label>
                 ))}
-                <div className="rounded-lg bg-[#E4EAFE] p-3 text-[11px] text-(--text-app)">
+                <div className="rounded-lg bg-[#E4EAFE] p-3 text-[11px] text-foreground">
                   HR 조직도(그로우)에서 부서 42개를 자동으로 가져올 수 있습니다.
                 </div>
               </div>
@@ -265,7 +265,7 @@ export default function SetupPage() {
               <div className="overflow-hidden rounded-xl border border-(--border-app)">
                 <table className="w-full text-xs">
                   <thead>
-                    <tr className="border-b border-(--border-app) bg-black/[.02] text-left text-[10px] font-bold uppercase text-(--text-muted) dark:bg-white/[.03]">
+                    <tr className="border-b border-(--border-app) bg-black/2 text-left text-[10px] font-bold uppercase text-(--text-muted) dark:bg-white/3">
                       <th className="p-2.5">유형</th>
                       <th className="p-2.5">호스트</th>
                       <th className="p-2.5">값</th>
@@ -278,7 +278,7 @@ export default function SetupPage() {
                       <tr key={i} className="border-b border-(--border-app) last:border-b-0">
                         <td className="p-2.5 font-mono">{r.type}</td>
                         <td className="p-2.5 font-mono">{r.host}</td>
-                        <td className="max-w-[260px] truncate p-2.5 font-mono text-(--text-muted)">{r.value}</td>
+                        <td className="max-w-65 truncate p-2.5 font-mono text-(--text-muted)">{r.value}</td>
                         <td className="p-2.5">
                           <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${DNS_STATE_TONE[r.state]}`}>{r.state}</span>
                         </td>
@@ -311,7 +311,7 @@ export default function SetupPage() {
                   마지막 검사 2분 전 · {dnsRecords.length}개 중 {dnsRecords.filter((r) => r.state === "확인됨").length}개 확인
                 </span>
               </div>
-              <div className="mt-3 rounded-lg bg-[#E4EAFE] p-3 text-[11px] leading-relaxed text-(--text-app)">
+              <div className="mt-3 rounded-lg bg-[#E4EAFE] p-3 text-[11px] leading-relaxed text-foreground">
                 DNS 전파는 최대 24시간 걸립니다. DKIM과 DMARC는 지금 건너뛰고 다음 단계로 넘어가도 되며,
                 나중에 <strong>관리자 · 도메인 · 정책</strong>에서 같은 화면으로 확인할 수 있습니다. 다만 두
                 레코드가 없으면 외부 메일 서버가 발신 메일을 스팸으로 분류할 수 있습니다.
@@ -345,11 +345,11 @@ export default function SetupPage() {
                   <div key={label} className="flex items-center justify-between rounded-lg border border-(--border-app) px-3 py-2.5 text-xs font-semibold">
                     {label}
                     <span
-                      className="flex h-[22px] w-9 items-center rounded-full p-[3px]"
+                      className="flex h-5.5 w-9 items-center rounded-full p-0.75"
                       style={{ backgroundColor: i < 3 ? "var(--color-primary)" : "var(--border-app)" }}
                     >
                       <span
-                        className="h-[16px] w-[16px] rounded-full bg-white"
+                        className="h-4 w-4 rounded-full bg-white"
                         style={{ transform: i < 3 ? "translateX(16px)" : "translateX(0)" }}
                       />
                     </span>

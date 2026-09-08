@@ -99,7 +99,7 @@ export function PolicyTab() {
           </p>
           <div className="mt-3 flex flex-col gap-2">
             {AI_ROLLOUT.map((r) => (
-              <div key={r.name} className="flex items-center justify-between rounded-lg bg-white/[.06] px-3 py-2 text-xs">
+              <div key={r.name} className="flex items-center justify-between rounded-lg bg-white/6 px-3 py-2 text-xs">
                 <div>
                   <p className="font-semibold text-white">{r.name}</p>
                   <p className="text-[10.5px] text-white/50">{r.count}</p>
@@ -110,8 +110,8 @@ export function PolicyTab() {
           </div>
         </div>
 
-        <AdminCard className="!bg-[#FBF9F4] !border-[#EBE4D6]">
-          <p className="text-xs leading-relaxed text-(--text-app)">
+        <AdminCard className="bg-[#FBF9F4]! border-[#EBE4D6]!">
+          <p className="text-xs leading-relaxed text-foreground">
             HR 시스템(그로우) 조직도를 매일 03:00에 동기화합니다. 마지막 동기화 {lastSync} · 1,284명
           </p>
           <button

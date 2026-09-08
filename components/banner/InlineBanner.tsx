@@ -44,7 +44,7 @@ export function InlineBanner({
       <div className="min-w-0 flex-1">
         <p className={`text-[13px] font-bold ${s.title}`}>{title}</p>
         {body && (
-          <p className="mt-0.5 text-[12px] leading-[1.55] text-[#5C6068] [text-wrap:pretty]">{body}</p>
+          <p className="mt-0.5 text-[12px] leading-[1.55] text-[#5C6068] text-pretty">{body}</p>
         )}
       </div>
       {actionLabel && (
@@ -61,7 +61,7 @@ export function InlineBanner({
         <button
           type="button"
           onClick={onDismiss}
-          className="shrink-0 text-[#9A9EA5] hover:text-(--text-app)"
+          className="shrink-0 text-[#9A9EA5] hover:text-foreground"
           aria-label="닫기"
         >
           <X size={13} />

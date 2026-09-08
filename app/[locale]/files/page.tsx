@@ -11,7 +11,7 @@ import { useToast } from "@/context/toast-context";
 const LINK_STATE_STYLE: Record<string, string> = {
   활성: "bg-(--status-success-bg) text-(--status-success)",
   "만료 임박": "bg-(--status-warning-bg) text-(--status-warning)",
-  만료됨: "bg-black/[.06] text-(--text-muted) dark:bg-white/[.08]",
+  만료됨: "bg-black/6 text-(--text-muted) dark:bg-white/8",
 };
 
 export default function FilesPage() {
@@ -30,7 +30,7 @@ export default function FilesPage() {
   const openFile = (name: string) => toast.info("파일을 다운로드합니다", { sub: name });
 
   return (
-    <WorkspaceLayout title="첨부 파일" className="flex flex-col bg-(--surface-app)">
+    <WorkspaceLayout title="첨부 파일" className="flex flex-col bg-background">
       <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-5 py-4 sm:px-7">
         <div className="min-w-0">
           <p className="truncate text-xs text-(--text-muted)">
@@ -45,21 +45,21 @@ export default function FilesPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="파일명 · 보낸사람 검색"
-              className="h-9 w-[260px] rounded-lg bg-black/[.04] pl-8 pr-2.5 text-xs outline-none dark:bg-white/[.06]"
+              className="h-9 w-65 rounded-lg bg-black/4 pl-8 pr-2.5 text-xs outline-none dark:bg-white/6"
             />
           </div>
-          <div className="flex rounded-lg bg-black/[.04] p-1 dark:bg-white/[.06]">
+          <div className="flex rounded-lg bg-black/4 p-1 dark:bg-white/6">
             <button
               type="button"
               onClick={() => setView("grid")}
-              className={`flex h-7 w-8 items-center justify-center rounded-md ${view === "grid" ? "bg-(--surface-app) shadow-sm" : "text-(--text-muted)"}`}
+              className={`flex h-7 w-8 items-center justify-center rounded-md ${view === "grid" ? "bg-background shadow-sm" : "text-(--text-muted)"}`}
             >
               <LayoutGrid size={14} />
             </button>
             <button
               type="button"
               onClick={() => setView("list")}
-              className={`flex h-7 w-8 items-center justify-center rounded-md ${view === "list" ? "bg-(--surface-app) shadow-sm" : "text-(--text-muted)"}`}
+              className={`flex h-7 w-8 items-center justify-center rounded-md ${view === "list" ? "bg-background shadow-sm" : "text-(--text-muted)"}`}
             >
               <List size={14} />
             </button>
@@ -150,7 +150,7 @@ export default function FilesPage() {
                   key={f.name}
                   type="button"
                   onClick={() => openFile(f.name)}
-                  className="rounded-xl border border-(--border-app) p-3 text-left transition hover:bg-black/[.02] dark:hover:bg-white/[.03]"
+                  className="rounded-xl border border-(--border-app) p-3 text-left transition hover:bg-black/2 dark:hover:bg-white/3"
                 >
                   <div
                     className="mb-2 flex h-16 items-center justify-center rounded-lg text-xs font-bold"
@@ -172,7 +172,7 @@ export default function FilesPage() {
                   key={f.name}
                   type="button"
                   onClick={() => openFile(f.name)}
-                  className="flex items-center gap-3 rounded-lg border border-(--border-app) px-3 py-2 text-left transition hover:bg-black/[.02] dark:hover:bg-white/[.03]"
+                  className="flex items-center gap-3 rounded-lg border border-(--border-app) px-3 py-2 text-left transition hover:bg-black/2 dark:hover:bg-white/3"
                 >
                   <span
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[10px] font-bold"
@@ -218,7 +218,7 @@ export default function FilesPage() {
             </div>
           </div>
 
-          <div className="rounded-lg bg-black/[.02] p-3 dark:bg-white/[.03]">
+          <div className="rounded-lg bg-black/2 p-3 dark:bg-white/3">
             <p className="text-xs font-semibold">정리 제안</p>
             <p className="mt-1 text-[11px] text-(--text-muted)">
               2년 이상 지난 100 MB 이상 첨부 14개. 메일 본문은 유지하고 첨부만 삭제합니다. 총 3.2 GB 확보.

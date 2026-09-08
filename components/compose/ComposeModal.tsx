@@ -236,8 +236,8 @@ function ComposeForm({
       <form
         onSubmit={handleSend}
         onClick={(e) => e.stopPropagation()}
-        className={`relative flex h-full w-full flex-col overflow-hidden bg-(--surface-app) shadow-2xl transition-all sm:h-auto sm:max-h-[85vh] sm:rounded-[14px] sm:border sm:border-(--border-app) ${
-          expanded ? "sm:w-[900px]" : "sm:w-[620px]"
+        className={`relative flex h-full w-full flex-col overflow-hidden bg-background shadow-2xl transition-all sm:h-auto sm:max-h-[85vh] sm:rounded-[14px] sm:border sm:border-(--border-app) ${
+          expanded ? "sm:w-225" : "sm:w-155"
         }`}
       >
         <div className="flex shrink-0 items-center gap-2.5 border-b border-(--border-app) px-4 py-3">
@@ -275,7 +275,7 @@ function ComposeForm({
                     key={r.id}
                     type="button"
                     onClick={() => setRecipients((prev) => prev.filter((x) => x.id !== r.id))}
-                    className="group flex items-center gap-1.5 rounded-full bg-(--surface-muted) py-1 pl-1 pr-2.5 text-xs font-medium hover:bg-black/[.06] dark:hover:bg-white/[.1]"
+                    className="group flex items-center gap-1.5 rounded-full bg-(--surface-muted) py-1 pl-1 pr-2.5 text-xs font-medium hover:bg-black/6 dark:hover:bg-white/10"
                     title="제거"
                   >
                     <span
@@ -296,7 +296,7 @@ function ComposeForm({
                   onKeyDown={handleRecipientKeyDown}
                   onBlur={commitRecipientInput}
                   placeholder="이름 또는 이메일 입력…"
-                  className="min-w-[140px] flex-1 bg-transparent text-xs outline-none placeholder:text-[#B0B4BA]"
+                  className="min-w-35 flex-1 bg-transparent text-xs outline-none placeholder:text-[#B0B4BA]"
                 />
               </div>
               <button
@@ -349,7 +349,7 @@ function ComposeForm({
           </div>
 
           <div className="mx-4 mb-1 flex flex-wrap items-center gap-3 rounded-xl border border-[#EBE4D6] bg-[#FBF9F4] px-4 py-3">
-            <span className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-[6px] bg-[#17181B] text-[9px] font-extrabold text-white">
+            <span className="flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-md bg-[#17181B] text-[9px] font-extrabold text-white">
               AI
             </span>
             <span className="text-xs text-(--text-muted)">톤을 선택하면 초안을 다시 씁니다.</span>
@@ -365,7 +365,7 @@ function ComposeForm({
                   className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
                     tone === t.key
                       ? "bg-[#17181B] text-white"
-                      : "border border-[#E6DFD0] bg-white text-[#5C6068] hover:bg-black/[.02]"
+                      : "border border-[#E6DFD0] bg-white text-[#5C6068] hover:bg-black/2"
                   }`}
                 >
                   {t.label}
@@ -409,10 +409,10 @@ function ComposeForm({
                   return (
                     <div
                       key={att.id}
-                      className="flex items-center gap-2.5 rounded-[10px] border border-(--border-app) bg-(--surface-app) px-3 py-2"
+                      className="flex items-center gap-2.5 rounded-[10px] border border-(--border-app) bg-background px-3 py-2"
                     >
                       <span
-                        className="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-[7px] text-[9px] font-extrabold uppercase"
+                        className="flex h-7.5 w-7.5 shrink-0 items-center justify-center rounded-[7px] text-[9px] font-extrabold uppercase"
                         style={{ backgroundColor: style.bg, color: style.fg }}
                       >
                         {att.ext.slice(0, 3) || "FILE"}
@@ -448,13 +448,13 @@ function ComposeForm({
               onDrop={handleDrop}
               role="button"
               tabIndex={0}
-              className={`flex shrink-0 cursor-pointer items-center gap-2.5 rounded-[10px] border border-dashed px-3 py-2 transition sm:w-[220px] ${
+              className={`flex shrink-0 cursor-pointer items-center gap-2.5 rounded-[10px] border border-dashed px-3 py-2 transition sm:w-55 ${
                 isDragging
-                  ? "border-(--color-primary) bg-(--color-primary)/[.06]"
-                  : "border-(--border-app) bg-black/[.015] dark:bg-white/[.02]"
+                  ? "border-(--color-primary) bg-(--color-primary)/6"
+                  : "border-(--border-app) bg-black/1.5 dark:bg-white/2"
               }`}
             >
-              <span className="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-[7px] bg-(--surface-muted) text-(--text-muted)">
+              <span className="flex h-7.5 w-7.5 shrink-0 items-center justify-center rounded-[7px] bg-(--surface-muted) text-(--text-muted)">
                 <Upload size={14} />
               </span>
               <div className="min-w-0">
@@ -497,7 +497,7 @@ function ComposeForm({
             {scheduleOpen && (
               <>
                 <div className="fixed inset-0 z-40" onClick={() => setScheduleOpen(false)} />
-                <div className="absolute bottom-full left-0 z-50 mb-2 w-48 overflow-hidden rounded-[10px] border border-(--border-app) bg-(--surface-app) py-1 text-(--text-app) shadow-xl">
+                <div className="absolute bottom-full left-0 z-50 mb-2 w-48 overflow-hidden rounded-[10px] border border-(--border-app) bg-background py-1 text-foreground shadow-xl">
                   {["오늘 18:00", "내일 09:00", "다음 주 월요일 09:00"].map((opt) => (
                     <button
                       key={opt}
