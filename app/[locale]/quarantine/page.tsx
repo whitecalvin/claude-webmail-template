@@ -72,8 +72,8 @@ export default function QuarantinePage() {
       showGlobalSearch={false}
       className="flex flex-col lg:flex-row"
     >
-      <div className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-105">
-        <div className="flex shrink-0 gap-1.5 border-b border-(--border-app) px-4 py-2.5">
+      <section aria-label="격리 메일 목록" className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-105">
+        <nav aria-label="격리 분류" className="flex shrink-0 gap-1.5 border-b border-(--border-app) px-4 py-2.5">
           {QUARANTINE_TABS.map((t) => (
             <button
               key={t}
@@ -88,13 +88,13 @@ export default function QuarantinePage() {
               {t} {t === "전체" ? mails.length : mails.filter((m) => m.kind === t).length}
             </button>
           ))}
-        </div>
+        </nav>
 
-        <div className="flex-1 overflow-y-auto">
+        <ul className="flex-1 overflow-y-auto">
           {filtered.map((m) => {
             const isActive = m.id === selectedId;
             return (
-              <div
+              <li
                 key={m.id}
                 role="button"
                 tabIndex={0}
@@ -119,18 +119,18 @@ export default function QuarantinePage() {
                     {m.score}
                   </span>
                 </div>
-              </div>
+              </li>
             );
           })}
-        </div>
-      </div>
+        </ul>
+      </section>
 
-      <div className="hidden min-w-0 flex-1 flex-col bg-(--surface-muted) lg:flex">
+      <article aria-labelledby={selected ? "quarantine-message-heading" : undefined} className="hidden min-w-0 flex-1 flex-col bg-(--surface-muted) lg:flex">
         {!selected ? (
           <p className="m-auto text-sm text-(--text-muted)">메일을 선택하세요.</p>
         ) : (
           <>
-            <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) bg-background px-6 py-3.5">
+            <header className="flex shrink-0 items-center gap-2 border-b border-(--border-app) bg-background px-6 py-3.5">
               <button
                 type="button"
                 onClick={releaseSelected}
@@ -156,10 +156,10 @@ export default function QuarantinePage() {
               <span className="ml-auto hidden text-[11px] text-(--text-muted) md:inline">
                 해제는 보안팀 승인 후 적용됩니다
               </span>
-            </div>
+            </header>
 
-            <div className="flex-1 overflow-y-auto p-6">
-              <h1 className="text-lg font-bold">{selected.subject}</h1>
+            <section className="flex-1 overflow-y-auto p-6">
+              <h1 id="quarantine-message-heading" className="text-lg font-bold">{selected.subject}</h1>
               <p className="mt-1 text-xs text-(--text-muted)">
                 {selected.from} · 오늘 {selected.time} · 수신 인사팀 14명
               </p>
@@ -215,10 +215,10 @@ export default function QuarantinePage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
           </>
         )}
-      </div>
+      </article>
 
       {confirmingDelete && selected && (
         <ConfirmDialog

@@ -51,7 +51,7 @@ export function CalendarMonthGrid({
   }
 
   return (
-    <div className="flex flex-1 flex-col overflow-y-auto">
+    <section aria-label="월간 캘린더" className="flex flex-1 flex-col overflow-y-auto">
       <div className="grid grid-cols-7 border-b border-(--border-app)">
         {DOW_LABELS.map((label, i) => (
           <div
@@ -101,6 +101,6 @@ export function CalendarMonthGrid({
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

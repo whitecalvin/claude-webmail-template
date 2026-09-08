@@ -41,13 +41,13 @@ export default function AdminSystemPage() {
     setPrintOpts((prev) => prev.map((o) => (o.name === name ? { ...o, on: !o.on } : o)));
 
   return (
-    <div className="flex h-dvh w-full bg-(--surface-muted) text-foreground">
+    <main className="flex h-dvh w-full bg-(--surface-muted) text-foreground">
       <div className="hidden lg:block">
         <AdminNav active={null} onSelect={() => router.push("/admin")} />
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) bg-background px-7 py-4">
+        <header className="flex shrink-0 items-center gap-3 border-b border-(--border-app) bg-background px-7 py-4">
           <div>
             <h1 className="text-[17px] font-bold tracking-tight">{t("pageTitle")}</h1>
             <p className="text-xs text-(--text-muted)">
@@ -74,9 +74,9 @@ export default function AdminSystemPage() {
               </button>
             ))}
           </div>
-        </div>
+        </header>
 
-        <div className="flex-1 overflow-y-auto p-7">
+        <section aria-label={t("pageTitle")} className="flex-1 overflow-y-auto p-7">
           {tab === "mail" && (
             <div className="grid grid-cols-1 gap-4 xl:grid-cols-[250px_1fr_1fr]">
               <div className="rounded-xl border border-(--border-app) bg-background p-4">
@@ -321,8 +321,8 @@ export default function AdminSystemPage() {
               ))}
             </div>
           )}
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }

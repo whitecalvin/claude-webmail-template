@@ -251,7 +251,7 @@ export default function CalendarPage() {
           onAddEvent={() => openCreateEvent(mobileSelectedDate)}
         />
       </div>
-      <div className="hidden min-w-0 flex-1 flex-col border-r border-(--border-app) bg-background lg:flex">
+      <section aria-label="캘린더 일정" className="hidden min-w-0 flex-1 flex-col border-r border-(--border-app) bg-background lg:flex">
         {view === "month" ? (
           <CalendarMonthGrid
             anchor={anchor}
@@ -270,7 +270,7 @@ export default function CalendarPage() {
             onSelectEvent={setSelectedEvent}
           />
         )}
-      </div>
+      </section>
 
       <div className="hidden lg:block">
         <CalendarSidebar
@@ -287,7 +287,10 @@ export default function CalendarPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 p-4"
           onClick={() => setSelectedEvent(null)}
         >
-          <div
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="event-details-heading"
             className="w-full max-w-sm rounded-2xl bg-background p-5 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
@@ -297,7 +300,7 @@ export default function CalendarPage() {
             >
               {selectedEvent.date}
             </span>
-            <h3 className="mt-3 text-lg font-bold">{selectedEvent.title}</h3>
+            <h3 id="event-details-heading" className="mt-3 text-lg font-bold">{selectedEvent.title}</h3>
             <p className="mt-1 text-sm text-(--text-muted)">
               {String(Math.floor(selectedEvent.startHour)).padStart(2, "0")}:
               {selectedEvent.startHour % 1 === 0 ? "00" : "30"} –{" "}
@@ -312,7 +315,7 @@ export default function CalendarPage() {
             >
               닫기
             </button>
-          </div>
+          </section>
         </div>
       )}
 

@@ -39,9 +39,9 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-dvh bg-(--surface-muted) text-foreground">
+    <main className="min-h-dvh bg-(--surface-muted) text-foreground">
       <div className="mx-auto flex max-w-6xl flex-col gap-5 p-5 sm:p-8">
-        <div className="flex items-center gap-3">
+        <header className="flex items-center gap-3">
           <div>
             <h1 className="text-[19px] font-bold tracking-tight">조직 설치 마법사</h1>
             <p className="text-xs text-(--text-muted)">
@@ -56,7 +56,7 @@ export default function OnboardingPage() {
               {progress}%
             </span>
           </div>
-        </div>
+        </header>
 
         <div className="grid gap-5 lg:grid-cols-[280px_1fr]">
           <div className="flex flex-col gap-2 rounded-xl border border-(--border-app) bg-background p-4">
@@ -190,6 +190,6 @@ export default function OnboardingPage() {
           </button>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

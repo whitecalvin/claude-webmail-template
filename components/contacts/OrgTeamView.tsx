@@ -28,7 +28,7 @@ export function OrgTeamView({ teamId }: { teamId: string }) {
   const parent = team ? ORG_TREE.find((n) => n.id === team.parentId) : null;
 
   return (
-    <div className="grid min-w-0 flex-1 grid-cols-[1fr_340px]">
+    <section aria-label="조직도" className="grid min-w-0 flex-1 grid-cols-[1fr_340px]">
       <div className="min-w-0 overflow-y-auto border-r border-(--border-app) p-5">
         <div className="mb-4 flex items-center gap-3">
           <div>
@@ -190,6 +190,6 @@ export function OrgTeamView({ teamId }: { teamId: string }) {
           </>
         )}
       </div>
-    </div>
+    </section>
   );
 }

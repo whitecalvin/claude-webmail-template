@@ -86,8 +86,8 @@ export function ContactsMobileView() {
 
   if (open) {
     return (
-      <div className="flex h-full flex-col">
-        <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) px-4 py-3">
+    <section aria-label="모바일 주소록" className="flex h-full flex-col">
+      <header className="flex shrink-0 items-center gap-2 border-b border-(--border-app) px-4 py-3">
           <button
             type="button"
             onClick={() => setOpenId(null)}
@@ -97,7 +97,7 @@ export function ContactsMobileView() {
             <ArrowLeft size={18} />
           </button>
           <p className="text-[15px] font-bold">연락처 편집</p>
-        </div>
+        </header>
 
         <div className="flex-1 overflow-y-auto p-4">
           <div className="mb-4 flex items-center gap-3 rounded-xl border border-(--border-app) p-3.5">
@@ -157,13 +157,13 @@ export function ContactsMobileView() {
             </button>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="flex h-full flex-col">
-      <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-5 pb-3 pt-2">
+    <section aria-label="모바일 주소록" className="flex h-full flex-col">
+      <header className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-5 pb-3 pt-2">
         <div>
           <p className="text-xl font-bold tracking-tight">주소록</p>
           <p className="mt-0.5 text-[11.5px] text-(--text-muted)">
@@ -179,7 +179,7 @@ export function ContactsMobileView() {
         >
           <Plus size={18} />
         </button>
-      </div>
+      </header>
 
       <div className="shrink-0 border-b border-(--border-app) px-4 py-3">
         <div className="relative mb-2.5">
@@ -257,6 +257,6 @@ export function ContactsMobileView() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

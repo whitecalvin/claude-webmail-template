@@ -27,9 +27,9 @@ export function SettingsSectionPage({ active }: { active: SettingsNavKey }) {
       ) : active === "inbox-display" ? (
         <ComingSoonView label={title} />
       ) : (
-        <div className="min-w-0 flex-1 overflow-y-auto p-4 sm:p-7">
+        <section aria-label={title} className="min-w-0 flex-1 overflow-y-auto p-4 sm:p-7">
           <div className="mx-auto h-full max-w-lg">{Card ? <Card /> : null}</div>
-        </div>
+        </section>
       )}
     </WorkspaceLayout>
   );

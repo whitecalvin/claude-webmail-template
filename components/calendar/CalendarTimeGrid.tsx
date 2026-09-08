@@ -27,7 +27,7 @@ export function CalendarTimeGrid({
   const gutterWidth = 60;
 
   return (
-    <>
+    <section aria-label="시간대별 일정" className="flex min-h-0 flex-1 flex-col">
       <div
         className="grid shrink-0 border-b border-(--border-app)"
         style={{
@@ -134,6 +134,6 @@ export function CalendarTimeGrid({
           })}
         </div>
       </div>
-    </>
+    </section>
   );
 }

@@ -36,9 +36,9 @@ export function SignatureSettingsView() {
   };
 
   return (
-    <div className="flex flex-1 flex-col gap-5 overflow-y-auto p-4 sm:p-7">
+    <section aria-labelledby="signature-settings-heading" className="flex flex-1 flex-col gap-5 overflow-y-auto p-4 sm:p-7">
       <div>
-        <h1 className="text-[19px] font-bold tracking-tight">메일 · 서명</h1>
+        <h1 id="signature-settings-heading" className="text-[19px] font-bold tracking-tight">메일 · 서명</h1>
         <p className="mt-1 text-xs text-(--text-muted)">
           발신 기본값과 서명, 부재중 응답을 관리합니다.
         </p>
@@ -173,6 +173,6 @@ export function SignatureSettingsView() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

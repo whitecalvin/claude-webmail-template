@@ -66,8 +66,8 @@ export default function SetupPage() {
   };
 
   return (
-    <div className="flex min-h-dvh w-full lg:grid lg:grid-cols-[340px_1fr]">
-      <div className="flex flex-col gap-6 bg-[#17181B] p-8 text-white">
+    <main className="flex min-h-dvh w-full lg:grid lg:grid-cols-[340px_1fr]">
+      <aside aria-label="설치 단계" className="flex flex-col gap-6 bg-[#17181B] p-8 text-white">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-lg text-xs font-bold" style={{ backgroundColor: "#2B4BF2" }}>
             M
@@ -126,15 +126,15 @@ export default function SetupPage() {
             설치 안내 문서 열기
           </button>
         </div>
-      </div>
+      </aside>
 
-      <div className="flex flex-1 flex-col bg-background">
-        <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-6 py-5 sm:px-10">
+      <section aria-labelledby="setup-step-heading" className="flex flex-1 flex-col bg-background">
+        <header className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-6 py-5 sm:px-10">
           <div>
             <p className="text-xs font-bold" style={{ color: "var(--color-primary)" }}>
               {step} / {SETUP_STEPS.length} 단계
             </p>
-            <h2 className="mt-1 text-[22px] font-bold tracking-tight sm:text-[27px]">{SETUP_STEPS[step - 1].name}</h2>
+            <h2 id="setup-step-heading" className="mt-1 text-[22px] font-bold tracking-tight sm:text-[27px]">{SETUP_STEPS[step - 1].name}</h2>
           </div>
           <div className="ml-auto flex items-center gap-2">
             <div className="h-1.5 w-27.5 overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
@@ -142,9 +142,9 @@ export default function SetupPage() {
             </div>
             <span className="text-xs font-semibold text-(--text-muted)">진행률 {progress}%</span>
           </div>
-        </div>
+        </header>
 
-        <div className="flex-1 overflow-y-auto p-6 sm:p-10">
+        <section aria-label="설치 설정" className="flex-1 overflow-y-auto p-6 sm:p-10">
           {step === 1 && (
             <div className="max-w-lg">
               <p className="mb-4 text-sm text-(--text-muted)">
@@ -379,9 +379,9 @@ export default function SetupPage() {
               </button>
             </div>
           )}
-        </div>
+        </section>
 
-        <div className="flex shrink-0 items-center gap-2 border-t border-(--border-app) px-6 py-4 sm:px-10">
+        <footer className="flex shrink-0 items-center gap-2 border-t border-(--border-app) px-6 py-4 sm:px-10">
           {step > 1 && (
             <button type="button" onClick={back} className="h-10 rounded-lg border border-(--border-app) px-4 text-sm font-semibold">
               뒤로
@@ -395,8 +395,8 @@ export default function SetupPage() {
           >
             {step === SETUP_STEPS.length ? "설치 완료 · 로그인" : `다음 · ${SETUP_STEPS[step]?.name ?? ""}`}
           </button>
-        </div>
-      </div>
-    </div>
+        </footer>
+      </section>
+    </main>
   );
 }

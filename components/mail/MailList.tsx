@@ -99,18 +99,19 @@ export function MailList() {
   };
 
   return (
-    <div
+    <section
+      aria-labelledby="mail-list-heading"
       className={`flex h-full w-full flex-col ${CONTAINER_STYLE[style]}`}
     >
-      <div
+      <header
         className={`shrink-0 px-4 py-3 text-sm font-semibold ${HEADER_STYLE[style]}`}
         style={{ paddingBlock: `calc(0.75rem * var(--density-scale))` }}
       >
-        {folderLabel}
+        <h2 id="mail-list-heading" className="inline text-sm font-semibold">{folderLabel}</h2>
         <span className="ml-2 font-normal text-(--text-muted)">
           {t("countUnit", { count: visibleEmails.length })}
         </span>
-      </div>
+      </header>
 
       <ul className={`flex-1 overflow-y-auto ${LIST_STYLE[style]}`}>
         {visibleEmails.length === 0 && (
@@ -277,6 +278,6 @@ export function MailList() {
           }}
         />
       )}
-    </div>
+    </section>
   );
 }

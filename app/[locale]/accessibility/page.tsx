@@ -13,7 +13,7 @@ export default function AccessibilityPage() {
   return (
     <WorkspaceLayout title={<SettingsHeaderTitle title="접근성 명세 · KWCAG 2.2" />} headerActions={<span className="rounded-full bg-(--status-success-bg) px-3 py-1.5 text-xs font-bold text-(--status-success)">통과 {passed} / {A11Y_ROWS.length}</span>} showGlobalSearch={false} className="flex flex-col bg-(--surface-muted) lg:flex-row">
       <SettingsNav active="accessibility" />
-      <div className="min-h-0 w-full flex-1 overflow-y-auto">
+      <section aria-label="접근성 명세" className="min-h-0 w-full flex-1 overflow-y-auto">
       <div className="mx-auto flex max-w-5xl flex-col gap-5 p-5 sm:p-8">
         <p className="text-xs text-(--text-muted)">공공기관 납품 기준 · 자체 점검 2026년 8월 28일</p>
 
@@ -102,7 +102,7 @@ export default function AccessibilityPage() {
           </div>
         </div>
       </div>
-      </div>
+      </section>
     </WorkspaceLayout>
   );
 }

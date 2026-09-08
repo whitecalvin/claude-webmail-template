@@ -109,8 +109,8 @@ export function ReadingPane({ onBack }: { onBack?: () => void }) {
   };
 
   return (
-    <div className={`flex h-full w-full flex-1 flex-col ${WRAPPER_STYLE[style]}`}>
-      <div
+    <article aria-labelledby="message-subject" className={`flex h-full w-full flex-1 flex-col ${WRAPPER_STYLE[style]}`}>
+      <header
         className={`flex items-center gap-2 px-4 py-2.5 ${ACTION_BAR_STYLE[style]}`}
       >
         {onBack && (
@@ -169,11 +169,11 @@ export function ReadingPane({ onBack }: { onBack?: () => void }) {
             <Trash2 size={18} />
           </button>
         </div>
-      </div>
+      </header>
 
       <div className="flex min-h-0 flex-1">
         <div className={`flex-1 overflow-y-auto ${CONTENT_STYLE[style]}`}>
-          <h1 className="mb-4 text-xl font-semibold leading-snug sm:text-2xl">
+          <h1 id="message-subject" className="mb-4 text-xl font-semibold leading-snug sm:text-2xl">
             {email.subject}
           </h1>
 
@@ -225,6 +225,6 @@ export function ReadingPane({ onBack }: { onBack?: () => void }) {
           }}
         />
       )}
-    </div>
+    </article>
   );
 }

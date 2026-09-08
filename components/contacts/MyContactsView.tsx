@@ -89,7 +89,7 @@ export function MyContactsView() {
   };
 
   return (
-    <div className="grid min-w-0 flex-1 grid-cols-[1fr_360px]">
+    <section aria-label="내 주소록" className="grid min-w-0 flex-1 grid-cols-[1fr_360px]">
       <div className="flex min-w-0 flex-col overflow-hidden border-r border-(--border-app)">
         <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-5 py-4">
           <div>
@@ -298,6 +298,6 @@ export function MyContactsView() {
           </>
         )}
       </div>
-    </div>
+    </section>
   );
 }

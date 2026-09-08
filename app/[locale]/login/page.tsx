@@ -42,7 +42,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-dvh w-full bg-background xl:grid xl:grid-cols-[minmax(32rem,0.9fr)_minmax(40rem,1.1fr)]">
       <main className="flex min-h-dvh w-full flex-col px-6 py-6 sm:px-10 sm:py-8 lg:px-12 xl:px-16 2xl:py-12">
-        <div className="mx-auto flex w-full max-w-md items-center gap-3">
+        <header className="mx-auto flex w-full max-w-md items-center gap-3">
           <span
             className="flex size-8 items-center justify-center rounded-[10px] text-sm font-bold text-white shadow-[0_8px_24px_color-mix(in_srgb,var(--color-primary)_24%,transparent)]"
             style={{ backgroundColor: "var(--color-primary)" }}
@@ -52,7 +52,7 @@ export default function LoginPage() {
           <span className="text-[17px] font-bold tracking-tight text-foreground">
             GXWebMail
           </span>
-        </div>
+        </header>
 
         <div className="flex flex-1 items-center py-8 sm:py-10 2xl:py-12">
           <div className="mx-auto w-full max-w-md">

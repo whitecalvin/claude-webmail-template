@@ -11,12 +11,12 @@ export default function ShortcutsPage() {
   return (
     <WorkspaceLayout title={<SettingsHeaderTitle title="키보드 단축키" />} showGlobalSearch={false} className="flex flex-col bg-(--surface-muted) lg:flex-row">
       <SettingsNav active="shortcuts" />
-      <div className="min-h-0 w-full flex-1 overflow-y-auto py-8">
+      <section aria-labelledby="shortcuts-heading" className="min-h-0 w-full flex-1 overflow-y-auto py-8">
         <div className="mx-auto max-w-3xl px-4">
-          <div className="border border-(--border-app) bg-background p-8 sm:p-12">
-            <div className="flex items-start justify-between gap-4 border-b-2 border-(--text-app) pb-4">
+          <article className="border border-(--border-app) bg-background p-8 sm:p-12">
+            <header className="flex items-start justify-between gap-4 border-b-2 border-(--text-app) pb-4">
               <div>
-                <h1 className="text-[26px] font-bold tracking-tight">키보드 단축키</h1>
+                <h1 id="shortcuts-heading" className="text-[26px] font-bold tracking-tight">키보드 단축키</h1>
                 <p className="mt-1 text-xs text-(--text-muted)">
                   GXWebMail · 인쇄용 전체 목록 · 2026년 9월
                 </p>
@@ -28,7 +28,7 @@ export default function ShortcutsPage() {
                 </p>
                 <p className="mt-0.5">⌘ 는 Windows에서 Ctrl</p>
               </div>
-            </div>
+            </header>
 
             <div className="mt-6 columns-1 gap-11 sm:columns-2">
               {SHORTCUT_GROUPS.map((group) => (
@@ -57,13 +57,13 @@ export default function ShortcutsPage() {
               ))}
             </div>
 
-            <div className="mt-2 flex items-center justify-between border-t border-(--border-app) pt-3.5 text-xs text-(--text-muted)">
+            <footer className="mt-2 flex items-center justify-between border-t border-(--border-app) pt-3.5 text-xs text-(--text-muted)">
               <p>단축키는 설정 · 접근성에서 끌 수 있습니다. 입력 중에는 동작하지 않습니다.</p>
               <p>gxsoft.co.kr</p>
-            </div>
-          </div>
+            </footer>
+          </article>
         </div>
-      </div>
+      </section>
     </WorkspaceLayout>
   );
 }

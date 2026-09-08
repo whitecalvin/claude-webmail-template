@@ -31,7 +31,7 @@ export default function FilesPage() {
 
   return (
     <WorkspaceLayout title="첨부 파일" className="flex flex-col bg-background">
-      <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-5 py-4 sm:px-7">
+      <header className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-5 py-4 sm:px-7">
         <div className="min-w-0">
           <p className="truncate text-xs text-(--text-muted)">
             메일 첨부 4,182개 · 18.2 GB · 대용량 링크 12개 활성
@@ -65,10 +65,10 @@ export default function FilesPage() {
             </button>
           </div>
         </div>
-      </div>
+      </header>
 
       <div className="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[216px_1fr_300px]">
-        <aside className="hidden flex-col gap-5 overflow-y-auto border-r border-(--border-app) p-3.5 lg:flex">
+        <aside aria-label="첨부 파일 필터" className="hidden flex-col gap-5 overflow-y-auto border-r border-(--border-app) p-3.5 lg:flex">
           <div>
             <p className="mb-2 px-1 text-[11px] font-bold text-(--text-muted)">종류</p>
             <div className="flex flex-col gap-0.5">
@@ -120,9 +120,9 @@ export default function FilesPage() {
           </div>
         </aside>
 
-        <div className="min-h-0 overflow-y-auto p-4 sm:p-5">
+        <section aria-labelledby="recent-attachments-heading" className="min-h-0 overflow-y-auto p-4 sm:p-5">
           <div className="mb-3 flex items-center gap-2">
-            <p className="text-sm font-bold">최근 첨부</p>
+            <h2 id="recent-attachments-heading" className="text-sm font-bold">최근 첨부</h2>
             <span className="text-xs text-(--text-muted)">{filteredCards.length}개</span>
             <div className="ml-auto flex gap-1">
               {FILE_SORTS.map((s) => (
@@ -187,9 +187,9 @@ export default function FilesPage() {
               ))}
             </div>
           )}
-        </div>
+        </section>
 
-        <aside className="hidden flex-col gap-4 overflow-y-auto border-l border-(--border-app) p-4 lg:flex">
+        <aside aria-label="첨부 파일 요약" className="hidden flex-col gap-4 overflow-y-auto border-l border-(--border-app) p-4 lg:flex">
           <div>
             <p className="mb-2 text-xs font-bold">대용량 링크</p>
             <div className="flex flex-col gap-3">

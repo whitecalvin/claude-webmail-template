@@ -40,9 +40,9 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex min-h-dvh w-full lg:grid lg:grid-cols-2">
-      <div className="flex w-full flex-col px-6 py-10 sm:px-12 lg:px-18 lg:py-16">
-        <div className="flex items-center gap-3">
+    <main className="flex min-h-dvh w-full lg:grid lg:grid-cols-2">
+      <section aria-labelledby="signup-heading" className="flex w-full flex-col px-6 py-10 sm:px-12 lg:px-18 lg:py-16">
+        <header className="flex items-center gap-3">
           <span
             className="flex h-8 w-8 items-center justify-center rounded-[10px] text-sm font-bold text-white"
             style={{ backgroundColor: "var(--color-primary)" }}
@@ -52,10 +52,10 @@ export default function SignupPage() {
           <span className="text-[17px] font-bold tracking-tight text-foreground">
             GXWebMail
           </span>
-        </div>
+        </header>
 
         <div className="my-auto w-full max-w-98 py-10">
-          <h1 className="text-[32px] font-bold leading-[1.2] tracking-tight text-foreground">
+          <h1 id="signup-heading" className="text-[32px] font-bold leading-[1.2] tracking-tight text-foreground">
             계정을 만들어 보세요
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-(--text-muted)">
@@ -180,9 +180,9 @@ export default function SignupPage() {
             </Link>
           </p>
         </div>
-      </div>
+      </section>
 
-      <div className="relative hidden flex-col justify-between overflow-hidden bg-[#17181B] px-18 py-16 lg:flex">
+      <aside aria-label="제품 소개" className="relative hidden flex-col justify-between overflow-hidden bg-[#17181B] px-18 py-16 lg:flex">
         <div
           className="pointer-events-none absolute"
           style={{
@@ -223,7 +223,7 @@ export default function SignupPage() {
         <p className="relative text-xs text-white/45">
           © 2026 GXWebMail. 공공·교육기관 조달 등록 제품.
         </p>
-      </div>
-    </div>
+      </aside>
+    </main>
   );
 }

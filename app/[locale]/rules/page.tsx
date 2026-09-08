@@ -61,7 +61,7 @@ export default function RulesPage() {
   return (
     <WorkspaceLayout title={<SettingsHeaderTitle title="내 규칙 · 서명 · 자동응답" />} headerActions={<button type="button" onClick={() => setCreatingRule(true)} className="h-8 rounded-lg px-3 text-xs font-semibold text-white transition hover:brightness-110" style={{ backgroundColor: "var(--color-primary)" }}>규칙 만들기</button>} showGlobalSearch={false} className="flex flex-col bg-(--surface-muted) lg:flex-row">
       <SettingsNav active="filters" />
-      <div className="min-h-0 w-full flex-1 overflow-y-auto">
+      <section aria-label="메일 규칙과 자동응답" className="min-h-0 w-full flex-1 overflow-y-auto">
       <div className="mx-auto flex max-w-6xl flex-col gap-5 p-5 sm:p-8">
         <p className="text-xs text-(--text-muted)">규칙 {activeCount}건 활성 · 이번 주 214통 자동 분류됨</p>
 
@@ -283,7 +283,7 @@ export default function RulesPage() {
           </div>
         </div>
       </div>
-      </div>
+      </section>
 
       {creatingRule && (
         <Modal onClose={() => setCreatingRule(false)} maxWidth={400}>

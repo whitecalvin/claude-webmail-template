@@ -48,8 +48,8 @@ export function CalendarMobileView({
   const weekCount = allEvents.filter((e) => weekISOs.has(e.date)).length;
 
   return (
-    <div className="flex h-full flex-col">
-      <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-5 pb-3 pt-2">
+    <section aria-label="모바일 캘린더" className="flex h-full flex-col">
+      <header className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-5 pb-3 pt-2">
         <div>
           <p className="text-xl font-bold tracking-tight">
             {selectedDate.getMonth() + 1}월 {selectedDate.getDate()}일{" "}
@@ -68,7 +68,7 @@ export function CalendarMobileView({
         >
           <Plus size={18} />
         </button>
-      </div>
+      </header>
 
       <div className="flex shrink-0 gap-2 border-b border-(--border-app) px-4 py-3">
         {weekDays.map((day) => {
@@ -196,6 +196,6 @@ export function CalendarMobileView({
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }

@@ -67,14 +67,14 @@ export default function MailboxesPage() {
       }
       className="overflow-y-auto bg-(--surface-muted)"
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-5 p-5 sm:p-8">
+      <section aria-label={t("title")} className="mx-auto flex max-w-6xl flex-col gap-5 p-5 sm:p-8">
         <p className="text-xs text-(--text-muted)">
           {t("summary", { mailboxes: SHARED_BOXES.length, scheduled: mails.length, templates: MAIL_TEMPLATES.length })}
         </p>
 
         <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr_1fr]">
-          <div className="rounded-xl border border-(--border-app) bg-background p-5">
-            <h2 className="mb-3 text-sm font-bold">{t("sharedMailboxes")}</h2>
+          <section aria-labelledby="shared-mailboxes-heading" className="rounded-xl border border-(--border-app) bg-background p-5">
+            <h2 id="shared-mailboxes-heading" className="mb-3 text-sm font-bold">{t("sharedMailboxes")}</h2>
             <div className="flex flex-col gap-2">
               {SHARED_BOXES.map((b) => (
                 <div key={b.addr} className="flex items-center gap-3">
@@ -102,11 +102,11 @@ export default function MailboxesPage() {
             <p className="mt-3 rounded-lg bg-(--color-primary)/6 px-3 py-2 text-[11px] text-(--text-muted)">
               {t("delegatedFormat", { delegate: ui(DELEGATE_NOTE) })}
             </p>
-          </div>
+          </section>
 
-          <div className="rounded-xl border border-(--border-app) bg-background p-5">
+          <section aria-labelledby="scheduled-mail-heading" className="rounded-xl border border-(--border-app) bg-background p-5">
             <div className="mb-3 flex items-center gap-2">
-              <h2 className="text-sm font-bold">{t("scheduledMailbox")}</h2>
+              <h2 id="scheduled-mail-heading" className="text-sm font-bold">{t("scheduledMailbox")}</h2>
               <span className="ml-auto text-[11px] text-(--text-muted)">{t("waitingCount", { count: mails.length })}</span>
             </div>
             {mails.length === 0 ? (
@@ -145,10 +145,10 @@ export default function MailboxesPage() {
                 {t("changeSchedule")}
               </button>
             </div>
-          </div>
+          </section>
 
-          <div className="rounded-xl border border-(--border-app) bg-background p-5">
-            <h2 className="mb-3 text-sm font-bold">{t("templatesAndSnippets")}</h2>
+          <section aria-labelledby="mail-templates-heading" className="rounded-xl border border-(--border-app) bg-background p-5">
+            <h2 id="mail-templates-heading" className="mb-3 text-sm font-bold">{t("templatesAndSnippets")}</h2>
             <div className="flex flex-col gap-2.5">
               {MAIL_TEMPLATES.map((template) => (
                 <div key={template.name} className="border-b border-(--border-app) pb-2.5 last:border-b-0">
@@ -164,9 +164,9 @@ export default function MailboxesPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </section>
         </div>
-      </div>
+      </section>
 
       {sendingPct !== null && (
         <LoadingModal title={t("sending")} sub={t("keepWindowOpen")} pct={sendingPct} />

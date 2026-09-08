@@ -48,8 +48,8 @@ export default function ApprovalsPage() {
       showGlobalSearch={false}
       className="flex flex-col lg:flex-row"
     >
-      <div className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-100">
-        <div className="flex shrink-0 gap-1.5 border-b border-(--border-app) px-4 py-2.5">
+      <section aria-label="결재 문서 목록" className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-100">
+        <nav aria-label="결재 상태" className="flex shrink-0 gap-1.5 border-b border-(--border-app) px-4 py-2.5">
           {APPROVAL_TABS.map((t) => (
             <button
               key={t}
@@ -64,13 +64,13 @@ export default function ApprovalsPage() {
               {t}
             </button>
           ))}
-        </div>
+        </nav>
 
-        <div className="flex-1 overflow-y-auto">
+        <ul className="flex-1 overflow-y-auto">
           {APPROVALS.map((a) => {
             const isActive = a.id === selectedId;
             return (
-              <div
+              <li
                 key={a.id}
                 role="button"
                 tabIndex={0}
@@ -94,18 +94,18 @@ export default function ApprovalsPage() {
                 <p className="mt-1 text-[11px] text-(--text-muted)">
                   {a.author} · {a.amount}
                 </p>
-              </div>
+              </li>
             );
           })}
-        </div>
-      </div>
+        </ul>
+      </section>
 
-      <div className="hidden min-w-0 flex-1 flex-col bg-(--surface-muted) lg:flex">
+      <article aria-labelledby={selected ? "approval-document-heading" : undefined} className="hidden min-w-0 flex-1 flex-col bg-(--surface-muted) lg:flex">
         {!selected ? (
           <p className="m-auto text-sm text-(--text-muted)">결재 문서를 선택하세요.</p>
         ) : (
           <>
-            <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) bg-background px-6 py-3.5">
+            <header className="flex shrink-0 items-center gap-2 border-b border-(--border-app) bg-background px-6 py-3.5">
               <button
                 type="button"
                 onClick={() => setPendingAction("approve")}
@@ -131,12 +131,12 @@ export default function ApprovalsPage() {
               <span className="ml-auto hidden text-[11px] text-(--text-muted) md:inline">
                 문서번호 {selected.no} · 보존 5년
               </span>
-            </div>
+            </header>
 
-            <div className="flex-1 overflow-y-auto p-6">
+            <section className="flex-1 overflow-y-auto p-6">
               <div className="flex items-start gap-3">
                 <div className="min-w-0 flex-1">
-                  <h1 className="text-xl font-bold leading-snug">{selected.title}</h1>
+                  <h1 id="approval-document-heading" className="text-xl font-bold leading-snug">{selected.title}</h1>
                   <p className="mt-1 text-xs text-(--text-muted)">
                     기안 {selected.author} (기술본부 CTO) · 2026-09-01 17:22 · 메일 스레드 연동
                   </p>
@@ -230,10 +230,10 @@ export default function ApprovalsPage() {
                   />
                 </div>
               </div>
-            </div>
+            </section>
           </>
         )}
-      </div>
+      </article>
 
       {pendingAction && selected && (
         <ConfirmDialog

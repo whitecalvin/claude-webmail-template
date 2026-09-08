@@ -8,8 +8,8 @@ import { MOBILE_ADMIN_SCREENS } from "@/lib/mock-admin-mobile";
 // drills into AdminMobileScreen on tap (there's no room for a sidebar).
 export function AdminMobileMenu({ onSelect }: { onSelect: (id: string) => void }) {
   return (
-    <div className="flex h-full flex-col">
-      <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) px-4 py-3">
+    <section aria-labelledby="admin-mobile-heading" className="flex h-full flex-col">
+      <header className="flex shrink-0 items-center gap-2 border-b border-(--border-app) px-4 py-3">
         <Link
           href="/"
           className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10"
@@ -18,12 +18,12 @@ export function AdminMobileMenu({ onSelect }: { onSelect: (id: string) => void }
           <ArrowLeft size={18} />
         </Link>
         <div>
-          <p className="text-[15px] font-bold">Admin Console</p>
+          <h1 id="admin-mobile-heading" className="text-[15px] font-bold">Admin Console</h1>
           <p className="text-[11px] text-(--text-muted)">gxsoft.co.kr</p>
         </div>
-      </div>
+      </header>
 
-      <div className="flex-1 overflow-y-auto">
+      <nav aria-label="관리자 메뉴" className="flex-1 overflow-y-auto">
         {MOBILE_ADMIN_SCREENS.map((screen) => (
           <button
             key={screen.id}
@@ -42,7 +42,7 @@ export function AdminMobileMenu({ onSelect }: { onSelect: (id: string) => void }
             <ChevronRight size={16} className="shrink-0 text-(--text-muted)" />
           </button>
         ))}
-      </div>
-    </div>
+      </nav>
+    </section>
   );
 }

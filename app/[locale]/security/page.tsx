@@ -47,7 +47,7 @@ export default function SecurityPage() {
   return (
     <WorkspaceLayout title={<SettingsHeaderTitle title="계정 보안" />} headerActions={<span className="rounded-full bg-(--status-warning-bg) px-3 py-1.5 text-xs font-bold text-(--status-warning)">보안 점수 72 / 100 · 개선 3건</span>} showGlobalSearch={false} className="flex flex-col bg-(--surface-muted) lg:flex-row">
       <SettingsNav active="security" />
-      <div className="min-h-0 w-full flex-1 overflow-y-auto">
+      <section aria-label="계정 보안" className="min-h-0 w-full flex-1 overflow-y-auto">
       <div className="mx-auto flex max-w-5xl flex-col gap-5 p-5 sm:p-8">
         <p className="text-xs text-(--text-muted)">{CURRENT_USER.name} · {CURRENT_USER.email} · 마지막 비밀번호 변경 132일 전</p>
 
@@ -191,7 +191,7 @@ export default function SecurityPage() {
           </div>
         </div>
       </div>
-      </div>
+      </section>
 
       {confirmKind === "reissue" && (
         <ConfirmDialog

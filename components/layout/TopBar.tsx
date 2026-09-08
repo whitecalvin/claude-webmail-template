@@ -116,8 +116,8 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
 
         {title || actions ? (
           <div className={`hidden min-w-0 items-center gap-3 px-4 lg:flex ${showGlobalSearch ? "border-l border-(--border-app)" : "flex-1"}`}>
-            {title ? <div className="truncate text-sm font-bold">{title}</div> : null}
-            {actions ? <div className={`flex items-center gap-2 ${showGlobalSearch ? "shrink-0" : "min-w-0 flex-1"}`}>{actions}</div> : null}
+            {title ? <h1 className="truncate text-sm font-bold">{title}</h1> : null}
+            {actions ? <div role="toolbar" className={`flex items-center gap-2 ${showGlobalSearch ? "shrink-0" : "min-w-0 flex-1"}`}>{actions}</div> : null}
           </div>
         ) : null}
 
@@ -169,7 +169,7 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
       </div>
 
       {showGlobalSearch && mobileSearchOpen ? <div className="border-t border-(--border-app) px-3 py-2 md:hidden"><Suspense fallback={<div className="h-9 rounded-(--radius-app) bg-(--surface-muted)" />}><GlobalSearch mobile onSubmitted={() => setMobileSearchOpen(false)} /></Suspense></div> : null}
-      {showMobilePageContext && (title || actions) ? <div className="flex min-h-11 items-center gap-3 border-t border-(--border-app) px-3 py-2 lg:hidden">{title ? <div className="min-w-0 flex-1 truncate text-sm font-bold">{title}</div> : null}{actions ? <div className="flex shrink-0 items-center gap-2">{actions}</div> : null}</div> : null}
+      {showMobilePageContext && (title || actions) ? <div className="flex min-h-11 items-center gap-3 border-t border-(--border-app) px-3 py-2 lg:hidden">{title ? <h1 className="min-w-0 flex-1 truncate text-sm font-bold">{title}</h1> : null}{actions ? <div role="toolbar" className="flex shrink-0 items-center gap-2">{actions}</div> : null}</div> : null}
     </header>
   );
 }

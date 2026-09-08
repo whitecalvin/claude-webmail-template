@@ -23,7 +23,7 @@ export function AdminHeader({
   const [range, setRange] = useState("최근 7일");
 
   return (
-    <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) bg-background px-7 py-4">
+    <header className="flex shrink-0 items-center gap-3 border-b border-(--border-app) bg-background px-7 py-4">
       <div>
         <h1 className="text-[17px] font-bold tracking-tight">{title}</h1>
         <p className="text-xs text-(--text-muted)">{sub}</p>
@@ -40,6 +40,6 @@ export function AdminHeader({
           {cta}
         </button>
       </div>
-    </div>
+    </header>
   );
 }

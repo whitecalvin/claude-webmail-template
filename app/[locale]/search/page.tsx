@@ -69,8 +69,8 @@ function SearchPageContent() {
 
   return (
     <WorkspaceLayout showGlobalSearch className="flex flex-col lg:flex-row">
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col border-r border-(--border-app)">
-        <div className="shrink-0 border-b border-(--border-app) px-5 py-3.5 sm:px-6">
+      <section aria-label="검색 결과" className="flex min-h-0 min-w-0 flex-1 flex-col border-r border-(--border-app)">
+        <header className="shrink-0 border-b border-(--border-app) px-5 py-3.5 sm:px-6">
           <div className="flex h-11 items-center gap-2 rounded-[11px] border border-(--border-app) bg-black/2 px-3 dark:bg-white/3">
             <span className="min-w-0 flex-1 truncate text-sm font-medium">
               {queryEdited ? `“${query}”` : "전체 검색 결과"}
@@ -121,19 +121,19 @@ function SearchPageContent() {
               {sortBy} ▾
             </button>
           </div>
-        </div>
+        </header>
 
-        <div className="flex-1 overflow-y-auto">
+        <section aria-label="검색 결과 목록" className="flex-1 overflow-y-auto">
           {filteredGroups.length === 0 && (
             <p className="p-8 text-center text-sm text-(--text-muted)">검색 결과가 없습니다.</p>
           )}
-          {filteredGroups.map((group) => (
-            <div key={group.name}>
-              <div className="border-b border-(--border-app) bg-black/1.5 px-5 py-2.5 text-[11px] font-bold text-(--text-muted) dark:bg-white/2 sm:px-6">
+          {filteredGroups.map((group, groupIndex) => (
+            <section key={group.name} aria-labelledby={`search-group-${groupIndex}`}>
+              <h2 id={`search-group-${groupIndex}`} className="border-b border-(--border-app) bg-black/1.5 px-5 py-2.5 text-[11px] font-bold text-(--text-muted) dark:bg-white/2 sm:px-6">
                 {group.name}
-              </div>
+              </h2>
               {group.items.map((item, i) => (
-                <div
+                <article
                   key={i}
                   className="flex items-start gap-3 border-b border-(--border-app) px-5 py-3 hover:bg-black/1.5 dark:hover:bg-white/2 sm:px-6"
                 >
@@ -153,7 +153,7 @@ function SearchPageContent() {
                         <span className="ml-auto shrink-0 text-[11px] text-(--text-muted)">{item.date}</span>
                       )}
                     </div>
-                    <p className="truncate text-[13px] font-medium">{item.subject}</p>
+                    <h3 className="truncate text-[13px] font-medium">{item.subject}</h3>
                     {item.hit && (
                       <p className="truncate text-xs text-(--text-muted)">
                         {item.hitPrefix}
@@ -173,14 +173,14 @@ function SearchPageContent() {
                       </div>
                     )}
                   </div>
-                </div>
+                </article>
               ))}
-            </div>
+            </section>
           ))}
-        </div>
-      </div>
+        </section>
+      </section>
 
-      <aside className="hidden w-75 shrink-0 flex-col gap-5 overflow-y-auto bg-(--surface-muted) p-5 lg:flex">
+      <aside aria-label="검색 필터" className="hidden w-75 shrink-0 flex-col gap-5 overflow-y-auto bg-(--surface-muted) p-5 lg:flex">
         <p className="text-xs font-bold">검색 조건 좁히기</p>
         {facets.map((group) => (
           <div key={group.name}>
