@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ModuleRail } from "@/components/layout/ModuleRail";
-import { BottomTabBar } from "@/components/layout/BottomTabBar";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
 import { ConfirmDialog } from "@/components/overlay/ConfirmDialog";
 import { useToast } from "@/context/toast-context";
 import {
@@ -44,18 +43,12 @@ export default function ApprovalsPage() {
   };
 
   return (
-    <div className="flex h-dvh w-full flex-col bg-(--surface-app) lg:flex-row">
-      <div className="hidden lg:block">
-        <ModuleRail />
-      </div>
-
+    <WorkspaceLayout
+      title={<span className="flex items-center gap-2">결재 · 승인 <span className="rounded-full bg-[#FDF0E4] px-2 py-0.5 text-[11px] font-bold text-[#B4740F]">내 차례 4건</span></span>}
+      showGlobalSearch={false}
+      className="flex flex-col lg:flex-row"
+    >
       <div className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-[400px]">
-        <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) px-4 py-3.5">
-          <p className="text-base font-bold">결재 · 승인</p>
-          <span className="rounded-full bg-[#FDF0E4] px-2 py-0.5 text-[11px] font-bold text-[#B4740F]">
-            내 차례 4건
-          </span>
-        </div>
         <div className="flex shrink-0 gap-1.5 border-b border-(--border-app) px-4 py-2.5">
           {APPROVAL_TABS.map((t) => (
             <button
@@ -106,8 +99,6 @@ export default function ApprovalsPage() {
           })}
         </div>
       </div>
-
-      <BottomTabBar />
 
       <div className="hidden min-w-0 flex-1 flex-col bg-(--surface-muted) lg:flex">
         {!selected ? (
@@ -263,6 +254,6 @@ export default function ApprovalsPage() {
           }}
         />
       )}
-    </div>
+    </WorkspaceLayout>
   );
 }

@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
-import { ArrowLeft } from "lucide-react";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
 import {
   DELEGATE_NOTE,
   MAIL_TEMPLATES,
@@ -45,23 +44,10 @@ export default function MailboxesPage() {
   }, [sendingPct, t, toast, ui]);
 
   return (
-    <div className="min-h-dvh bg-(--surface-muted) text-(--text-app)">
-      <div className="mx-auto flex max-w-6xl flex-col gap-5 p-5 sm:p-8">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10"
-            aria-label={t("backToMail")}
-          >
-            <ArrowLeft size={18} />
-          </Link>
-          <div>
-            <h1 className="text-[19px] font-bold tracking-tight">{t("title")}</h1>
-            <p className="text-xs text-(--text-muted)">
-              {t("summary", { mailboxes: SHARED_BOXES.length, scheduled: mails.length, templates: MAIL_TEMPLATES.length })}
-            </p>
-          </div>
-          <div className="ml-auto flex gap-2">
+    <WorkspaceLayout
+      title={t("title")}
+      headerActions={
+        <>
             <button
               type="button"
               onClick={() => toast.info(t("permissionSent"))}
@@ -77,8 +63,14 @@ export default function MailboxesPage() {
             >
               {t("newTemplate")}
             </button>
-          </div>
-        </div>
+        </>
+      }
+      className="overflow-y-auto bg-(--surface-muted)"
+    >
+      <div className="mx-auto flex max-w-6xl flex-col gap-5 p-5 sm:p-8">
+        <p className="text-xs text-(--text-muted)">
+          {t("summary", { mailboxes: SHARED_BOXES.length, scheduled: mails.length, templates: MAIL_TEMPLATES.length })}
+        </p>
 
         <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr_1fr]">
           <div className="rounded-xl border border-(--border-app) bg-(--surface-app) p-5">
@@ -179,6 +171,6 @@ export default function MailboxesPage() {
       {sendingPct !== null && (
         <LoadingModal title={t("sending")} sub={t("keepWindowOpen")} pct={sendingPct} />
       )}
-    </div>
+    </WorkspaceLayout>
   );
 }

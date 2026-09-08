@@ -107,20 +107,25 @@ export function CalendarTimeGrid({
                     (event.endHour - event.startHour) * ROW_HEIGHT - 2,
                     24
                   );
+                  const isCompact = height < 40;
                   return (
                     <button
                       key={event.id}
                       type="button"
                       onClick={() => onSelectEvent?.(event)}
-                      className="absolute left-1 right-1 flex flex-col gap-0.5 overflow-hidden rounded-lg p-1.5 text-left shadow-[0_2px_6px_-2px_rgba(20,22,30,.3)]"
+                      className={`absolute left-1 right-1 flex flex-col overflow-hidden rounded-lg px-1.5 text-left shadow-[0_2px_6px_-2px_rgba(20,22,30,.3)] ${
+                        isCompact ? "justify-center py-1" : "gap-0.5 py-1.5"
+                      }`}
                       style={{ top, height, backgroundColor: event.color, color: "#fff" }}
                     >
                       <span className="truncate text-[11px] font-bold leading-tight">
                         {event.title}
                       </span>
-                      <span className="truncate text-[10px] leading-tight opacity-75">
-                        {event.meta}
-                      </span>
+                      {!isCompact ? (
+                        <span className="truncate text-[10px] leading-tight opacity-75">
+                          {event.meta}
+                        </span>
+                      ) : null}
                     </button>
                   );
                 })}

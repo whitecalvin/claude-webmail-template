@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "@/i18n/navigation";
-import { ArrowLeft, Bold, Check, Italic, Link2, Trash2, Underline } from "lucide-react";
+import { Bold, Check, Italic, Link2, Trash2, Underline } from "lucide-react";
 import { BUILDER_ROWS, MY_RULES, SIGNATURE_TABS } from "@/lib/mock-rules";
 import { CURRENT_USER } from "@/lib/current-user";
 import { Modal } from "@/components/overlay/Modal";
 import { ConfirmDialog } from "@/components/overlay/ConfirmDialog";
 import { useToast } from "@/context/toast-context";
-import { ModuleRail } from "@/components/layout/ModuleRail";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
+import { SettingsHeaderTitle } from "@/components/settings/SettingsHeaderTitle";
 import { SettingsNav } from "@/components/settings/SettingsNav";
 import { Switch } from "@/components/ui/Switch";
 
@@ -59,38 +59,11 @@ export default function RulesPage() {
   };
 
   return (
-    <div className="flex h-dvh w-full bg-(--surface-muted) text-(--text-app)">
-      <div className="hidden lg:block">
-        <ModuleRail />
-      </div>
-      <div className="hidden lg:block">
-        <SettingsNav active="filters" />
-      </div>
+    <WorkspaceLayout title={<SettingsHeaderTitle title="내 규칙 · 서명 · 자동응답" />} headerActions={<button type="button" onClick={() => setCreatingRule(true)} className="h-8 rounded-lg px-3 text-xs font-semibold text-white transition hover:brightness-110" style={{ backgroundColor: "var(--color-primary)" }}>규칙 만들기</button>} showGlobalSearch={false} className="flex flex-col bg-(--surface-muted) lg:flex-row">
+      <SettingsNav active="filters" />
       <div className="min-h-0 w-full flex-1 overflow-y-auto">
       <div className="mx-auto flex max-w-6xl flex-col gap-5 p-5 sm:p-8">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/settings"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 lg:hidden"
-            aria-label="설정으로"
-          >
-            <ArrowLeft size={18} />
-          </Link>
-          <div>
-            <h1 className="text-[19px] font-bold tracking-tight">내 규칙 · 서명 · 자동응답</h1>
-            <p className="text-xs text-(--text-muted)">
-              규칙 {activeCount}건 활성 · 이번 주 214통 자동 분류됨
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => setCreatingRule(true)}
-            className="ml-auto h-9 rounded-lg px-3.5 text-xs font-semibold text-white transition hover:brightness-110"
-            style={{ backgroundColor: "var(--color-primary)" }}
-          >
-            규칙 만들기
-          </button>
-        </div>
+        <p className="text-xs text-(--text-muted)">규칙 {activeCount}건 활성 · 이번 주 214통 자동 분류됨</p>
 
         <div className="grid gap-5 lg:grid-cols-2">
           <div className="flex flex-col gap-5">
@@ -375,6 +348,6 @@ export default function RulesPage() {
           onConfirm={() => setShowApplied(false)}
         />
       )}
-    </div>
+    </WorkspaceLayout>
   );
 }

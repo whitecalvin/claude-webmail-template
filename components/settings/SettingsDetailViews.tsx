@@ -21,9 +21,8 @@ import { Dropdown } from "@/components/ui/Dropdown";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { localeNames, locales, type Locale } from "@/i18n/routing";
 
-// Card components for the four settings tabs that live inline on
-// /settings?tab=... (labels, notifications, integrations, locale), plus a
-// generic "not built yet" placeholder for tabs without real content.
+// Card components used by the dedicated labels, notifications, integrations,
+// and locale settings routes, plus a generic placeholder for pending screens.
 
 const VISIBILITY_STYLE: Record<string, string> = {
   "목록 표시": "bg-(--status-success-bg) text-(--status-success)",

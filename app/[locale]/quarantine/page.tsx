@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { AlertTriangle, Check, X } from "lucide-react";
-import { ModuleRail } from "@/components/layout/ModuleRail";
-import { BottomTabBar } from "@/components/layout/BottomTabBar";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
 import { ConfirmDialog } from "@/components/overlay/ConfirmDialog";
 import { InlineBanner } from "@/components/banner/InlineBanner";
 import { useToast } from "@/context/toast-context";
@@ -67,21 +66,13 @@ export default function QuarantinePage() {
   };
 
   return (
-    <div className="flex h-dvh w-full flex-col bg-(--surface-app) lg:flex-row">
-      <div className="hidden lg:block">
-        <ModuleRail />
-      </div>
-
+    <WorkspaceLayout
+      title={<span className="flex items-center gap-2">격리함 <span className="rounded-full bg-[#FDF0E4] px-2 py-0.5 text-[11px] font-bold text-[#B4740F]">{mails.length}건</span></span>}
+      headerActions={<span className="hidden text-[11px] font-normal text-(--text-muted) sm:inline">14일 후 자동 삭제</span>}
+      showGlobalSearch={false}
+      className="flex flex-col lg:flex-row"
+    >
       <div className="flex min-h-0 w-full flex-col border-r border-(--border-app) lg:w-[420px]">
-        <div className="flex shrink-0 items-center gap-2 border-b border-(--border-app) px-4 py-3.5">
-          <p className="text-base font-bold">격리함</p>
-          <span className="rounded-full bg-[#FDF0E4] px-2 py-0.5 text-[11px] font-bold text-[#B4740F]">
-            {mails.length}건
-          </span>
-          <span className="ml-auto hidden text-[11px] text-(--text-muted) sm:inline">
-            14일 후 자동 삭제
-          </span>
-        </div>
         <div className="flex shrink-0 gap-1.5 border-b border-(--border-app) px-4 py-2.5">
           {QUARANTINE_TABS.map((t) => (
             <button
@@ -133,8 +124,6 @@ export default function QuarantinePage() {
           })}
         </div>
       </div>
-
-      <BottomTabBar />
 
       <div className="hidden min-w-0 flex-1 flex-col bg-(--surface-muted) lg:flex">
         {!selected ? (
@@ -241,6 +230,6 @@ export default function QuarantinePage() {
           onConfirm={removeSelected}
         />
       )}
-    </div>
+    </WorkspaceLayout>
   );
 }

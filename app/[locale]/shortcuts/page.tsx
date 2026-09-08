@@ -1,32 +1,18 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
-import { ArrowLeft } from "lucide-react";
 import { SHORTCUT_GROUPS } from "@/lib/mock-shortcuts";
-import { ModuleRail } from "@/components/layout/ModuleRail";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
+import { SettingsHeaderTitle } from "@/components/settings/SettingsHeaderTitle";
 import { SettingsNav } from "@/components/settings/SettingsNav";
 
 // Keyboard shortcut reference. Static/read-only — deliberately styled to
 // look printable, per the "인쇄용 전체 목록 보기" link that leads here.
 export default function ShortcutsPage() {
   return (
-    <div className="flex h-dvh w-full bg-(--surface-muted)">
-      <div className="hidden lg:block">
-        <ModuleRail />
-      </div>
-      <div className="hidden lg:block">
-        <SettingsNav active="shortcuts" />
-      </div>
+    <WorkspaceLayout title={<SettingsHeaderTitle title="키보드 단축키" />} showGlobalSearch={false} className="flex flex-col bg-(--surface-muted) lg:flex-row">
+      <SettingsNav active="shortcuts" />
       <div className="min-h-0 w-full flex-1 overflow-y-auto py-8">
         <div className="mx-auto max-w-3xl px-4">
-          <Link
-            href="/settings"
-            className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-(--text-muted) hover:text-(--text-app) lg:hidden"
-          >
-            <ArrowLeft size={15} />
-            설정으로
-          </Link>
-
           <div className="border border-(--border-app) bg-(--surface-app) p-8 sm:p-12">
             <div className="flex items-start justify-between gap-4 border-b-2 border-(--text-app) pb-4">
               <div>
@@ -78,6 +64,6 @@ export default function ShortcutsPage() {
           </div>
         </div>
       </div>
-    </div>
+    </WorkspaceLayout>
   );
 }

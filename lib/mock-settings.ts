@@ -9,20 +9,19 @@ import type {
   UserToggle,
 } from "@/types/settings";
 
-// Navigation and mock data shared across the Settings pages. Some entries
-// route to /settings?tab=... (rendered inline) and some to dedicated pages
-// (e.g. /rules, /security) — see SettingsNav for how `href` is consumed.
+// Navigation and mock data shared across the Settings pages. Every settings
+// section has a canonical App Router page below /settings/<section>.
 export const SETTINGS_NAV = [
-  { key: "signature", name: "메일 · 서명", href: "/settings?tab=signature" },
-  { key: "inbox-display", name: "받은편지함 표시", href: "/settings?tab=inbox-display" },
-  { key: "filters", name: "필터 · 자동 분류", href: "/rules" },
-  { key: "labels", name: "라벨 관리", href: "/settings?tab=labels" },
-  { key: "notifications", name: "알림", href: "/settings?tab=notifications" },
-  { key: "security", name: "보안 · 로그인 기록", href: "/security" },
-  { key: "integrations", name: "연동 (캘린더 · 결재)", href: "/settings?tab=integrations" },
-  { key: "locale", name: "언어 · 시간대", href: "/settings?tab=locale" },
-  { key: "shortcuts", name: "단축키", href: "/shortcuts" },
-  { key: "accessibility", name: "접근성", href: "/accessibility" },
+  { key: "signature", name: "메일 · 서명", href: "/settings/signature" },
+  { key: "inbox-display", name: "받은편지함 표시", href: "/settings/inbox-display" },
+  { key: "filters", name: "필터 · 자동 분류", href: "/settings/filters" },
+  { key: "labels", name: "라벨 관리", href: "/settings/labels" },
+  { key: "notifications", name: "알림", href: "/settings/notifications" },
+  { key: "security", name: "보안 · 로그인 기록", href: "/settings/security" },
+  { key: "integrations", name: "연동 (캘린더 · 결재)", href: "/settings/integrations" },
+  { key: "locale", name: "언어 · 시간대", href: "/settings/locale" },
+  { key: "shortcuts", name: "단축키", href: "/settings/shortcuts" },
+  { key: "accessibility", name: "접근성", href: "/settings/accessibility" },
 ] as const;
 
 export type SettingsNavKey = (typeof SETTINGS_NAV)[number]["key"];

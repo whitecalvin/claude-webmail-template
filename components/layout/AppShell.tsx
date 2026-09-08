@@ -3,13 +3,10 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { TopBar } from "./TopBar";
+import { WorkspaceLayout } from "./WorkspaceLayout";
 import { Sidebar } from "./Sidebar";
-import { ModuleRail } from "./ModuleRail";
-import { BottomTabBar } from "./BottomTabBar";
 import { MailList } from "@/components/mail/MailList";
 import { ReadingPane } from "@/components/mail/ReadingPane";
-import { CustomizerPanel } from "@/components/customizer/CustomizerPanel";
 import { ComposeModal } from "@/components/compose/ComposeModal";
 import { ProductTour } from "@/components/tour/ProductTour";
 import { GlobalBanner, type GlobalBannerTone } from "@/components/banner/GlobalBanner";
@@ -118,53 +115,55 @@ export function AppShell() {
         : null;
 
   return (
-    <div className="flex h-dvh overflow-hidden bg-(--surface-app) text-(--text-app)">
-      <div className="hidden lg:block">
-        <ModuleRail />
-      </div>
-
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        {bannerTone === "offline" && (
-          <GlobalBanner
-            tone="offline"
-            message={t("offline")}
-            actionLabel={t("reconnect")}
-            onAction={() => setIsOnline(navigator.onLine)}
-          />
+    <>
+      <WorkspaceLayout
+        onMenuClick={() => setMobileNav("folders")}
+        onOpenTour={() => setShowTour(true)}
+        onToggleDelegate={
+          delegateActive
+            ? undefined
+            : () => {
+                setDelegateActive(true);
+                toast.info(t("delegateStarted", { name: DELEGATE_ACCOUNT }));
+              }
+        }
+        showBottomTabBar={mobileView !== "reading"}
+        className="relative flex flex-col"
+      >
+        {bannerTone && (
+          <div className="pointer-events-none fixed inset-x-0 top-[4.25rem] z-[30] flex justify-center px-3 sm:px-4">
+            <div className="pointer-events-auto w-full max-w-3xl overflow-hidden rounded-xl shadow-xl ring-1 ring-black/10 dark:ring-white/10">
+              {bannerTone === "offline" && (
+                <GlobalBanner
+                  tone="offline"
+                  message={t("offline")}
+                  actionLabel={t("reconnect")}
+                  onAction={() => setIsOnline(navigator.onLine)}
+                />
+              )}
+              {bannerTone === "maintenance" && (
+                <GlobalBanner
+                  tone="maintenance"
+                  message={t("maintenanceNotice")}
+                  actionLabel={t("maintenanceDetails")}
+                  onAction={() => toast.info(t("maintenanceDetailsBody"))}
+                  onDismiss={() => setShowMaintenance(false)}
+                />
+              )}
+              {bannerTone === "delegate" && (
+                <GlobalBanner
+                  tone="delegate"
+                  message={t("delegateActive", { name: DELEGATE_ACCOUNT })}
+                  actionLabel={t("delegateEnd")}
+                  onAction={() => {
+                    setDelegateActive(false);
+                    toast.info(t("delegateEnded"));
+                  }}
+                />
+              )}
+            </div>
+          </div>
         )}
-        {bannerTone === "maintenance" && (
-          <GlobalBanner
-            tone="maintenance"
-            message={t("maintenanceNotice")}
-            actionLabel={t("maintenanceDetails")}
-            onAction={() => toast.info(t("maintenanceDetailsBody"))}
-            onDismiss={() => setShowMaintenance(false)}
-          />
-        )}
-        {bannerTone === "delegate" && (
-          <GlobalBanner
-            tone="delegate"
-            message={t("delegateActive", { name: DELEGATE_ACCOUNT })}
-            actionLabel={t("delegateEnd")}
-            onAction={() => {
-              setDelegateActive(false);
-              toast.info(t("delegateEnded"));
-            }}
-          />
-        )}
-        <TopBar
-          onMenuClick={() => setMobileNav("folders")}
-          onOpenTour={() => setShowTour(true)}
-          onToggleDelegate={
-            delegateActive
-              ? undefined
-              : () => {
-                  setDelegateActive(true);
-                  toast.info(t("delegateStarted", { name: DELEGATE_ACCOUNT }));
-                }
-          }
-        />
-
         <div className="flex min-h-0 flex-1 flex-row-reverse lg:flex-row">
           <div
             className={`h-full w-full shrink-0 lg:w-64 ${
@@ -196,15 +195,13 @@ export function AppShell() {
           </div>
         </div>
 
-        {mobileView !== "reading" && <BottomTabBar />}
-      </div>
+      </WorkspaceLayout>
 
-      <CustomizerPanel />
       <ComposeModal />
       {showTour && <ProductTour onClose={() => setShowTour(false)} />}
       {sessionMinutesLeft !== null && (
         <SessionExpiryPopover minutesLeft={sessionMinutesLeft} onLogout={logout} onExtend={extendSession} />
       )}
-    </div>
+    </>
   );
 }

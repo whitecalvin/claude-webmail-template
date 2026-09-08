@@ -22,8 +22,6 @@ interface MailContextValue {
   selectedEmailId: string | null;
   selectedEmail: Email | null;
   unreadCounts: Record<FolderId, number>;
-  searchQuery: string;
-  isSearching: boolean;
   composeDraft: ComposeDraft | null;
   composeSessionId: number;
   setActiveFolder: (folder: FolderId) => void;
@@ -33,7 +31,6 @@ interface MailContextValue {
   moveToTrash: (id: string) => void;
   moveToFolder: (id: string, folder: FolderId) => void;
   permanentlyDelete: (id: string) => void;
-  setSearchQuery: (query: string) => void;
   openCompose: (draft?: Partial<ComposeDraft>) => void;
   closeCompose: () => void;
   sendEmail: (draft: ComposeDraft) => void;
@@ -41,39 +38,22 @@ interface MailContextValue {
 
 const MailContext = createContext<MailContextValue | null>(null);
 
-function matchesQuery(email: Email, query: string) {
-  const q = query.trim().toLowerCase();
-  if (!q) return true;
-  return (
-    email.subject.toLowerCase().includes(q) ||
-    email.preview.toLowerCase().includes(q) ||
-    email.from.name.toLowerCase().includes(q) ||
-    email.from.email.toLowerCase().includes(q)
-  );
-}
-
 export function MailProvider({ children }: { children: ReactNode }) {
   const [emails, setEmails] = useState<Email[]>(MOCK_EMAILS);
   const [activeFolder, setActiveFolder] = useState<FolderId>("inbox");
   const [selectedEmailId, setSelectedEmailId] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
   const [composeDraft, setComposeDraft] = useState<ComposeDraft | null>(null);
   // Bumped on every openCompose() call so ComposeModal can key off it and
   // remount with a fresh internal state even when reopened with a new draft
   // while an old one was already open (e.g. "reply" clicked twice).
   const [composeSessionId, setComposeSessionId] = useState(0);
 
-  const isSearching = searchQuery.trim().length > 0;
-
   const visibleEmails = useMemo(() => {
-    if (isSearching) {
-      return emails.filter((e) => matchesQuery(e, searchQuery));
-    }
     if (activeFolder === "starred") {
       return emails.filter((e) => e.starred);
     }
     return emails.filter((e) => e.folder === activeFolder);
-  }, [emails, activeFolder, isSearching, searchQuery]);
+  }, [emails, activeFolder]);
 
   const selectedEmail = useMemo(
     () => emails.find((e) => e.id === selectedEmailId) ?? null,
@@ -101,7 +81,6 @@ export function MailProvider({ children }: { children: ReactNode }) {
   const setActiveFolderAndClear = (folder: FolderId) => {
     setActiveFolder(folder);
     setSelectedEmailId(null);
-    setSearchQuery("");
   };
 
   const selectEmail = (id: string) => {
@@ -175,8 +154,6 @@ export function MailProvider({ children }: { children: ReactNode }) {
     selectedEmailId,
     selectedEmail,
     unreadCounts,
-    searchQuery,
-    isSearching,
     composeDraft,
     composeSessionId,
     setActiveFolder: setActiveFolderAndClear,
@@ -186,7 +163,6 @@ export function MailProvider({ children }: { children: ReactNode }) {
     moveToTrash,
     moveToFolder,
     permanentlyDelete,
-    setSearchQuery,
     openCompose,
     closeCompose,
     sendEmail,

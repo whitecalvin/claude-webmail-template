@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "@/i18n/navigation";
-import { ArrowLeft, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import {
   AUTH_METHODS,
   MFA_METHODS,
@@ -10,7 +9,8 @@ import {
   SESSIONS,
 } from "@/lib/mock-security-personal";
 import { CURRENT_USER } from "@/lib/current-user";
-import { ModuleRail } from "@/components/layout/ModuleRail";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
+import { SettingsHeaderTitle } from "@/components/settings/SettingsHeaderTitle";
 import { SettingsNav } from "@/components/settings/SettingsNav";
 import { ConfirmDialog } from "@/components/overlay/ConfirmDialog";
 import { useToast } from "@/context/toast-context";
@@ -45,33 +45,11 @@ export default function SecurityPage() {
   };
 
   return (
-    <div className="flex h-dvh w-full bg-(--surface-muted) text-(--text-app)">
-      <div className="hidden lg:block">
-        <ModuleRail />
-      </div>
-      <div className="hidden lg:block">
-        <SettingsNav active="security" />
-      </div>
+    <WorkspaceLayout title={<SettingsHeaderTitle title="계정 보안" />} headerActions={<span className="rounded-full bg-(--status-warning-bg) px-3 py-1.5 text-xs font-bold text-(--status-warning)">보안 점수 72 / 100 · 개선 3건</span>} showGlobalSearch={false} className="flex flex-col bg-(--surface-muted) lg:flex-row">
+      <SettingsNav active="security" />
       <div className="min-h-0 w-full flex-1 overflow-y-auto">
       <div className="mx-auto flex max-w-5xl flex-col gap-5 p-5 sm:p-8">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/settings"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 lg:hidden"
-            aria-label="설정으로"
-          >
-            <ArrowLeft size={18} />
-          </Link>
-          <div>
-            <h1 className="text-[19px] font-bold tracking-tight">계정 보안</h1>
-            <p className="text-xs text-(--text-muted)">
-              {CURRENT_USER.name} · {CURRENT_USER.email} · 마지막 비밀번호 변경 132일 전
-            </p>
-          </div>
-          <span className="ml-auto flex items-center gap-1.5 rounded-full bg-(--status-warning-bg) px-3 py-1.5 text-xs font-bold text-(--status-warning)">
-            보안 점수 72 / 100 · 개선 3건
-          </span>
-        </div>
+        <p className="text-xs text-(--text-muted)">{CURRENT_USER.name} · {CURRENT_USER.email} · 마지막 비밀번호 변경 132일 전</p>
 
         <div className="grid gap-5 lg:grid-cols-2">
           <div className="flex flex-col gap-5">
@@ -244,6 +222,6 @@ export default function SecurityPage() {
           }}
         />
       )}
-    </div>
+    </WorkspaceLayout>
   );
 }

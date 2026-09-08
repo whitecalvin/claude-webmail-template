@@ -13,8 +13,8 @@ import { Switch } from "@/components/ui/Switch";
 import type { UserToggle } from "@/types/settings";
 
 // "메일 · 서명" settings screen: signature preview, send defaults, feature
-// toggles, personal filter rules, and a security summary card. Used both as
-// a standalone /settings tab and as a page within SettingsMobileView.
+// toggles, personal filter rules, and a security summary card. Rendered by
+// the dedicated /settings/signature route.
 
 const SECURITY_TONE_STYLE: Record<
   (typeof SECURITY_ROWS)[number]["tone"],

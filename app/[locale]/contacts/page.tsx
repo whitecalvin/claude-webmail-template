@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ModuleRail } from "@/components/layout/ModuleRail";
-import { BottomTabBar } from "@/components/layout/BottomTabBar";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
 import { OrgTreeSidebar } from "@/components/contacts/OrgTreeSidebar";
 import { MyContactsView } from "@/components/contacts/MyContactsView";
 import { OrgTeamView } from "@/components/contacts/OrgTeamView";
@@ -17,16 +16,10 @@ export default function ContactsPage() {
   const [selectedTeamId, setSelectedTeamId] = useState("org-strategy");
 
   return (
-    <div className="flex h-dvh w-full flex-col bg-(--surface-app) lg:flex-row">
-      <div className="hidden lg:block">
-        <ModuleRail />
-      </div>
-
+    <WorkspaceLayout title="주소록" showGlobalSearch={false} className="flex flex-col lg:flex-row">
       <div className="min-h-0 flex-1 lg:hidden">
         <ContactsMobileView />
       </div>
-      <BottomTabBar />
-
       <div className="hidden lg:block">
         <OrgTreeSidebar
           mode={mode}
@@ -45,6 +38,6 @@ export default function ContactsPage() {
           <OrgTeamView teamId={selectedTeamId} />
         )}
       </div>
-    </div>
+    </WorkspaceLayout>
   );
 }

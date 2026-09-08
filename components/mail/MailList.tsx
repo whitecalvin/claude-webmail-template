@@ -75,8 +75,6 @@ export function MailList() {
     moveToFolder,
     permanentlyDelete,
     activeFolder,
-    isSearching,
-    searchQuery,
   } = useMail();
   const { draft } = useTheme();
   const toast = useToast();
@@ -86,11 +84,7 @@ export function MailList() {
   const style = draft.layoutStyle;
 
   const activeFolderEntry = FOLDERS.find((f) => f.id === activeFolder);
-  const folderLabel = isSearching
-    ? t("searchResultsFor", { query: searchQuery })
-    : activeFolderEntry
-      ? tFolder(activeFolderEntry.id)
-      : null;
+  const folderLabel = activeFolderEntry ? tFolder(activeFolderEntry.id) : null;
 
   // Trashing an already-trashed email means permanent delete (with a
   // confirm dialog); trashing anything else is reversible via an undo toast.
@@ -121,7 +115,7 @@ export function MailList() {
       <ul className={`flex-1 overflow-y-auto ${LIST_STYLE[style]}`}>
         {visibleEmails.length === 0 && (
           <li className="p-6 text-center text-sm text-(--text-muted)">
-            {isSearching ? t("noSearchResults") : t("noMail")}
+            {t("noMail")}
           </li>
         )}
         {visibleEmails.map((email) => {

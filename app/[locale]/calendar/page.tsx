@@ -2,8 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
-import { ModuleRail } from "@/components/layout/ModuleRail";
-import { BottomTabBar } from "@/components/layout/BottomTabBar";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
 import { CalendarSidebar } from "@/components/calendar/CalendarSidebar";
 import { CalendarTimeGrid } from "@/components/calendar/CalendarTimeGrid";
 import { CalendarMonthGrid } from "@/components/calendar/CalendarMonthGrid";
@@ -178,11 +177,66 @@ export default function CalendarPage() {
   };
 
   return (
-    <div className="flex h-dvh w-full flex-col lg:flex-row">
-      <div className="hidden lg:block">
-        <ModuleRail />
-      </div>
-
+    <WorkspaceLayout
+      title={dayLabel}
+      headerActions={
+        <>
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => shiftAnchor(-1)}
+              className="flex h-7 w-7 items-center justify-center rounded-[7px] transition hover:bg-black/5 active:translate-y-px dark:hover:bg-white/10"
+              aria-label="이전"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              type="button"
+              onClick={() => shiftAnchor(1)}
+              className="flex h-7 w-7 items-center justify-center rounded-[7px] transition hover:bg-black/5 active:translate-y-px dark:hover:bg-white/10"
+              aria-label="다음"
+            >
+              <ChevronRight size={16} />
+            </button>
+          </div>
+          <button
+            type="button"
+            onClick={() => setAnchor(today)}
+            className="h-[30px] rounded-lg border border-(--border-app) px-3 text-xs font-semibold transition hover:bg-black/5 active:translate-y-px dark:hover:bg-white/10"
+          >
+            오늘
+          </button>
+          <div className="ml-auto flex items-center gap-1 rounded-[9px] bg-black/[.04] p-[3px] dark:bg-white/[.06]">
+            {([{ key: "day", label: "일" }, { key: "week", label: "주" }, { key: "month", label: "월" }] as const).map((option) => (
+              <button
+                key={option.key}
+                type="button"
+                onClick={() => setView(option.key)}
+                className={`h-6 rounded-[7px] px-3 text-[11.5px] font-semibold transition active:translate-y-px ${
+                  view === option.key
+                    ? "bg-(--surface-app) shadow-[0_1px_2px_rgba(0,0,0,.08)]"
+                    : "text-(--text-muted) hover:text-(--text-app)"
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => openCreateEvent()}
+            className="flex h-8 shrink-0 items-center gap-1.5 rounded-[9px] px-3.5 text-xs font-semibold text-white transition hover:brightness-110 active:translate-y-px"
+            style={{ backgroundColor: "var(--color-primary)" }}
+          >
+            <Plus size={14} />
+            <span>일정 만들기</span>
+          </button>
+        </>
+      }
+      showGlobalSearch={false}
+      showMobilePageContext={false}
+      className="flex flex-col lg:flex-row"
+    >
       <div className="min-h-0 flex-1 bg-(--surface-app) lg:hidden">
         <CalendarMobileView
           weekDays={mobileWeekDays}
@@ -197,71 +251,7 @@ export default function CalendarPage() {
           onAddEvent={() => openCreateEvent(mobileSelectedDate)}
         />
       </div>
-      <BottomTabBar />
-
       <div className="hidden min-w-0 flex-1 flex-col border-r border-(--border-app) bg-(--surface-app) lg:flex">
-        <div className="flex shrink-0 items-center gap-3.5 border-b border-(--border-app) px-6 py-4">
-          <span className="text-lg font-bold tracking-tight">{dayLabel}</span>
-          <div className="flex items-center gap-1">
-            <button
-              type="button"
-              onClick={() => shiftAnchor(-1)}
-              className="flex h-7 w-7 items-center justify-center rounded-[7px] hover:bg-black/5 dark:hover:bg-white/10"
-              aria-label="이전"
-            >
-              <ChevronLeft size={16} />
-            </button>
-            <button
-              type="button"
-              onClick={() => shiftAnchor(1)}
-              className="flex h-7 w-7 items-center justify-center rounded-[7px] hover:bg-black/5 dark:hover:bg-white/10"
-              aria-label="다음"
-            >
-              <ChevronRight size={16} />
-            </button>
-          </div>
-          <button
-            type="button"
-            onClick={() => setAnchor(today)}
-            className="h-[30px] rounded-lg border border-(--border-app) px-3 text-xs font-semibold text-(--text-app) hover:bg-black/5 dark:hover:bg-white/10"
-          >
-            오늘
-          </button>
-
-          <div className="ml-auto flex items-center gap-1 rounded-[9px] bg-black/[.04] p-[3px] dark:bg-white/[.06]">
-            {(
-              [
-                { key: "day", label: "일" },
-                { key: "week", label: "주" },
-                { key: "month", label: "월" },
-              ] as const
-            ).map((opt) => (
-              <button
-                key={opt.key}
-                type="button"
-                onClick={() => setView(opt.key)}
-                className={`h-6 rounded-[7px] px-3 text-[11.5px] font-semibold transition ${
-                  view === opt.key
-                    ? "bg-(--surface-app) shadow-[0_1px_2px_rgba(0,0,0,.08)]"
-                    : "text-(--text-muted)"
-                }`}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => openCreateEvent()}
-            className="flex h-8 items-center gap-1.5 rounded-[9px] px-3.5 text-xs font-semibold text-white transition hover:brightness-110"
-            style={{ backgroundColor: "var(--color-primary)" }}
-          >
-            <Plus size={14} />
-            일정 만들기
-          </button>
-        </div>
-
         {view === "month" ? (
           <CalendarMonthGrid
             anchor={anchor}
@@ -411,6 +401,6 @@ export default function CalendarPage() {
           </div>
         </Modal>
       )}
-    </div>
+    </WorkspaceLayout>
   );
 }

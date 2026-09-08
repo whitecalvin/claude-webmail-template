@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Search as SearchIcon, Check, Plus, FileText, HelpCircle } from "lucide-react";
-import { ModuleRail } from "@/components/layout/ModuleRail";
-import { BottomTabBar } from "@/components/layout/BottomTabBar";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Check, Plus, FileText, HelpCircle } from "lucide-react";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
 import { SearchSyntaxPanel } from "@/components/search/SearchSyntaxPanel";
 import { useToast } from "@/context/toast-context";
 import {
@@ -21,14 +21,16 @@ import {
 // find anything (it contains `from:`/`has:` operators, not literal words).
 const SORT_OPTIONS = ["관련도순", "최신순", "보낸사람순"] as const;
 
-export default function SearchPage() {
+function SearchPageContent() {
   const toast = useToast();
+  const searchParams = useSearchParams();
+  const urlQuery = searchParams.get("q");
   const [chips, setChips] = useState(SEARCH_CHIPS);
   const [facets, setFacets] = useState(SEARCH_FACETS);
   const [showSyntax, setShowSyntax] = useState(false);
   const [sortBy, setSortBy] = useState<(typeof SORT_OPTIONS)[number]>("관련도순");
-  const [query, setQuery] = useState(SEARCH_QUERY);
-  const [queryEdited, setQueryEdited] = useState(false);
+  const query = urlQuery ?? SEARCH_QUERY;
+  const queryEdited = urlQuery !== null;
 
   const q = query.trim().toLowerCase();
   const filteredGroups = !queryEdited
@@ -66,25 +68,14 @@ export default function SearchPage() {
     );
 
   return (
-    <div className="flex h-dvh w-full flex-col bg-(--surface-app) lg:flex-row">
-      <div className="hidden lg:block">
-        <ModuleRail />
-      </div>
-
+    <WorkspaceLayout showGlobalSearch className="flex flex-col lg:flex-row">
       <div className="flex min-h-0 min-w-0 flex-1 flex-col border-r border-(--border-app)">
         <div className="shrink-0 border-b border-(--border-app) px-5 py-3.5 sm:px-6">
           <div className="flex h-11 items-center gap-2 rounded-[11px] border border-(--border-app) bg-black/[.02] px-3 dark:bg-white/[.03]">
-            <SearchIcon size={16} className="shrink-0 text-(--text-muted)" />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setQueryEdited(true);
-              }}
-              className="min-w-0 flex-1 bg-transparent text-sm font-medium outline-none"
-            />
-            <span className="hidden shrink-0 text-[11px] text-(--text-muted) sm:inline">
+            <span className="min-w-0 flex-1 truncate text-sm font-medium">
+              {queryEdited ? `“${query}”` : "전체 검색 결과"}
+            </span>
+            <span className="shrink-0 text-[11px] text-(--text-muted)">
               결과 {resultCount}건 · 0.12초
             </span>
             <button
@@ -189,8 +180,6 @@ export default function SearchPage() {
         </div>
       </div>
 
-      <BottomTabBar />
-
       <aside className="hidden w-[300px] shrink-0 flex-col gap-5 overflow-y-auto bg-(--surface-muted) p-5 lg:flex">
         <p className="text-xs font-bold">검색 조건 좁히기</p>
         {facets.map((group) => (
@@ -235,6 +224,14 @@ export default function SearchPage() {
       </aside>
 
       {showSyntax && <SearchSyntaxPanel onClose={() => setShowSyntax(false)} />}
-    </div>
+    </WorkspaceLayout>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={null}>
+      <SearchPageContent />
+    </Suspense>
   );
 }

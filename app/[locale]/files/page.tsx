@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "@/i18n/navigation";
-import { ArrowLeft, LayoutGrid, List, Search } from "lucide-react";
+import { LayoutGrid, List, Search } from "lucide-react";
+import { WorkspaceLayout } from "@/components/layout/WorkspaceLayout";
 import { BIG_LINKS, FILE_CARDS, FILE_PERIODS, FILE_SORTS, FILE_TYPES } from "@/lib/mock-files";
 import { useToast } from "@/context/toast-context";
 
@@ -30,14 +30,10 @@ export default function FilesPage() {
   const openFile = (name: string) => toast.info("파일을 다운로드합니다", { sub: name });
 
   return (
-    <div className="flex h-dvh w-full flex-col bg-(--surface-app)">
+    <WorkspaceLayout title="첨부 파일" className="flex flex-col bg-(--surface-app)">
       <div className="flex shrink-0 items-center gap-3 border-b border-(--border-app) px-5 py-4 sm:px-7">
-        <Link href="/" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10" aria-label="메일로 돌아가기">
-          <ArrowLeft size={18} />
-        </Link>
-        <div>
-          <h1 className="text-lg font-bold">첨부 파일</h1>
-          <p className="text-xs text-(--text-muted)">
+        <div className="min-w-0">
+          <p className="truncate text-xs text-(--text-muted)">
             메일 첨부 4,182개 · 18.2 GB · 대용량 링크 12개 활성
           </p>
         </div>
@@ -238,6 +234,6 @@ export default function FilesPage() {
           </div>
         </aside>
       </div>
-    </div>
+    </WorkspaceLayout>
   );
 }
