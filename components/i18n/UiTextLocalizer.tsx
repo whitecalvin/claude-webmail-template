@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect } from "react";
-import { useMessages } from "next-intl";
+import { useUiMessages } from "./UiMessagesProvider";
 
 const ATTRIBUTES = ["aria-label", "placeholder", "title"] as const;
 
@@ -13,10 +13,9 @@ export function UiTextLocalizer({
 }: {
   locale: string;
 }) {
-  const allMessages = useMessages() as { _ui?: Record<string, string> };
+  const messages = useUiMessages();
 
   useLayoutEffect(() => {
-    const messages = allMessages._ui ?? {};
     if (locale === "ko" || Object.keys(messages).length === 0) return;
 
     const decodedMessages = new Map<string, string>();
@@ -90,7 +89,7 @@ export function UiTextLocalizer({
     });
     observer.observe(document.body, { childList: true, characterData: true, subtree: true });
     return () => observer.disconnect();
-  }, [allMessages, locale]);
+  }, [messages, locale]);
 
   return null;
 }

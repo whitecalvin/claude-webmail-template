@@ -9,6 +9,7 @@ import { MailProvider } from "@/context/mail-context";
 import { ToastProvider } from "@/context/toast-context";
 import { ToastStack } from "@/components/toast/ToastStack";
 import { UiTextLocalizer } from "@/components/i18n/UiTextLocalizer";
+import { UiMessagesProvider } from "@/components/i18n/UiMessagesProvider";
 
 // Root layout: resolves/validates the `[locale]` segment, wires up the
 // three global context providers (theme, mail state, toasts), and mounts
@@ -56,16 +57,18 @@ export default async function RootLayout({
   return (
     <html lang={locale} className="h-full antialiased">
       <body className="h-full">
-        <NextIntlClientProvider messages={{ ...messages, _ui: uiMessages }}>
-          <ThemeProvider>
-            <MailProvider>
-              <ToastProvider>
-                {children}
-                <ToastStack />
-                <UiTextLocalizer locale={locale} />
-              </ToastProvider>
-            </MailProvider>
-          </ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <UiMessagesProvider messages={uiMessages}>
+            <ThemeProvider>
+              <MailProvider>
+                <ToastProvider>
+                  {children}
+                  <ToastStack />
+                  <UiTextLocalizer locale={locale} />
+                </ToastProvider>
+              </MailProvider>
+            </ThemeProvider>
+          </UiMessagesProvider>
         </NextIntlClientProvider>
       </body>
     </html>
