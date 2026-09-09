@@ -109,16 +109,16 @@ export function TopBar({ title, actions, menuButtonRef, onMenuClick, onOpenTour,
           <span className="whitespace-nowrap text-sm font-semibold sm:text-base">GXWebMail</span>
         </Link>
 
-        {showGlobalSearch ? (
-          <div className="hidden min-w-60 max-w-xl flex-1 px-3 md:block lg:px-4">
-            <Suspense fallback={<div className="h-9 rounded-(--radius-app) bg-(--surface-muted)" />}><GlobalSearch /></Suspense>
+        {title || actions ? (
+          <div className={`hidden min-w-0 items-center gap-3 pl-8 pr-3 xl:flex ${showGlobalSearch ? "shrink-0" : "flex-1"}`}>
+            {title ? <h1 className="truncate text-sm font-bold">{title}</h1> : null}
+            {actions ? <div role="toolbar" className={`flex items-center gap-2 ${showGlobalSearch ? "shrink-0" : "min-w-0 flex-1"}`}>{actions}</div> : null}
           </div>
         ) : null}
 
-        {title || actions ? (
-          <div className={`hidden min-w-0 items-center gap-3 px-4 xl:flex ${showGlobalSearch ? "" : "flex-1"}`}>
-            {title ? <h1 className="truncate text-sm font-bold">{title}</h1> : null}
-            {actions ? <div role="toolbar" className={`flex items-center gap-2 ${showGlobalSearch ? "shrink-0" : "min-w-0 flex-1"}`}>{actions}</div> : null}
+        {showGlobalSearch ? (
+          <div className="hidden min-w-60 max-w-xl flex-1 px-3 md:block lg:px-4">
+            <Suspense fallback={<div className="h-9 rounded-(--radius-app) bg-(--surface-muted)" />}><GlobalSearch /></Suspense>
           </div>
         ) : null}
 
@@ -179,8 +179,8 @@ export function TopBar({ title, actions, menuButtonRef, onMenuClick, onOpenTour,
         </div>
       </div>
 
-      {showGlobalSearch && mobileSearchOpen ? <div className="border-t border-(--border-app) px-3 py-2 md:hidden"><Suspense fallback={<div className="h-9 rounded-(--radius-app) bg-(--surface-muted)" />}><GlobalSearch mobile onSubmitted={() => setMobileSearchOpen(false)} /></Suspense></div> : null}
       {showMobilePageContext && (title || actions) ? <div className="flex min-h-11 items-center gap-3 border-t border-(--border-app) px-3 py-2 xl:hidden">{title ? <h1 className="min-w-0 flex-1 truncate text-sm font-bold">{title}</h1> : null}{actions ? <div role="toolbar" className="flex shrink-0 items-center gap-2">{actions}</div> : null}</div> : null}
+      {showGlobalSearch && mobileSearchOpen ? <div className="border-t border-(--border-app) px-3 py-2 md:hidden"><Suspense fallback={<div className="h-9 rounded-(--radius-app) bg-(--surface-muted)" />}><GlobalSearch mobile onSubmitted={() => setMobileSearchOpen(false)} /></Suspense></div> : null}
     </header>
   );
 }
