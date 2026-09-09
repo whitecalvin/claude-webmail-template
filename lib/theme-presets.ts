@@ -5,6 +5,8 @@ import type {
   ThemeSettings,
 } from "@/types/theme";
 
+export const THEME_STORAGE_KEY = "gxmail:theme";
+
 // Default theme values and preset options for the appearance customizer
 // (components/customizer). Persisted to localStorage by ThemeProvider.
 export const DEFAULT_THEME: ThemeSettings = {

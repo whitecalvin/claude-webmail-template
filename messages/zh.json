@@ -36,7 +36,26 @@
     "starred": "已加星标",
     "sent": "已发送",
     "drafts": "草稿",
+    "archive": "归档",
+    "spam": "垃圾邮件",
     "trash": "垃圾箱"
+  },
+  "workspaceSidebar": {
+    "navigation": "工作区导航",
+    "mailboxGroup": "邮箱",
+    "tools": "工具",
+    "calendar": "日历",
+    "contacts": "联系人",
+    "approvals": "审批",
+    "mailboxes": "共享邮箱",
+    "rules": "邮件规则",
+    "files": "文件",
+    "quarantine": "隔离",
+    "search": "搜索",
+    "settings": "设置",
+    "closeMenu": "关闭菜单",
+    "expand": "展开侧边栏",
+    "collapse": "收起侧边栏"
   },
   "appShell": {
     "reconnect": "重新连接",
@@ -104,7 +123,7 @@
   },
   "mailboxesPage": {
     "backToMail": "返回邮件",
-    "title": "共享邮箱 · 定时发送 · 模板",
+    "title": "共享邮箱",
     "summary": "管理邮箱 {mailboxes} 个 · 定时任务 {scheduled} 个 · 模板 {templates} 个",
     "permissionSent": "权限请求已发送给管理员",
     "permissionRequest": "许可请求",

@@ -36,7 +36,26 @@
     "starred": "Destacados",
     "sent": "Enviados",
     "drafts": "Borradores",
+    "archive": "Archivo",
+    "spam": "Spam",
     "trash": "Papelera"
+  },
+  "workspaceSidebar": {
+    "navigation": "Navegación del espacio de trabajo",
+    "mailboxGroup": "Buzones",
+    "tools": "Herramientas",
+    "calendar": "Calendario",
+    "contacts": "Contactos",
+    "approvals": "Aprobaciones",
+    "mailboxes": "Buzones compartidos",
+    "rules": "Reglas de correo",
+    "files": "Archivos",
+    "quarantine": "Cuarentena",
+    "search": "Buscar",
+    "settings": "Configuración",
+    "closeMenu": "Cerrar menú",
+    "expand": "Expandir barra lateral",
+    "collapse": "Contraer barra lateral"
   },
   "appShell": {
     "reconnect": "Volver a conectar",
@@ -104,7 +123,7 @@
   },
   "mailboxesPage": {
     "backToMail": "volver al correo",
-    "title": "Buzones compartidos · Envío programado · Plantillas",
+    "title": "Buzones compartidos",
     "summary": "Buzones administrados {mailboxes} · Programados {scheduled} · Plantillas {templates}",
     "permissionSent": "Se ha enviado una solicitud de permiso al administrador.",
     "permissionRequest": "Solicitud de permiso",

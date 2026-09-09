@@ -64,8 +64,10 @@ export function MailProvider({ children }: { children: ReactNode }) {
     const counts: Record<FolderId, number> = {
       inbox: 0,
       starred: 0,
-      sent: 0,
       drafts: 0,
+      sent: 0,
+      archive: 0,
+      spam: 0,
       trash: 0,
     };
     for (const email of emails) {

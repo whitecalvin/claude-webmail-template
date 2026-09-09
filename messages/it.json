@@ -36,7 +36,26 @@
     "starred": "Speciali",
     "sent": "Inviati",
     "drafts": "Bozze",
+    "archive": "Archivio",
+    "spam": "Spam",
     "trash": "Cestino"
+  },
+  "workspaceSidebar": {
+    "navigation": "Navigazione area di lavoro",
+    "mailboxGroup": "Caselle di posta",
+    "tools": "Strumenti",
+    "calendar": "Calendario",
+    "contacts": "Contatti",
+    "approvals": "Approvazioni",
+    "mailboxes": "Caselle condivise",
+    "rules": "Regole di posta",
+    "files": "File",
+    "quarantine": "Quarantena",
+    "search": "Cerca",
+    "settings": "Impostazioni",
+    "closeMenu": "Chiudi menu",
+    "expand": "Espandi barra laterale",
+    "collapse": "Comprimi barra laterale"
   },
   "appShell": {
     "reconnect": "Riconnetti",
@@ -104,7 +123,7 @@
   },
   "mailboxesPage": {
     "backToMail": "Torniamo alla posta",
-    "title": "Caselle condivise · Invio programmato · Modelli",
+    "title": "Caselle condivise",
     "summary": "Caselle gestite {mailboxes} · Programmate {scheduled} · Modelli {templates}",
     "permissionSent": "Una richiesta di autorizzazione è stata inviata all'amministratore",
     "permissionRequest": "Richiesta di autorizzazione",

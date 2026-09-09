@@ -10,6 +10,20 @@ import { ToastProvider } from "@/context/toast-context";
 import { ToastStack } from "@/components/toast/ToastStack";
 import { UiTextLocalizer } from "@/components/i18n/UiTextLocalizer";
 import { UiMessagesProvider } from "@/components/i18n/UiMessagesProvider";
+import { FONT_OPTIONS, THEME_STORAGE_KEY } from "@/lib/theme-presets";
+
+const FONT_STACKS = Object.fromEntries(
+  FONT_OPTIONS.map(({ value, stack }) => [value, stack])
+);
+
+const FONT_BOOTSTRAP_SCRIPT = `(() => {
+  try {
+    const stored = JSON.parse(window.localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)}) || "null");
+    const fontStacks = ${JSON.stringify(FONT_STACKS)};
+    const fontStack = stored && fontStacks[stored.fontFamily];
+    if (fontStack) document.documentElement.style.setProperty("--font-app", fontStack);
+  } catch {}
+})();`;
 
 // Root layout: resolves/validates the `[locale]` segment, wires up the
 // three global context providers (theme, mail state, toasts), and mounts
@@ -55,7 +69,10 @@ export default async function RootLayout({
   const uiMessages = (await import(`../../i18n/ui-messages/${locale}.json`)).default as Record<string, string>;
 
   return (
-    <html lang={locale} className="h-full antialiased">
+    <html lang={locale} className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: FONT_BOOTSTRAP_SCRIPT }} />
+      </head>
       <body className="h-full">
         <NextIntlClientProvider messages={messages}>
           <UiMessagesProvider messages={uiMessages}>

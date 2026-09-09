@@ -12,10 +12,12 @@ export function Switch({
   on,
   onToggle,
   size = "md",
+  label,
 }: {
   on: boolean;
   onToggle: () => void;
   size?: keyof typeof SIZE_STYLE;
+  label?: string;
 }) {
   const dims = SIZE_STYLE[size];
   return (
@@ -25,6 +27,7 @@ export function Switch({
       className={`flex shrink-0 items-center rounded-full p-0.75 transition ${dims.track}`}
       style={{ backgroundColor: on ? "var(--color-primary)" : "var(--border-app)" }}
       aria-pressed={on}
+      aria-label={label}
     >
       <span
         className={`rounded-full bg-white shadow-sm transition-transform ${dims.knob}`}

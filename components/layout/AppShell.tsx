@@ -4,23 +4,19 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { WorkspaceLayout } from "./WorkspaceLayout";
-import { Sidebar } from "./Sidebar";
 import { MailList } from "@/components/mail/MailList";
 import { ReadingPane } from "@/components/mail/ReadingPane";
-import { ComposeModal } from "@/components/compose/ComposeModal";
 import { ProductTour } from "@/components/tour/ProductTour";
 import { GlobalBanner, type GlobalBannerTone } from "@/components/banner/GlobalBanner";
 import { SessionExpiryPopover } from "@/components/overlay/SessionExpiryPopover";
-import { useTheme } from "@/context/theme-context";
 import { useMail } from "@/context/mail-context";
 import { useToast } from "@/context/toast-context";
 
-// Top-level shell for the main mail view ("/"): three-pane layout (folder
-// sidebar, mail list, reading pane) plus everything that only lives on this
-// page — the theme customizer, compose modal, product tour, and a simulated
+// Top-level shell for the main mail view ("/"): mail list and reading pane
+// inside the shared workspace layout, plus everything that only lives on this
+// page — the product tour and a simulated
 // session-expiry countdown. Other routes render their own simpler layouts
 // and don't use this component.
-type MobileNav = "folders" | "list";
 
 const SESSION_KEY = "gxmail:session-expires-at";
 const SESSION_DURATION_MS = 12 * 60 * 60 * 1000;
@@ -29,22 +25,17 @@ const DELEGATE_ACCOUNT = "한지우";
 
 export function AppShell() {
   const t = useTranslations("appShell");
+  const tSidebar = useTranslations("sidebar");
   const router = useRouter();
-  const { draft } = useTheme();
-  const { selectedEmailId, clearSelection } = useMail();
+  const { selectedEmailId, clearSelection, activeFolder } = useMail();
   const toast = useToast();
-  const [mobileNav, setMobileNav] = useState<MobileNav>("list");
   const [showTour, setShowTour] = useState(false);
   const [showMaintenance, setShowMaintenance] = useState(true);
   const [isOnline, setIsOnline] = useState(true);
   const [delegateActive, setDelegateActive] = useState(false);
   const [sessionMinutesLeft, setSessionMinutesLeft] = useState<number | null>(null);
 
-  // On mobile there's only room for one pane at a time. Selecting an email
-  // always shows the reading pane, regardless of which nav tab was active,
-  // so `mobileNav` alone isn't enough to know what to render.
-  const mobileView = selectedEmailId ? "reading" : mobileNav;
-  const sidebarFirst = draft.sidebarPosition === "left";
+  const mobileView = selectedEmailId ? "reading" : "list";
 
   const logout = () => {
     try {
@@ -117,7 +108,8 @@ export function AppShell() {
   return (
     <>
       <WorkspaceLayout
-        onMenuClick={() => setMobileNav("folders")}
+        title={tSidebar(activeFolder)}
+        showGlobalSearch
         onOpenTour={() => setShowTour(true)}
         onToggleDelegate={
           delegateActive
@@ -127,11 +119,10 @@ export function AppShell() {
                 toast.info(t("delegateStarted", { name: DELEGATE_ACCOUNT }));
               }
         }
-        showBottomTabBar={mobileView !== "reading"}
         className="relative flex flex-col"
       >
         {bannerTone && (
-          <div className="pointer-events-none fixed inset-x-0 top-17 z-30 flex justify-center px-3 sm:px-4">
+          <div className="pointer-events-none absolute inset-x-0 top-3 z-30 flex justify-center px-3 sm:px-4">
             <div className="pointer-events-auto w-full max-w-3xl overflow-hidden rounded-xl shadow-xl ring-1 ring-black/10 dark:ring-white/10">
               {bannerTone === "offline" && (
                 <GlobalBanner
@@ -164,17 +155,9 @@ export function AppShell() {
             </div>
           </div>
         )}
-        <div className="flex min-h-0 flex-1 flex-row-reverse lg:flex-row">
+        <div className="flex min-h-0 flex-1 lg:flex-row">
           <div
-            className={`h-full w-full shrink-0 lg:w-64 ${
-              mobileView === "folders" ? "block" : "hidden"
-            } lg:block ${sidebarFirst ? "lg:order-1" : "lg:order-3"}`}
-          >
-            <Sidebar onNavigate={() => setMobileNav("list")} />
-          </div>
-
-          <div
-            className={`h-full w-full shrink-0 lg:order-2 lg:w-90 ${
+            className={`h-full w-full shrink-0 lg:w-90 ${
               mobileView === "list" ? "block" : "hidden"
             } lg:block`}
           >
@@ -182,22 +165,19 @@ export function AppShell() {
           </div>
 
           <div
-            className={`h-full min-w-0 flex-1 lg:order-2 ${
+            className={`h-full min-w-0 flex-1 ${
               mobileView === "reading" ? "block" : "hidden"
             } lg:block`}
           >
             <ReadingPane
               onBack={() => {
                 clearSelection();
-                setMobileNav("list");
               }}
             />
           </div>
         </div>
-
       </WorkspaceLayout>
 
-      <ComposeModal />
       {showTour && <ProductTour onClose={() => setShowTour(false)} />}
       {sessionMinutesLeft !== null && (
         <SessionExpiryPopover minutesLeft={sessionMinutesLeft} onLogout={logout} onExtend={extendSession} />

@@ -20,8 +20,10 @@ import type { LayoutStyle } from "@/types/theme";
 const FOLDER_DOT: Record<FolderId, string> = {
   inbox: "#2B4BF2",
   starred: "#B4740F",
-  sent: "#2E8B5B",
   drafts: "#9A9EA5",
+  sent: "#2E8B5B",
+  archive: "#3B7A94",
+  spam: "#B4740F",
   trash: "#C0433B",
 };
 
@@ -83,8 +85,7 @@ export function MailList() {
   const [moveSheetEmail, setMoveSheetEmail] = useState<Email | null>(null);
   const style = draft.layoutStyle;
 
-  const activeFolderEntry = FOLDERS.find((f) => f.id === activeFolder);
-  const folderLabel = activeFolderEntry ? tFolder(activeFolderEntry.id) : null;
+  const folderLabel = tFolder(activeFolder);
 
   // Trashing an already-trashed email means permanent delete (with a
   // confirm dialog); trashing anything else is reversible via an undo toast.
@@ -249,7 +250,7 @@ export function MailList() {
 
       {moveSheetEmail && (
         <BottomSheet title={t("moveMailTitle")} onClose={() => setMoveSheetEmail(null)}>
-          {FOLDERS.filter((f) => f.id !== "starred" && f.id !== moveSheetEmail.folder).map((f) => (
+          {FOLDERS.filter((f) => f.id !== moveSheetEmail.folder).map((f) => (
             <BottomSheetRow
               key={f.id}
               label={tFolder(f.id)}

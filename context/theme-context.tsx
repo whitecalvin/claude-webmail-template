@@ -15,13 +15,12 @@ import {
   DENSITY_MAP,
   FONT_OPTIONS,
   RADIUS_MAP,
+  THEME_STORAGE_KEY,
 } from "@/lib/theme-presets";
 
 // Appearance customizer state: a `draft` the user edits live in the panel,
 // and a `published` snapshot that's actually persisted — so closing the
 // panel without saving can cleanly discard unsaved changes.
-const STORAGE_KEY = "gxmail:theme";
-
 interface ThemeContextValue {
   published: ThemeSettings;
   draft: ThemeSettings;
@@ -60,7 +59,7 @@ function applyThemeToDocument(theme: ThemeSettings) {
 function loadStoredTheme(): ThemeSettings {
   if (typeof window === "undefined") return DEFAULT_THEME;
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(THEME_STORAGE_KEY);
     if (!raw) return DEFAULT_THEME;
     return { ...DEFAULT_THEME, ...JSON.parse(raw) };
   } catch {
@@ -97,7 +96,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const publish = useCallback(() => {
     setPublished(draft);
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+      window.localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(draft));
     } catch {
       // localStorage unavailable; live theme still applies for this session
     }

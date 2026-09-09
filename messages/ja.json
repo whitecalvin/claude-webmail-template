@@ -36,7 +36,26 @@
     "starred": "スター付き",
     "sent": "送信済み",
     "drafts": "下書き",
+    "archive": "アーカイブ",
+    "spam": "迷惑メール",
     "trash": "ゴミ箱"
+  },
+  "workspaceSidebar": {
+    "navigation": "ワークスペースナビゲーション",
+    "mailboxGroup": "メールボックス",
+    "tools": "ツール",
+    "calendar": "カレンダー",
+    "contacts": "連絡先",
+    "approvals": "承認",
+    "mailboxes": "共有メールボックス",
+    "rules": "メールルール",
+    "files": "ファイル",
+    "quarantine": "隔離",
+    "search": "検索",
+    "settings": "設定",
+    "closeMenu": "メニューを閉じる",
+    "expand": "サイドバーを展開",
+    "collapse": "サイドバーを折りたたむ"
   },
   "appShell": {
     "reconnect": "再接続",
@@ -104,7 +123,7 @@
   },
   "mailboxesPage": {
     "backToMail": "メールに戻る",
-    "title": "共有メールボックス・予約送信・テンプレート",
+    "title": "共有メールボックス",
     "summary": "管理メールボックス {mailboxes}件・予約 {scheduled}件・テンプレート {templates}件",
     "permissionSent": "権限要求を管理者に送信しました",
     "permissionRequest": "権限要求",

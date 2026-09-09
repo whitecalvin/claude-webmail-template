@@ -236,8 +236,8 @@ function ComposeForm({
       <form
         onSubmit={handleSend}
         onClick={(e) => e.stopPropagation()}
-        className={`relative flex h-full w-full flex-col overflow-hidden bg-background shadow-2xl transition-all sm:h-auto sm:max-h-[85vh] sm:rounded-[14px] sm:border sm:border-(--border-app) ${
-          expanded ? "sm:w-225" : "sm:w-155"
+        className={`relative flex h-full w-full flex-col overflow-hidden bg-background shadow-2xl transition-all sm:h-[min(88vh,760px)] sm:max-h-none sm:max-w-[calc(100vw-2rem)] sm:rounded-[14px] sm:border sm:border-(--border-app) ${
+          expanded ? "sm:w-260" : "sm:w-190"
         }`}
       >
         <div className="flex shrink-0 items-center gap-2.5 border-b border-(--border-app) px-4 py-3">

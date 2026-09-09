@@ -13,7 +13,7 @@ import { LoadingModal } from "@/components/overlay/LoadingModal";
 import { useToast } from "@/context/toast-context";
 import { useUiText } from "@/components/i18n/useUiText";
 
-// "공용 메일함 · 예약 발송 · 템플릿" page: shared/delegated mailboxes,
+// Shared/delegated mailboxes with scheduled-send and template utilities.
 // the scheduled-send queue (with a simulated "send now" progress modal),
 // and mail templates.
 const STATE_TONE: Record<string, string> = {

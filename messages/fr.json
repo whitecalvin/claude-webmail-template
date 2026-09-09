@@ -36,7 +36,26 @@
     "starred": "Favoris",
     "sent": "Envoyés",
     "drafts": "Brouillons",
+    "archive": "Archives",
+    "spam": "Indésirables",
     "trash": "Corbeille"
+  },
+  "workspaceSidebar": {
+    "navigation": "Navigation de l’espace de travail",
+    "mailboxGroup": "Boîtes aux lettres",
+    "tools": "Outils",
+    "calendar": "Calendrier",
+    "contacts": "Contacts",
+    "approvals": "Approbations",
+    "mailboxes": "Boîtes partagées",
+    "rules": "Règles de messagerie",
+    "files": "Fichiers",
+    "quarantine": "Quarantaine",
+    "search": "Recherche",
+    "settings": "Paramètres",
+    "closeMenu": "Fermer le menu",
+    "expand": "Développer la barre latérale",
+    "collapse": "Réduire la barre latérale"
   },
   "appShell": {
     "reconnect": "Se reconnecter",
@@ -104,7 +123,7 @@
   },
   "mailboxesPage": {
     "backToMail": "Retour au courrier",
-    "title": "Boîtes partagées · Envoi programmé · Modèles",
+    "title": "Boîtes partagées",
     "summary": "Boîtes gérées {mailboxes} · Programmés {scheduled} · Modèles {templates}",
     "permissionSent": "Une demande d'autorisation a été envoyée à l'administrateur",
     "permissionRequest": "Demande d'autorisation",

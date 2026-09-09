@@ -1,10 +1,10 @@
 "use client";
 
-import { FormEvent, ReactNode, Suspense, useEffect, useState } from "react";
+import { FormEvent, Suspense, useEffect, useState, type ReactNode, type RefObject } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
-import { Bell, HelpCircle, Inbox, LogOut, Menu, Paintbrush, Paperclip, Search, ShieldCheck, UserCog, X } from "lucide-react";
+import { Bell, HelpCircle, LogOut, Menu, Paintbrush, Search, ShieldCheck, UserCog, X } from "lucide-react";
 import { useTheme } from "@/context/theme-context";
 import { CURRENT_USER } from "@/lib/current-user";
 import { NotificationPopover } from "@/components/notifications/NotificationPopover";
@@ -68,6 +68,7 @@ function GlobalSearch({ mobile = false, onSubmitted }: { mobile?: boolean; onSub
 export interface TopBarProps {
   title?: ReactNode;
   actions?: ReactNode;
+  menuButtonRef?: RefObject<HTMLButtonElement | null>;
   onMenuClick?: () => void;
   onOpenTour?: () => void;
   onToggleDelegate?: () => void;
@@ -75,7 +76,7 @@ export interface TopBarProps {
   showMobilePageContext?: boolean;
 }
 
-export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelegate, showGlobalSearch = true, showMobilePageContext = true }: TopBarProps) {
+export function TopBar({ title, actions, menuButtonRef, onMenuClick, onOpenTour, onToggleDelegate, showGlobalSearch = false, showMobilePageContext = true }: TopBarProps) {
   const t = useTranslations("topBar");
   const tMenu = useTranslations("profileMenu");
   const router = useRouter();
@@ -98,14 +99,14 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
     <header className={`relative z-20 shrink-0 bg-background ${HEADER_STYLE[draft.layoutStyle]}`}>
       <div className="flex h-14 min-w-0 items-center">
         {onMenuClick ? (
-          <button type="button" onClick={onMenuClick} className="ml-2 rounded-(--radius-app) p-2 hover:bg-black/5 dark:hover:bg-white/10 lg:hidden" aria-label={t("openMenu")}>
+          <button ref={menuButtonRef} type="button" onClick={onMenuClick} className="ml-2 rounded-(--radius-app) p-2 hover:bg-black/5 dark:hover:bg-white/10 xl:hidden" aria-label={t("openMenu")} aria-haspopup="dialog">
             <Menu size={20} />
           </button>
         ) : null}
 
-        <Link href="/" className="flex h-full shrink-0 items-center gap-2 px-3 sm:px-4 lg:w-64" aria-label="GXWebMail">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-(--radius-app) text-sm font-bold text-white" style={{ backgroundColor: "var(--color-primary)" }}>G</span>
-          <span className="whitespace-nowrap text-base font-semibold sm:text-lg">GXWebMail</span>
+        <Link href="/" className="flex h-full shrink-0 items-center gap-2 px-2 xl:hidden" aria-label="GXWebMail">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-(--radius-app) text-xs font-bold text-white" style={{ backgroundColor: "var(--color-primary)" }}>G</span>
+          <span className="whitespace-nowrap text-sm font-semibold sm:text-base">GXWebMail</span>
         </Link>
 
         {showGlobalSearch ? (
@@ -115,7 +116,7 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
         ) : null}
 
         {title || actions ? (
-          <div className={`hidden min-w-0 items-center gap-3 px-4 lg:flex ${showGlobalSearch ? "border-l border-(--border-app)" : "flex-1"}`}>
+          <div className={`hidden min-w-0 items-center gap-3 px-4 xl:flex ${showGlobalSearch ? "" : "flex-1"}`}>
             {title ? <h1 className="truncate text-sm font-bold">{title}</h1> : null}
             {actions ? <div role="toolbar" className={`flex items-center gap-2 ${showGlobalSearch ? "shrink-0" : "min-w-0 flex-1"}`}>{actions}</div> : null}
           </div>
@@ -130,7 +131,7 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
           {onOpenTour ? (
             <button type="button" onClick={onOpenTour} className="hidden rounded-(--radius-app) p-2 hover:bg-black/5 dark:hover:bg-white/10 sm:flex" aria-label={t("tour")} title={t("tour")}><HelpCircle size={18} /></button>
           ) : null}
-          <div className="relative hidden sm:block">
+          <div className="relative">
             <button type="button" onClick={() => setOpenMenu((value) => value === "notifications" ? "none" : "notifications")} className="relative rounded-(--radius-app) p-2 hover:bg-black/5 dark:hover:bg-white/10" aria-label={t("notifications")}>
               <Bell size={18} />
               {unreadNotifications.length > 0 ? <span className="absolute right-1 top-1 h-2 w-2 rounded-full" style={{ backgroundColor: "var(--color-accent)" }} /> : null}
@@ -140,7 +141,7 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
           <button
             type="button"
             onClick={openCustomizer}
-            className="hidden rounded-(--radius-app) p-2 transition hover:bg-black/5 active:translate-y-px dark:hover:bg-white/10 sm:flex"
+            className="flex rounded-(--radius-app) p-2 transition hover:bg-black/5 active:translate-y-px dark:hover:bg-white/10"
             aria-label={tMenu("themeCustomizer")}
             title={tMenu("themeCustomizer")}
           >
@@ -154,10 +155,20 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
               <>
                 <div className="fixed inset-0 z-40" onClick={closeMenus} />
                 <div className="absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-(--radius-app) border border-(--border-app) bg-background shadow-xl">
-                  <div className="border-b border-(--border-app) px-4 py-3"><p className="text-sm font-medium">{CURRENT_USER.name}</p><p className="truncate text-xs text-(--text-muted)">{CURRENT_USER.email}</p></div>
+                  <div className="flex min-w-0 items-center gap-3 border-b border-(--border-app) px-4 py-3">
+                    <span
+                      className="flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
+                      style={{ backgroundColor: "var(--color-accent)" }}
+                      aria-hidden="true"
+                    >
+                      {CURRENT_USER.name.slice(0, 1)}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-medium">{CURRENT_USER.name}</p>
+                      <p className="truncate text-xs text-(--text-muted)">{CURRENT_USER.email}</p>
+                    </div>
+                  </div>
                   <button type="button" onClick={() => { openCustomizer(); closeMenus(); }} className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><Paintbrush size={16} style={{ color: "var(--color-accent)" }} />{tMenu("themeCustomizer")}</button>
-                  <Link href="/mailboxes" onClick={closeMenus} className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><Inbox size={16} className="text-(--text-muted)" />{tMenu("mailboxes")}</Link>
-                  <Link href="/files" onClick={closeMenus} className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><Paperclip size={16} className="text-(--text-muted)" />{tMenu("files")}</Link>
                   <Link href="/admin" onClick={closeMenus} className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><ShieldCheck size={16} className="text-(--text-muted)" />{tMenu("admin")}</Link>
                   {onToggleDelegate ? <button type="button" onClick={() => { onToggleDelegate(); closeMenus(); }} className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><UserCog size={16} className="text-(--text-muted)" />{tMenu("switchToDelegate")}</button> : null}
                   <button type="button" onClick={() => { closeMenus(); try { window.localStorage.removeItem("gxmail:session"); window.sessionStorage.removeItem("gxmail:session-expires-at"); } catch {} router.push("/login"); }} className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm text-(--status-danger) hover:bg-black/5 dark:hover:bg-white/5"><LogOut size={16} />{tMenu("logout")}</button>
@@ -169,7 +180,7 @@ export function TopBar({ title, actions, onMenuClick, onOpenTour, onToggleDelega
       </div>
 
       {showGlobalSearch && mobileSearchOpen ? <div className="border-t border-(--border-app) px-3 py-2 md:hidden"><Suspense fallback={<div className="h-9 rounded-(--radius-app) bg-(--surface-muted)" />}><GlobalSearch mobile onSubmitted={() => setMobileSearchOpen(false)} /></Suspense></div> : null}
-      {showMobilePageContext && (title || actions) ? <div className="flex min-h-11 items-center gap-3 border-t border-(--border-app) px-3 py-2 lg:hidden">{title ? <h1 className="min-w-0 flex-1 truncate text-sm font-bold">{title}</h1> : null}{actions ? <div role="toolbar" className="flex shrink-0 items-center gap-2">{actions}</div> : null}</div> : null}
+      {showMobilePageContext && (title || actions) ? <div className="flex min-h-11 items-center gap-3 border-t border-(--border-app) px-3 py-2 xl:hidden">{title ? <h1 className="min-w-0 flex-1 truncate text-sm font-bold">{title}</h1> : null}{actions ? <div role="toolbar" className="flex shrink-0 items-center gap-2">{actions}</div> : null}</div> : null}
     </header>
   );
 }

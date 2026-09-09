@@ -1,5 +1,12 @@
 // Shared shapes for the mail feature (inbox, compose, meeting invites).
-export type FolderId = "inbox" | "starred" | "sent" | "drafts" | "trash";
+export type FolderId =
+  | "inbox"
+  | "starred"
+  | "drafts"
+  | "sent"
+  | "archive"
+  | "spam"
+  | "trash";
 
 export interface Folder {
   id: FolderId;

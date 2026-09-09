@@ -9,7 +9,7 @@
     "settings": "설정"
   },
   "profileMenu": {
-    "mailboxes": "공용 메일함 · 예약 · 템플릿",
+    "mailboxes": "공용 편지함 · 예약 · 템플릿",
     "files": "첨부 파일",
     "admin": "관리자",
     "logout": "로그아웃",
@@ -36,7 +36,26 @@
     "starred": "중요",
     "sent": "보낸편지함",
     "drafts": "임시보관함",
+    "archive": "보관함",
+    "spam": "스팸",
     "trash": "휴지통"
+  },
+  "workspaceSidebar": {
+    "navigation": "업무 메뉴",
+    "mailboxGroup": "메일함",
+    "tools": "도구",
+    "calendar": "캘린더",
+    "contacts": "주소록",
+    "approvals": "결재함",
+    "mailboxes": "공용 편지함",
+    "rules": "메일 규칙",
+    "files": "파일",
+    "quarantine": "격리",
+    "search": "검색",
+    "settings": "설정",
+    "closeMenu": "메뉴 닫기",
+    "expand": "사이드바 펼치기",
+    "collapse": "사이드바 접기"
   },
   "appShell": {
     "reconnect": "다시 연결",
@@ -104,13 +123,13 @@
   },
   "mailboxesPage": {
     "backToMail": "메일로 돌아가기",
-    "title": "공용 메일함 · 예약 발송 · 템플릿",
-    "summary": "담당 메일함 {mailboxes}개 · 예약 {scheduled}건 · 템플릿 {templates}개",
+    "title": "공용 편지함",
+    "summary": "담당 편지함 {mailboxes}개 · 예약 {scheduled}건 · 템플릿 {templates}개",
     "permissionSent": "권한 요청을 관리자에게 보냈습니다",
     "permissionRequest": "권한 요청",
     "templateEditorPending": "템플릿 편집기는 준비 중입니다",
     "newTemplate": "새 템플릿",
-    "sharedMailboxes": "공용 · 위임 메일함",
+    "sharedMailboxes": "공용 · 위임 편지함",
     "delegatedFormat": "위임 발신 시 \"{delegate}\" 형식으로 표기됩니다.",
     "scheduledMailbox": "예약 발송함",
     "waitingCount": "{count}건 대기",

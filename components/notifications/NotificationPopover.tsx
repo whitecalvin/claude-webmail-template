@@ -21,7 +21,7 @@ export function NotificationPopover({ onClose }: { onClose: () => void }) {
   return (
     <>
       <div className="fixed inset-0 z-40" onClick={onClose} />
-      <div className="absolute right-0 top-full z-50 mt-2 flex w-85 flex-col overflow-hidden rounded-(--radius-app) border border-(--border-app) bg-background shadow-[0_16px_34px_-18px_rgba(20,22,30,.34)]">
+      <div className="fixed inset-x-3 top-16 z-50 flex max-h-[calc(100dvh-5rem)] w-auto flex-col overflow-hidden rounded-(--radius-app) border border-(--border-app) bg-background shadow-[0_16px_34px_-18px_rgba(20,22,30,.34)] sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-2 sm:max-h-none sm:w-85">
         <div className="flex shrink-0 items-center gap-2.5 border-b border-(--border-app) px-3.5 py-3">
           <p className="text-[13.5px] font-bold">알림</p>
           {unreadCount > 0 && (
@@ -59,7 +59,7 @@ export function NotificationPopover({ onClose }: { onClose: () => void }) {
           ))}
         </div>
 
-        <div className="max-h-85 overflow-y-auto">
+        <div className="min-h-0 flex-1 overflow-y-auto sm:max-h-85 sm:flex-none">
           {filtered.length === 0 ? (
             <p className="px-4 py-8 text-center text-[12.5px] text-(--text-muted)">알림이 없습니다.</p>
           ) : (

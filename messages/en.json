@@ -36,7 +36,26 @@
     "starred": "Starred",
     "sent": "Sent",
     "drafts": "Drafts",
+    "archive": "Archive",
+    "spam": "Spam",
     "trash": "Trash"
+  },
+  "workspaceSidebar": {
+    "navigation": "Workspace navigation",
+    "mailboxGroup": "Mailboxes",
+    "tools": "Tools",
+    "calendar": "Calendar",
+    "contacts": "Contacts",
+    "approvals": "Approvals",
+    "mailboxes": "Shared mailboxes",
+    "rules": "Mail rules",
+    "files": "Files",
+    "quarantine": "Quarantine",
+    "search": "Search",
+    "settings": "Settings",
+    "closeMenu": "Close menu",
+    "expand": "Expand sidebar",
+    "collapse": "Collapse sidebar"
   },
   "appShell": {
     "reconnect": "Reconnect",
@@ -104,7 +123,7 @@
   },
   "mailboxesPage": {
     "backToMail": "Back to mail",
-    "title": "Shared Mailboxes · Scheduled Send · Templates",
+    "title": "Shared Mailboxes",
     "summary": "Managed mailboxes {mailboxes} · Scheduled {scheduled} · Templates {templates}",
     "permissionSent": "A permission request has been sent to the administrator",
     "permissionRequest": "Permission Request",

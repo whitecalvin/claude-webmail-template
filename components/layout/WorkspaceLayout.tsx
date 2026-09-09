@@ -1,35 +1,140 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { BottomTabBar } from "./BottomTabBar";
-import { ModuleRail } from "./ModuleRail";
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import { TopBar } from "./TopBar";
+import { WorkspaceSidebar } from "./WorkspaceSidebar";
 import { CustomizerPanel } from "@/components/customizer/CustomizerPanel";
+import { ComposeModal } from "@/components/compose/ComposeModal";
+import { useTheme } from "@/context/theme-context";
+
+const SIDEBAR_STORAGE_KEY = "gxmail:workspace-sidebar-collapsed";
+const DRAWER_TRANSITION_MS = 300;
 
 export interface WorkspaceLayoutProps {
   children: ReactNode;
   title?: ReactNode;
   headerActions?: ReactNode;
-  onMenuClick?: () => void;
   onOpenTour?: () => void;
   onToggleDelegate?: () => void;
   showGlobalSearch?: boolean;
   showMobilePageContext?: boolean;
-  showBottomTabBar?: boolean;
   className?: string;
 }
 
-export function WorkspaceLayout({ children, title, headerActions, onMenuClick, onOpenTour, onToggleDelegate, showGlobalSearch = true, showMobilePageContext = true, showBottomTabBar = true, className = "" }: WorkspaceLayoutProps) {
+export function WorkspaceLayout({ children, title, headerActions, onOpenTour, onToggleDelegate, showGlobalSearch = false, showMobilePageContext = true, className = "" }: WorkspaceLayoutProps) {
+  const tSidebar = useTranslations("workspaceSidebar");
+  const { draft } = useTheme();
+  const [collapsed, setCollapsed] = useState(false);
+  const [drawerMounted, setDrawerMounted] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeTimerRef = useRef<number | null>(null);
+
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    try {
+      setCollapsed(window.localStorage.getItem(SIDEBAR_STORAGE_KEY) === "true");
+    } catch {
+      // Storage can be unavailable in private browsing; expanded is safe.
+    }
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  useEffect(() => {
+    if (!drawerMounted) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [drawerMounted]);
+
+  useEffect(() => {
+    if (!drawerMounted) return;
+    const frame = window.requestAnimationFrame(() => setDrawerOpen(true));
+    return () => window.cancelAnimationFrame(frame);
+  }, [drawerMounted]);
+
+  useEffect(() => () => {
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+  }, []);
+
+  const openDrawer = () => {
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = null;
+    if (drawerMounted) {
+      setDrawerOpen(true);
+    } else {
+      setDrawerMounted(true);
+    }
+  };
+
+  const closeDrawer = () => {
+    setDrawerOpen(false);
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = window.setTimeout(() => {
+      setDrawerMounted(false);
+      menuButtonRef.current?.focus();
+      closeTimerRef.current = null;
+    }, DRAWER_TRANSITION_MS);
+  };
+
+  const handleDrawerKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeDrawer();
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const focusable = drawerRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusable?.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
+  const toggleCollapsed = () => {
+    setCollapsed((value) => {
+      const next = !value;
+      try {
+        window.localStorage.setItem(SIDEBAR_STORAGE_KEY, String(next));
+      } catch {
+        // Keep the live state even when storage is unavailable.
+      }
+      return next;
+    });
+  };
+
   return (
     <>
-      <div className="flex h-dvh w-full overflow-hidden bg-background text-foreground">
-        <div className="hidden lg:block"><ModuleRail /></div>
+      <div className={`flex h-dvh w-full overflow-hidden bg-background text-foreground ${draft.sidebarPosition === "right" ? "xl:flex-row-reverse" : "xl:flex-row"}`}>
+        <div className={`relative z-30 hidden h-full shrink-0 xl:block ${draft.sidebarPosition === "right" ? "border-l" : "border-r"} border-(--border-app)`}>
+          <WorkspaceSidebar collapsed={collapsed} onToggleCollapsed={toggleCollapsed} />
+        </div>
         <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-          <TopBar title={title} actions={headerActions} onMenuClick={onMenuClick} onOpenTour={onOpenTour} onToggleDelegate={onToggleDelegate} showGlobalSearch={showGlobalSearch} showMobilePageContext={showMobilePageContext} />
-          <main className={`min-h-0 min-w-0 flex-1 ${className}`}>{children}</main>
-          {showBottomTabBar ? <BottomTabBar /> : null}
+          <TopBar title={title} actions={headerActions} menuButtonRef={menuButtonRef} onMenuClick={openDrawer} onOpenTour={onOpenTour} onToggleDelegate={onToggleDelegate} showGlobalSearch={showGlobalSearch} showMobilePageContext={showMobilePageContext} />
+          <main id="workspace-main" className={`min-h-0 min-w-0 flex-1 ${className}`}>{children}</main>
         </div>
       </div>
+      {drawerMounted ? (
+        <div className="fixed inset-0 z-50 xl:hidden">
+          <button type="button" className={`absolute inset-0 bg-black/45 transition-opacity duration-300 ease-out motion-reduce:transition-none ${drawerOpen ? "opacity-100" : "opacity-0"}`} onClick={closeDrawer} aria-label={tSidebar("closeMenu")} />
+          <div ref={drawerRef} role="dialog" aria-modal="true" aria-label={tSidebar("navigation")} onKeyDown={handleDrawerKeyDown} className={`relative h-full w-fit transform-gpu transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none ${drawerOpen ? "translate-x-0" : "-translate-x-full"}`}>
+            <WorkspaceSidebar mobile onClose={closeDrawer} />
+          </div>
+        </div>
+      ) : null}
+      <ComposeModal />
       <CustomizerPanel />
     </>
   );

@@ -36,7 +36,26 @@
     "starred": "Com estrela",
     "sent": "Enviados",
     "drafts": "Rascunhos",
+    "archive": "Arquivo",
+    "spam": "Spam",
     "trash": "Lixeira"
+  },
+  "workspaceSidebar": {
+    "navigation": "Navegação do espaço de trabalho",
+    "mailboxGroup": "Caixas de correio",
+    "tools": "Ferramentas",
+    "calendar": "Calendário",
+    "contacts": "Contatos",
+    "approvals": "Aprovações",
+    "mailboxes": "Caixas compartilhadas",
+    "rules": "Regras de e-mail",
+    "files": "Arquivos",
+    "quarantine": "Quarentena",
+    "search": "Pesquisar",
+    "settings": "Configurações",
+    "closeMenu": "Fechar menu",
+    "expand": "Expandir barra lateral",
+    "collapse": "Recolher barra lateral"
   },
   "appShell": {
     "reconnect": "Reconectar",
@@ -104,7 +123,7 @@
   },
   "mailboxesPage": {
     "backToMail": "Voltar ao correio",
-    "title": "Caixas compartilhadas · Envio agendado · Modelos",
+    "title": "Caixas compartilhadas",
     "summary": "Caixas gerenciadas {mailboxes} · Agendados {scheduled} · Modelos {templates}",
     "permissionSent": "Uma solicitação de permissão foi enviada ao administrador",
     "permissionRequest": "Solicitação de permissão",

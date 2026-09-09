@@ -6,9 +6,10 @@ import { CURRENT_USER } from "@/lib/current-user";
 // edits here only affect what a fresh page load starts with.
 export const FOLDERS: Folder[] = [
   { id: "inbox", label: "받은편지함" },
-  { id: "starred", label: "중요" },
-  { id: "sent", label: "보낸편지함" },
   { id: "drafts", label: "임시보관함" },
+  { id: "sent", label: "보낸편지함" },
+  { id: "archive", label: "보관함" },
+  { id: "spam", label: "스팸" },
   { id: "trash", label: "휴지통" },
 ];
 
@@ -165,6 +166,30 @@ export const MOCK_EMAILS: Email[] = [
     body: ["지금 바로 확인하세요!", "이번 달 특별 할인 혜택을 놓치지 마세요."],
     receivedAt: "2026-09-03T10:00:00+09:00",
     unread: false,
+    starred: false,
+  },
+  {
+    id: "9",
+    folder: "archive",
+    from: { name: "GXSOFT 재무팀", email: "finance@gxsoft.co.kr" },
+    to: ["whitecalvin@gxsoft.co.kr"],
+    subject: "8월 법인카드 사용 내역 보관",
+    preview: "확인 완료된 8월 법인카드 사용 내역을 보관합니다.",
+    body: ["확인 완료된 8월 법인카드 사용 내역입니다.", "필요할 때 보관함에서 다시 확인할 수 있습니다."],
+    receivedAt: "2026-09-02T15:25:00+09:00",
+    unread: false,
+    starred: false,
+  },
+  {
+    id: "10",
+    folder: "spam",
+    from: { name: "서비스 안내", email: "offers@unknown-example.net" },
+    to: ["whitecalvin@gxsoft.co.kr"],
+    subject: "계정 용량을 지금 무료로 늘리세요",
+    preview: "외부 발신자가 보낸 의심스러운 홍보 메일입니다.",
+    body: ["외부 발신자가 보낸 의심스러운 홍보 메일입니다.", "링크를 열기 전에 발신자를 확인하세요."],
+    receivedAt: "2026-09-01T07:40:00+09:00",
+    unread: true,
     starred: false,
   },
 ];

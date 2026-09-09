@@ -36,7 +36,26 @@
     "starred": "Markiert",
     "sent": "Gesendet",
     "drafts": "Entwürfe",
+    "archive": "Archiv",
+    "spam": "Spam",
     "trash": "Papierkorb"
+  },
+  "workspaceSidebar": {
+    "navigation": "Arbeitsbereichsnavigation",
+    "mailboxGroup": "Postfächer",
+    "tools": "Werkzeuge",
+    "calendar": "Kalender",
+    "contacts": "Kontakte",
+    "approvals": "Genehmigungen",
+    "mailboxes": "Freigegebene Postfächer",
+    "rules": "E-Mail-Regeln",
+    "files": "Dateien",
+    "quarantine": "Quarantäne",
+    "search": "Suche",
+    "settings": "Einstellungen",
+    "closeMenu": "Menü schließen",
+    "expand": "Seitenleiste erweitern",
+    "collapse": "Seitenleiste einklappen"
   },
   "appShell": {
     "reconnect": "Erneut verbinden",
@@ -104,7 +123,7 @@
   },
   "mailboxesPage": {
     "backToMail": "Zurück zur Post",
-    "title": "Gemeinsame Postfächer · Geplanter Versand · Vorlagen",
+    "title": "Gemeinsame Postfächer",
     "summary": "Verwaltete Postfächer {mailboxes} · Geplant {scheduled} · Vorlagen {templates}",
     "permissionSent": "Eine Berechtigungsanfrage wurde an den Administrator gesendet",
     "permissionRequest": "Erlaubnisanfrage",

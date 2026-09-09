@@ -71,18 +71,17 @@ export function PolicyTab() {
         <AdminCard title="메일 정책">
           <div className="flex flex-col gap-3">
             {toggles.map((t) => (
-              <button
-                key={t.key}
-                type="button"
-                onClick={() => toggle(t.key)}
-                className="flex items-start gap-3 text-left"
-              >
-                <div className="min-w-0 flex-1">
+              <div key={t.key} className="flex items-start gap-3">
+                <button
+                  type="button"
+                  onClick={() => toggle(t.key)}
+                  className="min-w-0 flex-1 text-left"
+                >
                   <p className="text-xs font-semibold">{t.name}</p>
                   <p className="text-[11px] text-(--text-muted)">{t.desc}</p>
-                </div>
-                <AdminSwitch on={t.on} onToggle={() => toggle(t.key)} />
-              </button>
+                </button>
+                <AdminSwitch label={t.name} on={t.on} onToggle={() => toggle(t.key)} />
+              </div>
             ))}
           </div>
         </AdminCard>
