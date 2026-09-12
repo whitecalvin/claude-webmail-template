@@ -43,7 +43,9 @@
   "workspaceSidebar": {
     "navigation": "업무 메뉴",
     "mailboxGroup": "메일함",
-    "tools": "도구",
+    "collaborationGroup": "협업",
+    "mailManagementGroup": "메일 관리",
+    "shortcutsGroup": "바로가기",
     "calendar": "캘린더",
     "contacts": "주소록",
     "approvals": "결재함",

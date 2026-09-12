@@ -50,15 +50,31 @@ const STORAGE_USAGE: Record<FolderId, string> = {
   trash: "0 MiB / 10 GiB",
 };
 
-const TOOLS = [
-  { href: "/calendar", icon: CalendarDays, key: "calendar" },
-  { href: "/contacts", icon: Users, key: "contacts" },
-  { href: "/approvals", icon: ClipboardCheck, key: "approvals" },
-  { href: "/rules", icon: SlidersHorizontal, key: "rules" },
-  { href: "/files", icon: Paperclip, key: "files" },
-  { href: "/quarantine", icon: ShieldAlert, key: "quarantine" },
-  { href: "/search", icon: Search, key: "search" },
-  { href: "/settings", icon: Settings, key: "settings" },
+const SIDEBAR_GROUPS = [
+  {
+    key: "collaborationGroup",
+    items: [
+      { href: "/mailboxes", icon: Files, key: "mailboxes", animationIndex: 0 },
+      { href: "/calendar", icon: CalendarDays, key: "calendar", animationIndex: 1 },
+      { href: "/contacts", icon: Users, key: "contacts", animationIndex: 2 },
+      { href: "/approvals", icon: ClipboardCheck, key: "approvals", animationIndex: 3 },
+    ],
+  },
+  {
+    key: "mailManagementGroup",
+    items: [
+      { href: "/rules", icon: SlidersHorizontal, key: "rules", animationIndex: 4 },
+      { href: "/files", icon: Paperclip, key: "files", animationIndex: 5 },
+      { href: "/quarantine", icon: ShieldAlert, key: "quarantine", animationIndex: 6 },
+    ],
+  },
+  {
+    key: "shortcutsGroup",
+    items: [
+      { href: "/search", icon: Search, key: "search", animationIndex: 7 },
+      { href: "/settings", icon: Settings, key: "settings", animationIndex: 8 },
+    ],
+  },
 ] as const;
 
 const NAV_STYLE: Record<LayoutStyle, { active: string; idle: string }> = {
@@ -174,75 +190,78 @@ export function WorkspaceSidebar({ collapsed = false, mobile = false, onClose, o
       </div>
 
       <nav aria-label={tSidebar("navigation")} className="min-h-0 flex-1 overflow-y-auto px-3 pb-3">
-        {!compact ? <h2 className="px-3 pb-2 pt-2 text-xs font-bold uppercase tracking-[0.14em] text-(--text-muted)">{tSidebar("mailboxGroup")}</h2> : null}
-        <ul className="space-y-1">
-          {FOLDERS.map((folder, index) => {
-            const Icon = FOLDER_ICONS[folder.id];
-            const active = pathname === "/" && activeFolder === folder.id;
-            const count = unreadCounts[folder.id];
-            const label = tFolder(folder.id);
-            return (
-              <li key={folder.id} className={mobile ? "workspace-menu-item-enter" : undefined} style={mobile ? { animationDelay: `${80 + index * 30}ms` } : undefined}>
-                <button
-                  type="button"
-                  onClick={() => openFolder(folder.id)}
-                  className={`flex w-full items-center rounded-(--radius-app) py-2.5 text-sm transition ${compact ? "justify-center px-0" : "gap-3 px-3"} ${active ? navStyle.active : navStyle.idle}`}
-                  aria-current={active ? "page" : undefined}
-                  aria-label={compact ? label : undefined}
-                  title={compact ? label : undefined}
-                >
-                  <Icon size={19} className="shrink-0" />
-                  {!compact ? (
-                    <>
-                      <span className="min-w-0 flex-1 text-left">
-                        <span className="block truncate font-medium">{label}</span>
-                        <span className="block truncate text-[10px] font-normal text-(--text-muted)">{STORAGE_USAGE[folder.id]}</span>
-                      </span>
-                      {count > 0 ? <span className="min-w-6 rounded-full bg-(--color-primary) px-1.5 py-0.5 text-center text-xs text-white">{count}</span> : null}
-                    </>
-                  ) : count > 0 ? <span className="sr-only">{count}</span> : null}
-                </button>
-              </li>
-            );
-          })}
-          <li className={mobile ? "workspace-menu-item-enter" : undefined} style={mobile ? { animationDelay: `${80 + FOLDERS.length * 30}ms` } : undefined}>
-            <Link
-              href="/mailboxes"
-              onClick={onClose}
-              className={`flex items-center rounded-(--radius-app) py-2.5 text-sm transition ${compact ? "justify-center px-0" : "gap-3 px-3"} ${isToolActive(pathname, "/mailboxes") ? navStyle.active : navStyle.idle}`}
-              aria-current={isToolActive(pathname, "/mailboxes") ? "page" : undefined}
-              aria-label={compact ? tSidebar("mailboxes") : undefined}
-              title={compact ? tSidebar("mailboxes") : undefined}
-            >
-              <Files size={19} className="shrink-0" />
-              {!compact ? <span className="truncate">{tSidebar("mailboxes")}</span> : null}
-            </Link>
-          </li>
-        </ul>
+        <section aria-labelledby={!compact ? "workspace-sidebar-mailboxes-heading" : undefined}>
+          {!compact ? <h2 id="workspace-sidebar-mailboxes-heading" className="px-3 pb-2 pt-2 text-xs font-bold uppercase tracking-[0.14em] text-(--text-muted)">{tSidebar("mailboxGroup")}</h2> : null}
+          <ul className="space-y-1">
+            {FOLDERS.map((folder, index) => {
+              const Icon = FOLDER_ICONS[folder.id];
+              const active = pathname === "/" && activeFolder === folder.id;
+              const count = unreadCounts[folder.id];
+              const label = tFolder(folder.id);
+              return (
+                <li key={folder.id} className={mobile ? "workspace-menu-item-enter" : undefined} style={mobile ? { animationDelay: `${80 + index * 30}ms` } : undefined}>
+                  <button
+                    type="button"
+                    onClick={() => openFolder(folder.id)}
+                    className={`flex w-full items-center rounded-(--radius-app) py-2.5 text-sm transition ${compact ? "justify-center px-0" : "gap-3 px-3"} ${active ? navStyle.active : navStyle.idle}`}
+                    aria-current={active ? "page" : undefined}
+                    aria-label={compact ? label : undefined}
+                    title={compact ? label : undefined}
+                  >
+                    <Icon size={19} className="shrink-0" />
+                    {!compact ? (
+                      <>
+                        <span className="min-w-0 flex-1 text-left">
+                          <span className="block truncate font-medium">{label}</span>
+                          <span className="block truncate text-[10px] font-normal text-(--text-muted)">{STORAGE_USAGE[folder.id]}</span>
+                        </span>
+                        {count > 0 ? <span className="min-w-6 rounded-full bg-(--color-primary) px-1.5 py-0.5 text-center text-xs text-white">{count}</span> : null}
+                      </>
+                    ) : count > 0 ? <span className="sr-only">{count}</span> : null}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
 
-        {!compact ? <h2 className="px-3 pb-2 pt-7 text-xs font-bold uppercase tracking-[0.14em] text-(--text-muted)">{tSidebar("tools")}</h2> : <div className="my-4 border-t border-(--border-app)" />}
-        <ul className="space-y-1">
-          {TOOLS.map((tool, index) => {
-            const Icon = tool.icon;
-            const active = isToolActive(pathname, tool.href);
-            const label = tSidebar(tool.key);
-            return (
-              <li key={tool.href} className={mobile ? "workspace-menu-item-enter" : undefined} style={mobile ? { animationDelay: `${260 + index * 30}ms` } : undefined}>
-                <Link
-                  href={tool.href}
-                  onClick={onClose}
-                  className={`flex items-center rounded-(--radius-app) py-2.5 text-sm transition ${compact ? "justify-center px-0" : "gap-3 px-3"} ${active ? navStyle.active : navStyle.idle}`}
-                  aria-current={active ? "page" : undefined}
-                  aria-label={compact ? label : undefined}
-                  title={compact ? label : undefined}
-                >
-                  <Icon size={19} className="shrink-0" />
-                  {!compact ? <span className="truncate">{label}</span> : null}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        {SIDEBAR_GROUPS.map((group) => (
+          <section key={group.key} aria-labelledby={!compact ? `workspace-sidebar-${group.key}-heading` : undefined}>
+            {!compact ? (
+              <h2 id={`workspace-sidebar-${group.key}-heading`} className="px-3 pb-2 pt-7 text-xs font-bold uppercase tracking-[0.14em] text-(--text-muted)">
+                {tSidebar(group.key)}
+              </h2>
+            ) : (
+              <div className="mx-2 my-4 border-t border-(--border-app)" />
+            )}
+            <ul className="space-y-1">
+              {group.items.map((tool) => {
+                const Icon = tool.icon;
+                const active = isToolActive(pathname, tool.href);
+                const label = tSidebar(tool.key);
+                return (
+                  <li
+                    key={tool.href}
+                    className={mobile ? "workspace-menu-item-enter" : undefined}
+                    style={mobile ? { animationDelay: `${260 + tool.animationIndex * 30}ms` } : undefined}
+                  >
+                    <Link
+                      href={tool.href}
+                      onClick={onClose}
+                      className={`flex items-center rounded-(--radius-app) py-2.5 text-sm transition ${compact ? "justify-center px-0" : "gap-3 px-3"} ${active ? navStyle.active : navStyle.idle}`}
+                      aria-current={active ? "page" : undefined}
+                      aria-label={compact ? label : undefined}
+                      title={compact ? label : undefined}
+                    >
+                      <Icon size={19} className="shrink-0" />
+                      {!compact ? <span className="truncate">{label}</span> : null}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
       </nav>
 
       <button

@@ -43,7 +43,9 @@
   "workspaceSidebar": {
     "navigation": "Arbeitsbereichsnavigation",
     "mailboxGroup": "Postfächer",
-    "tools": "Werkzeuge",
+    "collaborationGroup": "Zusammenarbeit",
+    "mailManagementGroup": "E-Mail-Verwaltung",
+    "shortcutsGroup": "Schnellzugriff",
     "calendar": "Kalender",
     "contacts": "Kontakte",
     "approvals": "Genehmigungen",

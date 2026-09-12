@@ -14,6 +14,21 @@
   --text-muted: #6b7280;
   --border-app: #e5e7eb;
 
+  /* Semantic component tokens. Theme presets continue to own the base values
+     above; controls derive from them so every primitive updates live. */
+  --control-bg: var(--surface-app);
+  --control-hover: color-mix(in srgb, var(--text-app) 5%, var(--surface-app));
+  --control-muted: color-mix(in srgb, var(--text-muted) 22%, var(--surface-app));
+  --control-border: var(--border-app);
+  --focus-ring: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  --overlay-backdrop: rgb(15 23 42 / 42%);
+  --shadow-panel: 0 16px 40px -18px rgb(15 23 42 / 35%);
+  --shadow-dialog: 0 28px 72px -24px rgb(15 23 42 / 55%);
+  --toast-bg: #17181b;
+  --toast-text: #f7f7f5;
+  --toast-muted: #a7abb2;
+  --toast-action: #b9c6fa;
+
   --status-success: #2e8b5b;
   --status-success-bg: #e9f3ec;
   --status-warning: #a9762a;
@@ -34,6 +49,11 @@ html.dark {
   --status-warning-bg: rgba(169, 118, 42, 0.18);
   --status-danger-bg: rgba(192, 67, 59, 0.18);
   --rail-bg: #0b0c0e;
+  --control-hover: color-mix(in srgb, var(--text-app) 8%, var(--surface-app));
+  --control-muted: color-mix(in srgb, var(--text-muted) 28%, var(--surface-app));
+  --overlay-backdrop: rgb(0 0 0 / 62%);
+  --shadow-panel: 0 18px 44px -18px rgb(0 0 0 / 75%);
+  --shadow-dialog: 0 30px 80px -24px rgb(0 0 0 / 85%);
 }
 
 @theme inline {
@@ -45,6 +65,30 @@ body {
   background: var(--surface-app);
   color: var(--text-app);
   font-family: var(--font-app);
+  font-size: calc(1rem * var(--user-font-scale, 1));
+}
+
+html[data-high-contrast="true"] {
+  --border-app: color-mix(in srgb, var(--text-app) 58%, var(--surface-app));
+  --text-muted: color-mix(in srgb, var(--text-app) 76%, var(--surface-app));
+}
+
+html[data-enhanced-focus="true"] :focus-visible {
+  outline: 3px solid var(--color-accent) !important;
+  outline-offset: 3px !important;
+}
+
+html[data-reduce-motion="true"] *,
+html[data-reduce-motion="true"] *::before,
+html[data-reduce-motion="true"] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 24%, transparent);
 }
 
 * {

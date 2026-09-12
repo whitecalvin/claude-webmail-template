@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Check, RotateCcw } from "lucide-react";
+import { Check, RotateCcw, X } from "lucide-react";
 import { useTheme } from "@/context/theme-context";
 import {
   ACCENT_COLOR_OPTIONS,
@@ -9,6 +9,10 @@ import {
 } from "@/lib/theme-presets";
 import { CustomizerSection } from "./CustomizerSection";
 import { ThemePresetGallery } from "./ThemePresetGallery";
+import { ColorSwatchPicker } from "./ColorSwatchPicker";
+import { Button } from "@/components/ui/Button";
+import { IconButton } from "@/components/ui/IconButton";
+import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import type {
   ColorScheme,
   Density,
@@ -20,66 +24,6 @@ import type {
 // Every control here edits `draft`, which is applied to the DOM immediately;
 // "게시" (publish) is what actually persists it, "취소"/backdrop click
 // discards the draft back to the last published settings.
-
-function SwatchGrid({
-  options,
-  value,
-  onSelect,
-}: {
-  options: { label: string; value: string }[];
-  value: string;
-  onSelect: (v: string) => void;
-}) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {options.map((opt) => (
-        <button
-          key={opt.value}
-          type="button"
-          title={opt.label}
-          onClick={() => onSelect(opt.value)}
-          className="flex h-8 w-8 items-center justify-center rounded-full ring-offset-2 ring-offset-(--surface-app) transition"
-          style={{
-            backgroundColor: opt.value,
-            boxShadow: value === opt.value ? "0 0 0 2px var(--surface-app), 0 0 0 4px currentColor" : undefined,
-            color: opt.value,
-          }}
-        >
-          {value === opt.value && <Check size={14} className="text-white" />}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function SegmentedControl<T extends string>({
-  options,
-  value,
-  onChange,
-}: {
-  options: { label: string; value: T }[];
-  value: T;
-  onChange: (v: T) => void;
-}) {
-  return (
-    <div className="flex rounded-(--radius-app) border border-(--border-app) p-1 text-xs">
-      {options.map((opt) => (
-        <button
-          key={opt.value}
-          type="button"
-          onClick={() => onChange(opt.value)}
-          className={`flex-1 rounded-[calc(var(--radius-app)-2px)] px-2 py-1.5 font-medium transition ${
-            value === opt.value
-              ? "bg-(--color-primary) text-white"
-              : "text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
-          }`}
-        >
-          {opt.label}
-        </button>
-      ))}
-    </div>
-  );
-}
 
 export function CustomizerPanel() {
   const { draft, updateDraft, isCustomizerOpen, closeCustomizer, publish, resetToDefaults, isDirty } =
@@ -98,17 +42,16 @@ export function CustomizerPanel() {
           isCustomizerOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!isCustomizerOpen}
+        inert={!isCustomizerOpen}
       >
         <div className="flex shrink-0 items-center justify-between border-b border-(--border-app) px-4 py-3">
           <h2 className="text-base font-semibold">테마 사용자 정의</h2>
-          <button
-            type="button"
+          <IconButton
+            icon={<X size={18} />}
+            label="닫기"
+            compact
             onClick={() => closeCustomizer({ discard: true })}
-            className="rounded-(--radius-app) p-1.5 hover:bg-black/5 dark:hover:bg-white/10"
-            aria-label="닫기"
-          >
-            <X size={18} />
-          </button>
+          />
         </div>
 
         <div className="flex-1 overflow-y-auto">
@@ -122,7 +65,8 @@ export function CustomizerPanel() {
           <CustomizerSection title="색상">
             <div>
               <p className="mb-2 text-xs text-(--text-muted)">기본 색상</p>
-              <SwatchGrid
+              <ColorSwatchPicker
+                label="기본 색상"
                 options={PRIMARY_COLOR_OPTIONS}
                 value={draft.primaryColor}
                 onSelect={(v) => updateDraft({ primaryColor: v })}
@@ -130,7 +74,8 @@ export function CustomizerPanel() {
             </div>
             <div>
               <p className="mb-2 text-xs text-(--text-muted)">강조 색상</p>
-              <SwatchGrid
+              <ColorSwatchPicker
+                label="강조 색상"
                 options={ACCENT_COLOR_OPTIONS}
                 value={draft.accentColor}
                 onSelect={(v) => updateDraft({ accentColor: v })}
@@ -216,33 +161,34 @@ export function CustomizerPanel() {
         </div>
 
         <div className="flex shrink-0 items-center gap-2 border-t border-(--border-app) p-3">
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={resetToDefaults}
-            className="flex items-center gap-1.5 rounded-(--radius-app) px-3 py-2 text-sm text-(--text-muted) hover:bg-black/5 dark:hover:bg-white/10"
+            leadingIcon={<RotateCcw size={14} />}
+            className="text-(--text-muted)"
           >
-            <RotateCcw size={14} />
             기본값
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => closeCustomizer({ discard: true })}
-            className="ml-auto rounded-(--radius-app) px-4 py-2 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
+            className="ml-auto"
           >
             취소
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
             disabled={!isDirty}
             onClick={() => {
               publish();
               closeCustomizer();
             }}
-            className="rounded-(--radius-app) px-4 py-2 text-sm font-semibold text-white transition disabled:opacity-40"
-            style={{ backgroundColor: "var(--color-primary)" }}
           >
             게시
-          </button>
+          </Button>
         </div>
       </aside>
     </>

@@ -43,7 +43,9 @@
   "workspaceSidebar": {
     "navigation": "ワークスペースナビゲーション",
     "mailboxGroup": "メールボックス",
-    "tools": "ツール",
+    "collaborationGroup": "コラボレーション",
+    "mailManagementGroup": "メール管理",
+    "shortcutsGroup": "ショートカット",
     "calendar": "カレンダー",
     "contacts": "連絡先",
     "approvals": "承認",

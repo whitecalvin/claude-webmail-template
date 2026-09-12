@@ -100,13 +100,17 @@ for (const file of files) {
     ? []
     : Object.entries(data).filter(([, value]) => /[가-힣]/.test(String(value)));
   const emptyValues = Object.entries(data).filter(([, value]) => !String(value).trim());
-  if (missing.length || extra.length || koreanValues.length || emptyValues.length) {
+  const placeholderMismatches = locale === "ko"
+    ? []
+    : Object.entries(data).filter(([key, value]) => key in uiSource && placeholders(key).join(",") !== placeholders(String(value)).join(","));
+  if (missing.length || extra.length || koreanValues.length || emptyValues.length || placeholderMismatches.length) {
     hasError = true;
     console.error(`\n[${locale}] UI catalog mismatch:`);
     if (missing.length) console.error(`  missing keys: ${missing.length}`);
     if (extra.length) console.error(`  extra keys: ${extra.length}`);
     if (koreanValues.length) console.error(`  Korean values: ${koreanValues.length}`);
     if (emptyValues.length) console.error(`  empty values: ${emptyValues.length}`);
+    if (placeholderMismatches.length) console.error(`  ICU placeholder mismatches: ${placeholderMismatches.length}`);
   } else {
     console.log(`[${locale}] ✓ ${uiSourceKeys.length} UI strings`);
   }

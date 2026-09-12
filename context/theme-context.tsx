@@ -123,6 +123,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     [draft, published]
   );
 
+  useEffect(() => {
+    if (!isDirty) return;
+    const warn = (event: BeforeUnloadEvent) => event.preventDefault();
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [isDirty]);
+
   const value = useMemo(
     () => ({
       published,

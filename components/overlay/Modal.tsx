@@ -1,43 +1,36 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
+import { cn } from "@/components/ui/utils";
 
-// Base centered modal used directly for simple dialogs and as the foundation
-// for ConfirmDialog. `dismissible` controls both the Escape-key handler and
-// whether clicking the backdrop closes it.
-export function Modal({
-  onClose,
-  dismissible = true,
-  maxWidth = 420,
-  children,
-}: {
-  onClose: () => void;
-  dismissible?: boolean;
-  maxWidth?: number;
-  children: ReactNode;
-}) {
+export function Modal({ onClose, dismissible = true, maxWidth = 420, children, ariaLabel, labelledBy, describedBy, className }: { onClose: () => void; dismissible?: boolean; maxWidth?: number; children: ReactNode; ariaLabel?: string; labelledBy?: string; describedBy?: string; className?: string }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
-    if (!dismissible) return;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    const bodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const dialog = dialogRef.current;
+    const focusable = dialog?.querySelector<HTMLElement>('button:not(:disabled), [href], input:not(:disabled), textarea:not(:disabled), select:not(:disabled), [tabindex]:not([tabindex="-1"])');
+    (focusable ?? dialog)?.focus();
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && dismissible) onClose();
+      if (event.key !== "Tab" || !dialog) return;
+      const elements = Array.from(dialog.querySelectorAll<HTMLElement>('button:not(:disabled), [href], input:not(:disabled), textarea:not(:disabled), select:not(:disabled), [tabindex]:not([tabindex="-1"])'));
+      if (!elements.length) { event.preventDefault(); return; }
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     };
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    return () => { window.removeEventListener("keydown", handler); document.body.style.overflow = bodyOverflow; previouslyFocused.current?.focus(); };
   }, [dismissible, onClose]);
 
   return (
-    <div
-      className="fixed inset-0 z-80 flex items-center justify-center p-4"
-      style={{ backgroundColor: "rgba(20,22,30,.42)" }}
-      onClick={dismissible ? onClose : undefined}
-    >
-      <div
-        role="dialog"
-        aria-modal="true"
-        onClick={(e) => e.stopPropagation()}
-        className="w-full overflow-hidden rounded-[14px] bg-background text-foreground shadow-[0_24px_60px_-20px_rgba(20,22,30,.5)]"
-        style={{ maxWidth }}
-      >
+    <div className="fixed inset-0 z-80 flex items-center justify-center bg-(--overlay-backdrop) p-4" onMouseDown={(event) => { if (dismissible && event.target === event.currentTarget) onClose(); }}>
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label={ariaLabel} aria-labelledby={labelledBy} aria-describedby={describedBy} tabIndex={-1} className={cn("w-full overflow-hidden rounded-(--radius-app) bg-(--surface-app) text-foreground shadow-(--shadow-dialog) outline-none", className)} style={{ maxWidth }}>
         {children}
       </div>
     </div>

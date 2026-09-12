@@ -114,7 +114,7 @@ export default function AdminSystemPage() {
                   <div className="p-5 text-[#17181B]">
                     <h2 className="text-lg font-bold">{t("resetTitle")}</h2>
                     <p className="mt-2 text-xs leading-relaxed text-[#5C6068]">
-                      {ui("{{이름}}")}{t("resetIntro")} {t("expiryPrefix")}<strong>{t("expiresIn30Minutes")}</strong>{t("expirySuffix")}
+                      {"{{name}}"}{t("resetIntro")} {t("expiryPrefix")}<strong>{t("expiresIn30Minutes")}</strong>{t("expirySuffix")}
                     </p>
                     <div className="mt-3 flex h-9 items-center justify-center rounded text-xs font-semibold text-white" style={{ backgroundColor: "var(--color-primary)" }}>
                       {t("resetPassword")}

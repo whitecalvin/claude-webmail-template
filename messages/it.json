@@ -43,7 +43,9 @@
   "workspaceSidebar": {
     "navigation": "Navigazione area di lavoro",
     "mailboxGroup": "Caselle di posta",
-    "tools": "Strumenti",
+    "collaborationGroup": "Collaborazione",
+    "mailManagementGroup": "Gestione posta",
+    "shortcutsGroup": "Collegamenti rapidi",
     "calendar": "Calendario",
     "contacts": "Contatti",
     "approvals": "Approvazioni",

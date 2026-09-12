@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
+import Script from "next/script";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import "../globals.css";
@@ -11,6 +13,10 @@ import { ToastStack } from "@/components/toast/ToastStack";
 import { UiTextLocalizer } from "@/components/i18n/UiTextLocalizer";
 import { UiMessagesProvider } from "@/components/i18n/UiMessagesProvider";
 import { FONT_OPTIONS, THEME_STORAGE_KEY } from "@/lib/theme-presets";
+import { WorkspaceSidebarProvider } from "@/context/workspace-sidebar-context";
+import { WORKSPACE_SIDEBAR_COOKIE_NAME } from "@/lib/workspace-sidebar";
+import { SettingsProvider } from "@/context/settings-context";
+import { SettingsNavigationGuard } from "@/components/settings/SettingsNavigationGuard";
 
 const FONT_STACKS = Object.fromEntries(
   FONT_OPTIONS.map(({ value, stack }) => [value, stack])
@@ -65,25 +71,36 @@ export default async function RootLayout({
   // Makes the resolved locale available to server components (e.g. getTranslations)
   // rendered further down the tree without re-reading the route param.
   setRequestLocale(locale);
-  const messages = await getMessages();
+  const [messages, cookieStore] = await Promise.all([getMessages(), cookies()]);
   const uiMessages = (await import(`../../i18n/ui-messages/${locale}.json`)).default as Record<string, string>;
+  const sidebarInitiallyCollapsed =
+    cookieStore.get(WORKSPACE_SIDEBAR_COOKIE_NAME)?.value === "1";
 
   return (
     <html lang={locale} className="h-full antialiased" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: FONT_BOOTSTRAP_SCRIPT }} />
-      </head>
       <body className="h-full">
+        <Script
+          id="gxmail-font-bootstrap"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: FONT_BOOTSTRAP_SCRIPT }}
+        />
         <NextIntlClientProvider messages={messages}>
           <UiMessagesProvider messages={uiMessages}>
             <ThemeProvider>
-              <MailProvider>
-                <ToastProvider>
-                  {children}
-                  <ToastStack />
-                  <UiTextLocalizer locale={locale} />
-                </ToastProvider>
-              </MailProvider>
+              <WorkspaceSidebarProvider
+                initialCollapsed={sidebarInitiallyCollapsed}
+              >
+                <MailProvider>
+                  <SettingsProvider>
+                    <ToastProvider>
+                      {children}
+                      <SettingsNavigationGuard />
+                      <ToastStack />
+                      <UiTextLocalizer locale={locale} />
+                    </ToastProvider>
+                  </SettingsProvider>
+                </MailProvider>
+              </WorkspaceSidebarProvider>
             </ThemeProvider>
           </UiMessagesProvider>
         </NextIntlClientProvider>

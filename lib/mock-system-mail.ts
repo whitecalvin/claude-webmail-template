@@ -16,8 +16,8 @@ export const SYS_TEMPLATES = [
 ];
 
 export const SYS_VARS = [
-  "{{이름}}", "{{이메일}}", "{{조직명}}", "{{링크}}",
-  "{{만료시각}}", "{{요청위치}}", "{{브라우저}}", "{{지원연락처}}",
+  "{{name}}", "{{email}}", "{{organization}}", "{{link}}",
+  "{{expiresAt}}", "{{requestLocation}}", "{{browser}}", "{{supportContact}}",
 ];
 
 export const PRINT_META = [

@@ -2,12 +2,15 @@
 
 import { FormEvent, Suspense, useEffect, useState, type ReactNode, type RefObject } from "react";
 import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
-import { Link, useRouter } from "@/i18n/navigation";
-import { Bell, HelpCircle, LogOut, Menu, Paintbrush, Search, ShieldCheck, UserCog, X } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { getPathname, Link, usePathname, useRouter } from "@/i18n/navigation";
+import { Bell, HelpCircle, Languages, LogOut, Menu, Paintbrush, Search, ShieldCheck, UserCog, X } from "lucide-react";
 import { useTheme } from "@/context/theme-context";
+import { localeNames, locales, type Locale } from "@/i18n/routing";
 import { CURRENT_USER } from "@/lib/current-user";
 import { NotificationPopover } from "@/components/notifications/NotificationPopover";
+import { Dropdown } from "@/components/ui/Dropdown";
+import { Avatar } from "@/components/ui/Avatar";
 import { NOTIFICATIONS } from "@/lib/mock-notifications";
 import type { LayoutStyle } from "@/types/theme";
 
@@ -79,12 +82,26 @@ export interface TopBarProps {
 export function TopBar({ title, actions, menuButtonRef, onMenuClick, onOpenTour, onToggleDelegate, showGlobalSearch = false, showMobilePageContext = true }: TopBarProps) {
   const t = useTranslations("topBar");
   const tMenu = useTranslations("profileMenu");
+  const tLocale = useTranslations("localeSettings");
+  const locale = useLocale() as Locale;
+  const pathname = usePathname();
   const router = useRouter();
   const { openCustomizer, draft } = useTheme();
   const [openMenu, setOpenMenu] = useState<OpenMenu>("none");
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const unreadNotifications = NOTIFICATIONS.filter((notification) => notification.unread);
   const closeMenus = () => setOpenMenu("none");
+  const changeLocale = (nextLocale: string) => {
+    if (!locales.includes(nextLocale as Locale) || nextLocale === locale) return;
+    const suffix = `${window.location.search}${window.location.hash}`;
+    closeMenus();
+    const localizedPathname = getPathname({
+      href: pathname,
+      locale: nextLocale as Locale,
+      forcePrefix: true,
+    });
+    window.location.replace(`${localizedPathname}${suffix}`);
+  };
 
   useEffect(() => {
     if (!mobileSearchOpen) return;
@@ -148,27 +165,33 @@ export function TopBar({ title, actions, menuButtonRef, onMenuClick, onOpenTour,
             <Paintbrush size={18} style={{ color: "var(--color-accent)" }} />
           </button>
           <div className="relative">
-            <button type="button" onClick={() => setOpenMenu((value) => value === "profile" ? "none" : "profile")} className="flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold text-white" style={{ backgroundColor: "var(--color-accent)" }} aria-label={tMenu("profile")}>
-              {CURRENT_USER.name.slice(0, 1)}
+            <button type="button" onClick={() => setOpenMenu((value) => value === "profile" ? "none" : "profile")} className="rounded-full outline-none focus-visible:ring-3 focus-visible:ring-(--focus-ring)" aria-label={tMenu("profile")}>
+              <Avatar name={CURRENT_USER.name} size="sm" />
             </button>
             {openMenu === "profile" ? (
               <>
                 <div className="fixed inset-0 z-40" onClick={closeMenus} />
                 <div className="absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-(--radius-app) border border-(--border-app) bg-background shadow-xl">
                   <div className="flex min-w-0 items-center gap-3 border-b border-(--border-app) px-4 py-3">
-                    <span
-                      className="flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
-                      style={{ backgroundColor: "var(--color-accent)" }}
-                      aria-hidden="true"
-                    >
-                      {CURRENT_USER.name.slice(0, 1)}
-                    </span>
+                    <Avatar name={CURRENT_USER.name} size="md" />
                     <div className="min-w-0">
                       <p className="truncate text-sm font-medium">{CURRENT_USER.name}</p>
                       <p className="truncate text-xs text-(--text-muted)">{CURRENT_USER.email}</p>
                     </div>
                   </div>
                   <button type="button" onClick={() => { openCustomizer(); closeMenus(); }} className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><Paintbrush size={16} style={{ color: "var(--color-accent)" }} />{tMenu("themeCustomizer")}</button>
+                  <div className="flex items-start gap-2 border-t border-(--border-app) px-4 py-2.5">
+                    <Languages size={16} className="mt-2.5 shrink-0 text-(--text-muted)" aria-hidden="true" />
+                    <div className="min-w-0 flex-1">
+                      <p className="mb-1.5 text-xs font-medium text-(--text-muted)">{tLocale("displayLanguage")}</p>
+                      <Dropdown
+                        value={locale}
+                        options={locales.map((value) => ({ value, label: localeNames[value] }))}
+                        onChange={changeLocale}
+                        variant="form"
+                      />
+                    </div>
+                  </div>
                   <Link href="/admin" onClick={closeMenus} className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><ShieldCheck size={16} className="text-(--text-muted)" />{tMenu("admin")}</Link>
                   {onToggleDelegate ? <button type="button" onClick={() => { onToggleDelegate(); closeMenus(); }} className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm hover:bg-black/5 dark:hover:bg-white/5"><UserCog size={16} className="text-(--text-muted)" />{tMenu("switchToDelegate")}</button> : null}
                   <button type="button" onClick={() => { closeMenus(); try { window.localStorage.removeItem("gxmail:session"); window.sessionStorage.removeItem("gxmail:session-expires-at"); } catch {} router.push("/login"); }} className="flex w-full items-center gap-2 border-t border-(--border-app) px-4 py-2.5 text-left text-sm text-(--status-danger) hover:bg-black/5 dark:hover:bg-white/5"><LogOut size={16} />{tMenu("logout")}</button>

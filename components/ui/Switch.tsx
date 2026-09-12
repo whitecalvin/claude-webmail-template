@@ -1,38 +1,40 @@
 "use client";
 
-// Shared on/off toggle switch. Several screens had hand-rolled copies of
-// this that differed only in size — consolidated here with a `size` prop.
+import { cn } from "./utils";
+
 const SIZE_STYLE = {
-  sm: { track: "h-5 w-8", knob: "h-3.5 w-3.5", travel: 14 },
-  md: { track: "h-5.5 w-9", knob: "h-4 w-4", travel: 16 },
-  lg: { track: "h-5.75 w-10", knob: "h-4.25 w-4.25", travel: 17 },
+  sm: { track: "h-5 w-8", knob: "size-3.5", translate: "translate-x-3" },
+  md: { track: "h-6 w-10", knob: "size-4", translate: "translate-x-4" },
+  lg: { track: "h-7 w-12", knob: "size-5", translate: "translate-x-5" },
 } as const;
 
-export function Switch({
-  on,
-  onToggle,
-  size = "md",
-  label,
-}: {
+export interface SwitchProps {
   on: boolean;
   onToggle: () => void;
   size?: keyof typeof SIZE_STYLE;
   label?: string;
-}) {
+  disabled?: boolean;
+  className?: string;
+}
+
+export function Switch({ on, onToggle, size = "md", label, disabled = false, className }: SwitchProps) {
   const dims = SIZE_STYLE[size];
   return (
     <button
       type="button"
-      onClick={onToggle}
-      className={`flex shrink-0 items-center rounded-full p-0.75 transition ${dims.track}`}
-      style={{ backgroundColor: on ? "var(--color-primary)" : "var(--border-app)" }}
-      aria-pressed={on}
+      role="switch"
+      aria-checked={on}
       aria-label={label}
+      disabled={disabled}
+      onClick={onToggle}
+      className={cn(
+        "inline-flex shrink-0 items-center rounded-full border border-transparent p-0.5 outline-none transition-[background-color,box-shadow] focus-visible:ring-3 focus-visible:ring-(--focus-ring) disabled:cursor-not-allowed disabled:opacity-45",
+        dims.track,
+        className,
+      )}
+      style={{ backgroundColor: on ? "var(--color-primary)" : "var(--control-muted)" }}
     >
-      <span
-        className={`rounded-full bg-white shadow-sm transition-transform ${dims.knob}`}
-        style={{ transform: on ? `translateX(${dims.travel}px)` : "translateX(0)" }}
-      />
+      <span className={cn("rounded-full bg-white shadow-sm transition-transform", dims.knob, on && dims.translate)} />
     </button>
   );
 }

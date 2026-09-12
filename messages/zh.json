@@ -43,7 +43,9 @@
   "workspaceSidebar": {
     "navigation": "工作区导航",
     "mailboxGroup": "邮箱",
-    "tools": "工具",
+    "collaborationGroup": "协作",
+    "mailManagementGroup": "邮件管理",
+    "shortcutsGroup": "快捷方式",
     "calendar": "日历",
     "contacts": "联系人",
     "approvals": "审批",

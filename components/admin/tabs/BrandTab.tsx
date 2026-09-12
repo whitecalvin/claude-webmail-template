@@ -64,9 +64,9 @@ export function BrandTab() {
 
         <AdminCard title="전사 서명 템플릿">
           <div className="rounded-lg border border-(--border-app) bg-black/1.5 p-3 text-xs leading-relaxed dark:bg-white/2">
-            <p>{"{이름} · {부서} {직급}"}</p>
+            <p>{"{name} · {department} {title}"}</p>
             <p className="text-(--text-muted)">지엑스소프트 주식회사</p>
-            <p className="text-(--text-muted)">{"{이메일} · {전화}"}</p>
+            <p className="text-(--text-muted)">{"{email} · {phone}"}</p>
             <p style={{ color: "var(--color-primary)" }}>gxsoft.co.kr</p>
           </div>
           <div className="mt-3 flex flex-col gap-2.5">

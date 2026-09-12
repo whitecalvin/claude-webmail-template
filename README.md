@@ -11,7 +11,7 @@ The repository is intended for interface prototyping, design review, frontend de
 - Responsive enterprise mail shell with desktop and mobile navigation
 - Inbox, reading pane, compose flow, shared mailboxes, search, rules, and quarantine
 - Calendar, contacts, organization chart, files, approvals, notifications, and accessibility screens
-- Personal security and settings experiences
+- Complete user settings workspace with editable mail, appearance, accessibility, account, security, integration, and shortcut preferences
 - Administrator console with 13 management areas
 - Tenant onboarding and system mail, print, and error-page previews
 - Live theme customization with color, typography, density, radius, layout, and light/dark options
@@ -24,7 +24,7 @@ GXWebMail is a **design and interaction prototype**, not a production mail clien
 
 - There is no backend, mail transport, or database. Feature data is seeded from `lib/mock-*.ts` and held in React state.
 - There is no real authentication or authorization. Login and signup simulate a successful flow, and the session indicator is stored only in `localStorage`.
-- A browser refresh resets most mutable feature state to the bundled mock data.
+- A browser refresh resets most mutable feature state to the bundled mock data. User settings and published theme preferences are the deliberate exceptions and persist in versioned browser storage.
 - Buttons and controls are wired to visible prototype behavior such as state changes, dialogs, navigation, and toast feedback, but they do not call production services.
 - AI tone rewriting, account operations, delivery actions, migration, backup, billing, and similar administrative operations are demonstrations only.
 - No payment flow, subscription service, licensing server, or other business-model implementation is included.
@@ -78,7 +78,7 @@ Replace `{locale}` with one of the supported locale codes.
 | `/{locale}/signup` | Mock account registration |
 | `/{locale}/mailboxes` | Shared mailboxes |
 | `/{locale}/search` | Advanced mail search |
-| `/{locale}/rules` | Mail rules |
+| `/{locale}/rules` | Compatibility redirect to the canonical filter settings page |
 | `/{locale}/quarantine` | Quarantine review |
 | `/{locale}/calendar` | Calendar views |
 | `/{locale}/contacts` | Contacts and organization chart |
@@ -92,6 +92,31 @@ Replace `{locale}` with one of the supported locale codes.
 | `/{locale}/admin/onboarding` | Tenant onboarding |
 | `/{locale}/admin/system` | System mail, print, and error-page management |
 | `/{locale}/setup` | Initial setup flow |
+
+### User settings workspace
+
+`/{locale}/settings` is the grouped entry point for the user-facing settings system. On desktop, the same groups appear in a persistent settings navigation pane; on mobile, the entry page shows touch-friendly grouped lists and each detail route provides a back action. The settings routes are:
+
+| Group | Routes |
+| --- | --- |
+| General | `/settings/locale`, `/settings/theme`, `/settings/accessibility` |
+| Mail | `/settings/signature`, `/settings/inbox-display`, `/settings/sending`, `/settings/away`, `/settings/notifications` |
+| Mail management | `/settings/labels`, `/settings/filters`, `/settings/blocked-senders` |
+| Account | `/settings/account`, `/settings/security`, `/settings/integrations`, `/settings/shortcuts` |
+
+Every route contains editable controls rather than placeholder or report-only cards. Shared settings patterns provide save, discard, default reset, validation, confirmation dialogs, and toast feedback. Destructive operations such as label/filter removal, sender unblocking, session revocation, backup-code regeneration, and integration disconnection require confirmation where appropriate.
+
+The prototype distinguishes three states: bundled defaults, the last saved snapshot, and the current draft. Saved user settings are stored under the versioned `gxmail:user-settings:v1` localStorage key and reloaded after hydration. Unsaved drafts are never written automatically; enabled save actions persist them, cancel restores the saved snapshot, and reset prepares defaults as a new draft. Same-origin navigation and browser unload are guarded while either user settings or the theme draft has unsaved changes.
+
+Locale, theme, and workspace-sidebar preferences retain their specialized behavior:
+
+- Locale changes continue through `next-intl`, retain the current path, query, and hash, and save the draft before replacing the locale-prefixed URL.
+- Theme changes use the same `ThemeContext` as the global customizer, apply as a live preview, and persist only when published.
+- The initial collapsed sidebar state remains server-rendered from the `workspace_sidebar_collapsed` cookie so a refresh does not briefly show the expanded sidebar.
+
+The user accessibility route controls font scale, contrast, motion, focus, screen-reader detail, and keyboard-navigation document attributes. It is separate from the top-level `/accessibility` audit/reference experience. Likewise, the editable shortcut route is separate from the printable `/shortcuts` reference. `/rules` redirects to `/settings/filters`, making the filter editor the canonical rule-management surface.
+
+This remains a frontend template: settings do not update a server account, mail service, identity provider, notification service, or integration API. Password changes, session operations, synchronization, and connection states update typed mock state and provide visible feedback only.
 
 ## Technology stack
 
@@ -140,7 +165,7 @@ The build pre-renders every application screen for all ten supported locales.
 | `npm run start` | Serve the production build |
 | `npm run lint` | Run ESLint across the project |
 | `npm run check:locales` | Validate locale key parity, ICU placeholders, UI catalogs, and untranslated Korean values |
-| `npm run generate:ui-translations` | Regenerate UI translation catalogs using the configured generation workflow |
+| `npm run generate:ui-translations` | Regenerate UI catalogs, reusing reviewed manual/named translations before translating remaining strings |
 
 Run the following checks before committing UI or translation changes:
 
@@ -168,11 +193,11 @@ components/
   mail/                     Mail list, reading pane, and invitation cards
   notifications/            Notification popover
   overlay/                  Shared modal, drawer, sheet, and confirmation patterns
-  settings/                 Desktop and mobile settings screens
+  settings/                 Grouped, editable desktop and mobile user settings
   toast/                    Toast feedback stack
   tour/                     First-run product tour
   ui/                       Shared Checkbox, Dropdown, and Switch controls
-context/                    Mail, theme, and toast state providers
+context/                    Mail, settings, sidebar, theme, and toast state providers
 i18n/                       Locale routing, request configuration, and UI catalogs
 lib/                        Mock feature data and utilities
 messages/                   Named next-intl messages for each locale
@@ -190,11 +215,13 @@ proxy.ts                    Locale middleware configuration
 5. Keep `i18n/routing.ts`, named catalogs, and UI catalogs aligned when adding a locale.
 6. Run `npm run check:locales` before linting and building.
 
+The generator supports two offline-safe maintenance modes. `--extract-only` refreshes only the Korean source catalog, while `--reuse-named-only` rebuilds target catalogs from existing entries, reviewed files in `i18n/manual-translations/`, and matching named messages without calling a translation service. A normal generation run sends only the still-missing Korean UI strings to the configured Google Translate endpoint; use it only when that external transmission is approved. Manual translations take precedence and are intended for reviewed corrections that must survive regeneration.
+
 Do not place runtime user-generated text into the static UI catalog. The compatibility localizer only translates text that exactly matches a bundled catalog entry.
 
 ## Design-system conventions
 
-- Styled checkboxes, dropdowns, and switches use the shared controls in `components/ui/` instead of operating-system-native form chrome.
+- Forms and interactions reuse the themed controls in `components/ui/`, including buttons, inputs, textareas, switches, checkboxes, radio groups, dropdowns, segmented controls, avatars, progress indicators, tabs, panels, modals, popovers, toasts, badges, empty states, skeletons, spinners, and tooltips.
 - Interactive buttons and `[role="button"]` elements receive pointer cursor behavior globally from `app/globals.css`.
 - Theme changes are previewed live. Published theme values are stored in `localStorage` for the current browser.
 - Shared overlays and toast feedback should be reused so prototype interactions remain visually and behaviorally consistent.
@@ -204,6 +231,7 @@ Do not place runtime user-generated text into the static UI catalog. The compati
 
 - No SMTP, IMAP, JMAP, Exchange, calendar, contact, or file-service integration
 - No database, durable persistence, server-side validation, or multi-user synchronization
+- User-setting persistence is browser-local mock state only; clearing site data removes it, and it is not synchronized across devices or users
 - No production authentication, authorization, audit guarantees, or security enforcement
 - No real backup, restore, migration, billing, API-key, or delivery operation
 - No email HTML delivery compatibility or cross-client rendering certification

@@ -7,8 +7,8 @@ import { WorkspaceSidebar } from "./WorkspaceSidebar";
 import { CustomizerPanel } from "@/components/customizer/CustomizerPanel";
 import { ComposeModal } from "@/components/compose/ComposeModal";
 import { useTheme } from "@/context/theme-context";
+import { useWorkspaceSidebar } from "@/context/workspace-sidebar-context";
 
-const SIDEBAR_STORAGE_KEY = "gxmail:workspace-sidebar-collapsed";
 const DRAWER_TRANSITION_MS = 300;
 
 export interface WorkspaceLayoutProps {
@@ -25,22 +25,12 @@ export interface WorkspaceLayoutProps {
 export function WorkspaceLayout({ children, title, headerActions, onOpenTour, onToggleDelegate, showGlobalSearch = false, showMobilePageContext = true, className = "" }: WorkspaceLayoutProps) {
   const tSidebar = useTranslations("workspaceSidebar");
   const { draft } = useTheme();
-  const [collapsed, setCollapsed] = useState(false);
+  const { collapsed, toggleCollapsed } = useWorkspaceSidebar();
   const [drawerMounted, setDrawerMounted] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeTimerRef = useRef<number | null>(null);
-
-  /* eslint-disable react-hooks/set-state-in-effect */
-  useEffect(() => {
-    try {
-      setCollapsed(window.localStorage.getItem(SIDEBAR_STORAGE_KEY) === "true");
-    } catch {
-      // Storage can be unavailable in private browsing; expanded is safe.
-    }
-  }, []);
-  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     if (!drawerMounted) return;
@@ -101,18 +91,6 @@ export function WorkspaceLayout({ children, title, headerActions, onOpenTour, on
       event.preventDefault();
       first.focus();
     }
-  };
-
-  const toggleCollapsed = () => {
-    setCollapsed((value) => {
-      const next = !value;
-      try {
-        window.localStorage.setItem(SIDEBAR_STORAGE_KEY, String(next));
-      } catch {
-        // Keep the live state even when storage is unavailable.
-      }
-      return next;
-    });
   };
 
   return (

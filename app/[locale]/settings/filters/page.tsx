@@ -1,1 +1,2 @@
-export { default } from "../../rules/page";
+import { SettingsSectionPage } from "@/components/settings/SettingsSectionPage";
+export default function Page() { return <SettingsSectionPage active="filters" />; }

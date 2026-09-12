@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import { Modal } from "./Modal";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 import type { ConfirmTone } from "@/types/overlay";
 
 // Shared confirmation dialog for anything from a plain "Are you sure?" to a
@@ -60,7 +62,7 @@ export function ConfirmDialog({
     tone === "destructive" ? t("deleteForever") : tone === "warning" ? t("sendAnyway") : t("confirm");
 
   return (
-    <Modal onClose={onCancel} dismissible={dismissible} maxWidth={requireTypedText ? 380 : 392}>
+    <Modal onClose={onCancel} dismissible={dismissible} maxWidth={requireTypedText ? 380 : 392} labelledBy="confirm-dialog-title" describedBy={description ? "confirm-dialog-description" : undefined}>
       <div className="flex flex-col gap-1 p-5">
         {tone !== "default" && (
           <div className="mb-1 flex items-start gap-3">
@@ -70,9 +72,9 @@ export function ConfirmDialog({
               {tone === "alert" ? <Check size={17} strokeWidth={3} /> : "!"}
             </span>
             <div className="flex flex-col gap-1.5 pt-0.5">
-              <h2 className="text-[16px] font-bold leading-snug text-foreground">{title}</h2>
+              <h2 id="confirm-dialog-title" className="text-[16px] font-bold leading-snug text-foreground">{title}</h2>
               {description && (
-                <p className="text-[13px] leading-relaxed text-(--text-muted) text-pretty">
+                <p id="confirm-dialog-description" className="text-[13px] leading-relaxed text-(--text-muted) text-pretty">
                   {description}
                 </p>
               )}
@@ -81,21 +83,21 @@ export function ConfirmDialog({
         )}
         {tone === "default" && (
           <div className="flex flex-col gap-1.5">
-            <h2 className="text-[14.5px] font-bold leading-snug text-foreground">{title}</h2>
+            <h2 id="confirm-dialog-title" className="text-[14.5px] font-bold leading-snug text-foreground">{title}</h2>
             {description && (
-              <p className="text-[12.5px] leading-relaxed text-(--text-muted)">{description}</p>
+              <p id="confirm-dialog-description" className="text-[12.5px] leading-relaxed text-(--text-muted)">{description}</p>
             )}
           </div>
         )}
 
         {requireTypedText && (
-          <input
+          <Input
             type="text"
             value={typed}
             onChange={(e) => setTyped(e.target.value)}
             placeholder={typedPlaceholder ?? requireTypedText}
             autoFocus
-            className="mt-2.5 h-9 w-full rounded-[9px] border border-(--border-app) bg-(--surface-muted) px-3 text-[12.5px] outline-none focus:border-(--color-primary)"
+            className="text-[12.5px]"
           />
         )}
       </div>
@@ -103,28 +105,30 @@ export function ConfirmDialog({
       <div className="flex items-center gap-2 px-5 pb-5">
         <div className={`flex gap-2 ${isAlert ? "w-full justify-end" : "ml-auto"}`}>
           {!isAlert && (
-            <button
-              type="button"
+            <Button
+              size="sm"
               onClick={onCancel}
-              className="h-9.5 whitespace-nowrap rounded-[9px] border border-(--border-app) px-4 text-[13px] font-semibold text-foreground hover:bg-black/5 dark:hover:bg-white/10"
+              className="whitespace-nowrap"
             >
               {resolvedCancelLabel}
-            </button>
+            </Button>
           )}
           {middleAction && (
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={middleAction.onClick}
-              className="h-9.5 whitespace-nowrap rounded-[9px] px-4 text-[13px] font-semibold text-foreground hover:bg-black/5 dark:hover:bg-white/10"
+              className="whitespace-nowrap"
             >
               {middleAction.label}
-            </button>
+            </Button>
           )}
-          <button
-            type="button"
+          <Button
+            variant={tone === "destructive" ? "danger" : tone === "default" ? "primary" : "secondary"}
+            size="sm"
             disabled={requireTypedText ? !typedMatches : false}
             onClick={onConfirm}
-            className={`h-9.5 whitespace-nowrap rounded-[9px] px-4 text-[13px] font-semibold transition disabled:cursor-not-allowed disabled:bg-[#F0D9D6] disabled:text-[#B0736D] ${
+            className={`whitespace-nowrap ${
               requireTypedText && !typedMatches ? "" : CONFIRM_BTN_STYLE[tone]
             }`}
             style={
@@ -136,7 +140,7 @@ export function ConfirmDialog({
             }
           >
             {confirmLabel ?? defaultLabel}
-          </button>
+          </Button>
         </div>
       </div>
     </Modal>

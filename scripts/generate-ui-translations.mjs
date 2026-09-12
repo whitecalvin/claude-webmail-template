@@ -7,6 +7,7 @@ import ts from "typescript";
 const root = new URL("..", import.meta.url).pathname.replace(/^\/(\w:)/, "$1");
 const sourceRoots = ["app", "components", "context", "lib"];
 const outputDir = join(root, "i18n", "ui-messages");
+const manualDir = join(root, "i18n", "manual-translations");
 const targets = ["en", "de", "es", "fr", "it", "pt", "ja", "zh-CN", "zh-TW"];
 const fileNames = { "zh-CN": "zh", "zh-TW": "zh-hant" };
 const hangul = /[가-힣]/;
@@ -31,6 +32,15 @@ function collectText(source, fileName, result) {
     ts.forEachChild(node, visit);
   }
   visit(tree);
+}
+
+function collectParallelMessages(source, translated, result) {
+  if (typeof source === "string" && typeof translated === "string") {
+    if (!result.has(source)) result.set(source, translated);
+    return;
+  }
+  if (!source || !translated || typeof source !== "object" || typeof translated !== "object") return;
+  for (const key of Object.keys(source)) collectParallelMessages(source[key], translated[key], result);
 }
 
 function protect(text) {
@@ -81,32 +91,60 @@ await mkdir(outputDir, { recursive: true });
 const ordered = [...values].sort((a, b) => a.localeCompare(b, "ko"));
 await writeFile(join(outputDir, "ko.json"), `${JSON.stringify(Object.fromEntries(ordered.map((value) => [value, value])), null, 2)}\n`);
 
-if (process.argv.includes("--extract-only")) {
+const extractOnly = process.argv.includes("--extract-only");
+const reuseNamedOnly = process.argv.includes("--reuse-named-only");
+
+if (extractOnly) {
   console.log(`Extracted ${ordered.length} Korean UI and mock-data strings.`);
   process.exit(0);
 }
 
+const koreanNamedMessages = JSON.parse(await readFile(join(root, "messages", "ko.json"), "utf8"));
+
 for (const target of targets) {
   const fileName = fileNames[target] ?? target;
+  let existing = {};
+  let manual = {};
   try {
-    const existing = JSON.parse(await readFile(join(outputDir, `${fileName}.json`), "utf8"));
+    existing = JSON.parse(await readFile(join(outputDir, `${fileName}.json`), "utf8"));
     if (Object.keys(existing).length === ordered.length && ordered.every((source) => source in existing)) {
       console.log(`${target}: reused ${ordered.length}/${ordered.length}`);
       continue;
     }
   } catch {
-    // Missing or invalid output is regenerated below.
+    // Missing or invalid output starts with an empty reusable catalog.
+  }
+  try {
+    manual = JSON.parse(await readFile(join(manualDir, `${fileName}.json`), "utf8"));
+  } catch {
+    // Manual translations are optional and can be added locale by locale.
+  }
+  const targetNamedMessages = JSON.parse(await readFile(join(root, "messages", `${fileName}.json`), "utf8"));
+  const namedTranslations = new Map();
+  collectParallelMessages(koreanNamedMessages, targetNamedMessages, namedTranslations);
+  const reusable = Object.fromEntries(ordered.flatMap((source) => {
+    if (source in manual) return [[source, manual[source]]];
+    if (source in existing) return [[source, existing[source]]];
+    const translated = namedTranslations.get(source);
+    return translated === undefined ? [] : [[source, translated]];
+  }));
+  const missing = ordered.filter((source) => !(source in reusable));
+  if (reuseNamedOnly) {
+    await writeFile(join(outputDir, `${fileName}.json`), `${JSON.stringify(reusable, null, 2)}\n`);
+    console.log(`${target}: reused ${Object.keys(reusable).length}, missing ${missing.length}`);
+    continue;
   }
   let completed = 0;
-  const valuesForTarget = await mapWithConcurrency(ordered, 6, async (source) => {
+  const translatedMissing = await mapWithConcurrency(missing, 6, async (source) => {
     const value = await translate(source, target);
     completed += 1;
-    if (completed % 50 === 0) process.stdout.write(`\r${target}: ${completed}/${ordered.length}`);
+    if (completed % 25 === 0) process.stdout.write(`\r${target}: ${completed}/${missing.length} new`);
     return value;
   });
-  const translated = Object.fromEntries(ordered.map((source, index) => [source, valuesForTarget[index]]));
+  const additions = Object.fromEntries(missing.map((source, index) => [source, translatedMissing[index]]));
+  const translated = Object.fromEntries(ordered.map((source) => [source, additions[source] ?? reusable[source]]));
   await writeFile(join(outputDir, `${fileName}.json`), `${JSON.stringify(translated, null, 2)}\n`);
-  console.log(`\r${target}: ${ordered.length}/${ordered.length}`);
+  console.log(`\r${target}: reused ${ordered.length - missing.length}, translated ${missing.length}`);
 }
 
 const digest = createHash("sha256").update(ordered.join("\n")).digest("hex");
